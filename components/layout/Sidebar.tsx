@@ -120,7 +120,7 @@ export function Sidebar({ collapsed, onToggleCollapse, mobileOpen, onCloseMobile
               onClick={handleNavClick}
               title={collapsed ? item.label : undefined}
               className={cn(
-                'flex items-center gap-3 rounded text-sm transition-colors',
+                'flex items-center gap-3 rounded text-sm transition-colors active:translate-y-0.5 transition-transform duration-100',
                 collapsed ? 'justify-center px-2 py-2' : 'px-3 py-2',
                 isActive
                   ? 'bg-glow-green text-primary'
