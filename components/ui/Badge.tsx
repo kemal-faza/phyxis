@@ -1,0 +1,24 @@
+import { HTMLAttributes } from 'react'
+import { cn } from '@/lib/utils'
+
+interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
+  variant?: 'success' | 'neutral' | 'error' | 'warning'
+}
+
+export function Badge({ className, variant = 'neutral', ...props }: BadgeProps) {
+  return (
+    <span
+      className={cn(
+        'inline-flex items-center rounded px-2 py-0.5 text-xs font-medium',
+        {
+          'bg-primary/15 text-primary': variant === 'success',
+          'bg-surface-container-high text-on-surface-variant': variant === 'neutral',
+          'bg-error/15 text-error': variant === 'error',
+          'bg-tertiary/15 text-tertiary': variant === 'warning',
+        },
+        className
+      )}
+      {...props}
+    />
+  )
+}
