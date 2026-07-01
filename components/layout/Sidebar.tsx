@@ -78,7 +78,7 @@ export function Sidebar({ collapsed, onToggleCollapse, mobileOpen, onCloseMobile
           onClick={onToggleCollapse}
           className={cn(
             'hidden lg:flex items-center justify-center text-on-surface-variant transition-colors hover:bg-surface-container shrink-0',
-            collapsed ? 'h-8 w-full order-1' : 'h-14 w-10'
+            collapsed ? 'order-1 h-8 w-full' : 'order-2 h-14 w-10'
           )}
           aria-label={collapsed ? 'Perluas sidebar' : 'Ciutkan sidebar'}
         >
@@ -91,7 +91,7 @@ export function Sidebar({ collapsed, onToggleCollapse, mobileOpen, onCloseMobile
           onClick={handleNavClick}
           className={cn(
             'flex items-center font-bold text-primary transition-colors hover:bg-surface-container',
-            collapsed ? 'order-2 flex-1 justify-center h-8 text-lg' : 'flex-1 pl-4 h-14'
+            collapsed ? 'order-2 flex-1 justify-center h-8 text-lg' : 'order-1 flex-1 pl-4 h-14'
           )}
         >
           {collapsed ? <span>Px</span> : <span>PhyXis</span>}
