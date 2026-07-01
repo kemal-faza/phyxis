@@ -53,6 +53,7 @@ const config: Config = {
       },
       spacing: {
         'sidebar-width': '260px',
+        'sidebar-collapsed': '64px',
       },
     },
   },
