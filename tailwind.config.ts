@@ -37,6 +37,15 @@ const config: Config = {
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
       },
+      fontSize: {
+        'headline-lg': ['32px', { lineHeight: '1.2', letterSpacing: '-0.02em', fontWeight: '700' }],
+        'headline-md': ['24px', { lineHeight: '1.3', fontWeight: '600' }],
+        'headline-sm': ['20px', { lineHeight: '1.4', fontWeight: '600' }],
+        'body-lg': ['16px', { lineHeight: '1.6' }],
+        'body-md': ['14px', { lineHeight: '1.5' }],
+        'label-md': ['12px', { lineHeight: '1', letterSpacing: '0.05em', fontWeight: '600' }],
+        'label-sm': ['11px', { lineHeight: '1', fontWeight: '500' }],
+      },
       borderRadius: {
         DEFAULT: '0.125rem',
         lg: '0.25rem',
