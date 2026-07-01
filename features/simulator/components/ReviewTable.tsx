@@ -13,11 +13,44 @@ const MOCK_REVIEW: { nama: string; status: ReviewStatus; errors: number; avgTime
   { nama: 'Eka Putri', status: 'completed', errors: 0, avgTime: '6s' },
 ]
 
+function statusBadge(status: ReviewStatus) {
+  const variant = status === 'completed' ? 'success' : status === 'in-progress' ? 'warning' : 'neutral'
+  const label = status === 'completed' ? 'Selesai' : status === 'in-progress' ? 'Berjalan' : 'Belum mulai'
+  return <Badge variant={variant}>{label}</Badge>
+}
+
 export function ReviewTable() {
   return (
-    <Card>
-      <h2 className="mb-4 text-headline-sm">Hasil Simulator Praktikan &mdash; M-4 Gerak Jatuh Bebas</h2>
-      <div className="overflow-x-auto">
+    <div className="space-y-4">
+      <h2 className="text-headline-sm">
+        Hasil Simulator Praktikan &mdash; M-4 Gerak Jatuh Bebas
+      </h2>
+
+      {/* Mobile: Card list */}
+      <div className="space-y-3 md:hidden">
+        {MOCK_REVIEW.map((row) => (
+          <Card key={row.nama} className="space-y-3">
+            <div className="flex items-center justify-between gap-3">
+              <span className="text-body-lg font-semibold">{row.nama}</span>
+              {statusBadge(row.status)}
+            </div>
+            <div className="border-t border-border-subtle" />
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <div className="text-label-md text-on-surface-variant">TOTAL SALAH</div>
+                <div className="mt-1 text-headline-sm font-semibold">{row.errors}</div>
+              </div>
+              <div>
+                <div className="text-label-md text-on-surface-variant">RATA-RATA WAKTU</div>
+                <div className="mt-1 text-headline-sm font-semibold">{row.avgTime}</div>
+              </div>
+            </div>
+          </Card>
+        ))}
+      </div>
+
+      {/* Tablet/Desktop: Table */}
+      <Card className="hidden md:block">
         <table className="w-full text-left text-sm">
           <thead>
             <tr className="border-b border-border-subtle text-on-surface-variant">
@@ -31,30 +64,14 @@ export function ReviewTable() {
             {MOCK_REVIEW.map((row) => (
               <tr key={row.nama} className="border-b border-border-subtle last:border-0">
                 <td className="py-3 pr-4">{row.nama}</td>
-                <td className="py-3 pr-4">
-                  <Badge
-                    variant={
-                      row.status === 'completed'
-                        ? 'success'
-                        : row.status === 'in-progress'
-                          ? 'warning'
-                          : 'neutral'
-                    }
-                  >
-                    {row.status === 'completed'
-                      ? 'Selesai'
-                      : row.status === 'in-progress'
-                        ? 'Berjalan'
-                        : 'Belum mulai'}
-                  </Badge>
-                </td>
+                <td className="py-3 pr-4">{statusBadge(row.status)}</td>
                 <td className="py-3 pr-4">{row.errors}</td>
                 <td className="py-3">{row.avgTime}</td>
               </tr>
             ))}
           </tbody>
         </table>
-      </div>
-    </Card>
+      </Card>
+    </div>
   )
 }
