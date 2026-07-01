@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
-import { Input } from '@/components/ui/Input'
+import { FileUpload } from '@/components/ui/FileUpload'
 import { Progress } from '@/components/ui/Progress'
 
 export function ReportUpload() {
@@ -27,14 +27,13 @@ export function ReportUpload() {
   return (
     <Card className="space-y-4">
       <h2 className="text-headline-sm">Pengumpulan Laporan Akhir</h2>
-      <Input
-        type="file"
+      <FileUpload
+        value={file}
+        onChange={setFile}
         accept=".pdf"
-        onChange={(e) => setFile(e.target.files?.[0] ?? null)}
       />
       {file && (
         <div className="space-y-2">
-          <div className="text-sm text-on-surface-variant truncate max-w-full">{file.name}</div>
           <Progress value={progress} />
           <Button onClick={handleUpload} disabled={progress > 0 && progress < 100}>
             {submitted ? 'Terkirim' : 'Upload'}
