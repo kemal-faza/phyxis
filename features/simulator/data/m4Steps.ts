@@ -1,0 +1,95 @@
+import { SimulatorStep } from '@/features/simulator/types'
+
+export const M4_STEPS: SimulatorStep[] = [
+  {
+    id: 'm4-01',
+    question: 'Langkah pertama setelah alat terpasang adalah?',
+    options: [
+      'Melepas benda tanpa pengukuran',
+      'Mengukur tinggi jatuh benda dari titik lepas ke lantai',
+      'Menghitung massa benda',
+      'Mencatat waktu tanpa stopwatch',
+    ],
+    correctOptionIndex: 1,
+    animationClipName: 'langkah_01_ukur_tinggi',
+    explanation: 'Tinggi jatuh harus diukur sebelum percobaan dilakukan.',
+  },
+  {
+    id: 'm4-02',
+    question: 'Sebelum melepaskan benda, posisi stopwatch harus?',
+    options: [
+      'Diam di meja',
+      'Dipegang asisten',
+      'Siap ditekan saat benda dilepas',
+      'Dimatikan terlebih dahulu',
+    ],
+    correctOptionIndex: 2,
+    animationClipName: 'langkah_02_siap_stopwatch',
+    explanation: 'Stopwatch harus siap untuk mencatat waktu jatuh.',
+  },
+  {
+    id: 'm4-03',
+    question: 'Setelah benda dijatuhkan, langkah selanjutnya adalah?',
+    options: [
+      'Mencatat waktu jatuh dari stopwatch',
+      'Menjatuhkan benda lagi tanpa mencatat',
+      'Melepas stopwatch',
+      'Mengulang dari awal',
+    ],
+    correctOptionIndex: 0,
+    animationClipName: 'langkah_03_catat_waktu',
+    explanation: 'Waktu jatuh harus segera dicatat setelah benda menyentuh lantai.',
+  },
+  {
+    id: 'm4-04',
+    question: 'Pengulangan percobaan dilakukan sebanyak minimal?',
+    options: [
+      '1 kali',
+      '3 kali',
+      '5 kali',
+      '10 kali',
+    ],
+    correctOptionIndex: 1,
+    animationClipName: 'langkah_04_ulangi',
+    explanation: 'Minimal 3 kali pengulangan untuk mendapatkan data yang konsisten.',
+  },
+  {
+    id: 'm4-05',
+    question: 'Setelah data waktu terkumpul, langkah berikutnya adalah?',
+    options: [
+      'Membuang data yang tidak sesuai',
+      'Menghitung rata-rata waktu jatuh',
+      'Mengubah ketinggian',
+      'Mengganti benda',
+    ],
+    correctOptionIndex: 1,
+    animationClipName: 'langkah_05_hitung_rata',
+    explanation: 'Rata-rata waktu dihitung dari seluruh data pengulangan.',
+  },
+  {
+    id: 'm4-06',
+    question: 'Rumus yang digunakan untuk menghitung gravitasi adalah?',
+    options: [
+      'v = g.t',
+      'h = 1/2 g t^2',
+      'F = m.g',
+      'v = s/t',
+    ],
+    correctOptionIndex: 1,
+    animationClipName: 'langkah_06_hitung_g',
+    explanation: 'Dari rumus h = 1/2 g t^2, gravitasi dapat dihitung dengan g = 2h/t^2.',
+  },
+  {
+    id: 'm4-07',
+    question: 'Kesimpulan akhir dari percobaan gerak jatuh bebas adalah?',
+    options: [
+      'Benda berat jatuh lebih cepat',
+      'Waktu jatuh tidak bergantung pada massa',
+      'Udara mempercepat jatuh benda',
+      'Gravitasi memengaruhi berat benda',
+    ],
+    correctOptionIndex: 1,
+    animationClipName: 'langkah_07_kesimpulan',
+    explanation: 'Gerak jatuh bebas membuktikan bahwa waktu jatuh tidak bergantung pada massa benda.',
+  },
+]
