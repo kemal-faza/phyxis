@@ -1,0 +1,349 @@
+<!DOCTYPE html><html class="dark" lang="id"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Dosen Dashboard - PhyXis</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#00390a",
+                        "on-secondary-container": "#eaf0ff",
+                        "on-secondary-fixed": "#001c3a",
+                        "surface-container-high": "#282a2d",
+                        "surface-container-lowest": "#0c0e11",
+                        "on-surface": "#e2e2e6",
+                        "surface-bright": "#37393d",
+                        "surface-container-highest": "#333538",
+                        "on-secondary": "#00315f",
+                        "secondary": "#a5c8ff",
+                        "secondary-fixed-dim": "#a5c8ff",
+                        "on-primary-fixed": "#002204",
+                        "on-error": "#690005",
+                        "surface-container": "#1e2023",
+                        "primary-container": "#4caf50",
+                        "on-tertiary-fixed-variant": "#861948",
+                        "error-container": "#93000a",
+                        "outline": "#899484",
+                        "on-tertiary-fixed": "#3e001c",
+                        "inverse-on-surface": "#2f3034",
+                        "surface-variant": "#333538",
+                        "on-surface-variant": "#becab9",
+                        "glow-green": "rgba(76, 175, 80, 0.15)",
+                        "primary-fixed": "#94f990",
+                        "inverse-surface": "#e2e2e6",
+                        "surface-tint": "#78dc77",
+                        "on-background": "#e2e2e6",
+                        "on-primary-fixed-variant": "#005313",
+                        "error": "#ffb4ab",
+                        "data-blue": "#0D47A1",
+                        "tertiary-container": "#f26f9d",
+                        "border-subtle": "#2C323A",
+                        "on-primary-container": "#003c0b",
+                        "surface-container-low": "#1a1c1f",
+                        "secondary-container": "#006ec9",
+                        "on-tertiary": "#650032",
+                        "surface": "#111316",
+                        "secondary-fixed": "#d4e3ff",
+                        "tertiary-fixed-dim": "#ffb1c7",
+                        "inverse-primary": "#006e1c",
+                        "tertiary-fixed": "#ffd9e2",
+                        "on-error-container": "#ffdad6",
+                        "tertiary": "#ffb1c7",
+                        "primary-fixed-dim": "#78dc77",
+                        "surface-dim": "#111316",
+                        "surface-charcoal": "#1E2227",
+                        "outline-variant": "#3f4a3c",
+                        "on-secondary-fixed-variant": "#004786",
+                        "on-tertiary-container": "#690034",
+                        "indicator-blue": "#2196F3",
+                        "background": "#111316",
+                        "primary": "#78dc77"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "sidebar-width": "260px",
+                        "unit": "4px",
+                        "margin-desktop": "32px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "label-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["26px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "label-sm": ["11px", { "lineHeight": "1", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+             font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased min-h-screen flex">
+<!-- SideNavBar -->
+<aside class="flex flex-col h-screen fixed left-0 top-0 overflow-y-auto bg-surface-charcoal border-r border-border-subtle w-sidebar-width z-50">
+<div class="p-6">
+<h1 class="text-headline-md font-headline-md font-bold text-primary tracking-tight">PhyXis</h1>
+<p class="text-label-sm font-label-sm text-on-surface-variant mt-1">Physics Lab Ecosystem</p>
+</div>
+<nav class="flex-1 mt-4">
+<ul class="space-y-1">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 border-l-4 border-primary bg-glow-green text-primary font-bold" href="#">
+<span class="material-symbols-outlined icon-fill">dashboard</span>
+<span class="text-label-md font-label-md">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined">verified</span>
+<span class="text-label-md font-label-md">Indikator KPS</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span class="text-label-md font-label-md">Rubrik Penilaian</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined">database</span>
+<span class="text-label-md font-label-md">Bank Soal</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-label-md font-label-md">Rapor</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined">monitor_heart</span>
+<span class="text-label-md font-label-md">Monitoring Fitur</span>
+</a>
+</li>
+</ul>
+</nav>
+<div class="p-4 mt-auto">
+<button class="w-full bg-primary hover:bg-primary-fixed text-on-primary font-label-md text-label-md py-3 rounded-DEFAULT transition-colors duration-200">
+                Mulai Praktikum
+            </button>
+<ul class="mt-4 space-y-1">
+<li>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-sm">help</span>
+<span class="text-label-sm font-label-sm">Bantuan</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-sm">settings</span>
+<span class="text-label-sm font-label-sm">Pengaturan</span>
+</a>
+</li>
+</ul>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="flex-1 ml-sidebar-width flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center w-full h-16 px-gutter bg-surface-charcoal border-b border-border-subtle sticky top-0 z-40">
+<div class="flex items-center gap-6">
+<!-- Navigation Links - Suppressed for Dashboard context, focusing on actions -->
+<div class="hidden md:flex gap-6">
+<h2 class="text-headline-sm font-headline-sm text-on-surface">Dosen Dashboard</h2>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="bg-surface border border-border-subtle text-body-md font-body-md text-on-surface rounded-full pl-10 pr-4 py-1.5 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all w-64 placeholder-on-surface-variant" placeholder="Cari modul atau mahasiswa..." type="text">
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">history</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+</div>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-border-subtle ml-2">
+<img alt="User Avatar Profile" class="w-full h-full object-cover" data-alt="A professional headshot of an academic physics professor in a modern laboratory setting. The lighting is crisp and cool, reflecting an environment of precision and high technology. Deep charcoal background with subtle highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBudusUZP8ke_mIkejFsbZHOYD9gagQJZqcgXYvFKxIyGqAtkPiBkybRO7tSGHBTc2gi80-dvWgUMtrlwBkysNDwP6GBUkWVxy7gS7l6KVSmOmop9o5fJcld9JsfLWCkeH5IAhVN0bNoheF18r81NLWNWwCC7lRI2FpY6f4Ile06i2vhphQ_0mJv_Xl5tVYgwqMtpfIcnvexhLCq1MzkR3TxsZWaUabO8O9b5fVSn2ornBv_e67IgxTpjXaWeLTBQss5knsdzQSdCWM">
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 p-margin-desktop overflow-y-auto">
+<div class="grid grid-cols-12 gap-6">
+<!-- Modul Grid (Bento Style) -->
+<section class="col-span-12 xl:col-span-8 bg-surface-charcoal border border-border-subtle rounded-xl p-6">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Status Modul Praktikum</h3>
+<span class="text-label-sm font-label-sm text-on-surface-variant bg-surface px-2 py-1 rounded border border-border-subtle">Sistem Terkini</span>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3">
+<!-- Generative script for modules to simulate dense data view -->
+<script>
+                            const modules = [
+                                {id: 'M-1', status: 'active'}, {id: 'M-2', status: 'active'}, {id: 'M-3', status: 'pending'}, {id: 'M-4', status: 'pending'}, {id: 'M-5', status: 'pending'},
+                                {id: 'K-1', status: 'active'}, {id: 'K-2', status: 'active'}, {id: 'K-3', status: 'pending'}, {id: 'K-4', status: 'pending'}, {id: 'K-5', status: 'pending'},
+                                {id: 'L-1', status: 'active'}, {id: 'L-2', status: 'pending'}, {id: 'L-3', status: 'pending'}, {id: 'L-4', status: 'pending'},
+                                {id: 'O-1', status: 'active'}, {id: 'O-2', status: 'active'}, {id: 'O-3', status: 'active'}, {id: 'O-4', status: 'pending'}
+                            ];
+                            
+                            modules.forEach(m => {
+                                const bgClass = m.status === 'active' ? 'bg-glow-green border-primary' : 'bg-surface border-border-subtle';
+                                const textClass = m.status === 'active' ? 'text-primary' : 'text-on-surface-variant';
+                                const glow = m.status === 'active' ? 'shadow-[0_0_12px_rgba(76,175,80,0.15)]' : '';
+                                
+                                document.write(`
+                                    <div class="flex flex-col items-center justify-center p-3 border rounded-lg ${bgClass} ${glow} cursor-pointer hover:border-primary transition-all">
+                                        <span class="text-label-md font-label-md ${textClass}">${m.id}</span>
+                                    </div>
+                                `);
+                            });
+                        </script>
+</div>
+</section>
+<!-- Bobot Rubrik (Sliders & Pie) -->
+<section class="col-span-12 xl:col-span-4 flex flex-col gap-6">
+<div class="bg-surface-charcoal border border-border-subtle rounded-xl p-6 h-full">
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-6">Bobot Rubrik</h3>
+<div class="space-y-5">
+<!-- Sliders -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-center">
+<label class="text-label-sm font-label-sm text-on-surface-variant">Pre-test</label>
+<span class="text-label-md font-label-md text-secondary">10%</span>
+</div>
+<input class="w-full h-1 bg-surface rounded-lg appearance-none cursor-pointer accent-secondary" max="100" min="0" type="range" value="10">
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-center">
+<label class="text-label-sm font-label-sm text-on-surface-variant">Simulator</label>
+<span class="text-label-md font-label-md text-secondary">30%</span>
+</div>
+<input class="w-full h-1 bg-surface rounded-lg appearance-none cursor-pointer accent-secondary" max="100" min="0" type="range" value="30">
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-center">
+<label class="text-label-sm font-label-sm text-on-surface-variant">Lab Nyata</label>
+<span class="text-label-md font-label-md text-secondary">30%</span>
+</div>
+<input class="w-full h-1 bg-surface rounded-lg appearance-none cursor-pointer accent-secondary" max="100" min="0" type="range" value="30">
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-center">
+<label class="text-label-sm font-label-sm text-on-surface-variant">Post-test</label>
+<span class="text-label-md font-label-md text-secondary">10%</span>
+</div>
+<input class="w-full h-1 bg-surface rounded-lg appearance-none cursor-pointer accent-secondary" max="100" min="0" type="range" value="10">
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-center">
+<label class="text-label-sm font-label-sm text-on-surface-variant">Laporan</label>
+<span class="text-label-md font-label-md text-secondary">20%</span>
+</div>
+<input class="w-full h-1 bg-surface rounded-lg appearance-none cursor-pointer accent-secondary" max="100" min="0" type="range" value="20">
+</div>
+</div>
+</div>
+</section>
+<!-- Indikator KPS Aktif -->
+<section class="col-span-12 lg:col-span-8 bg-surface-charcoal border border-border-subtle rounded-xl p-6">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Indikator KPS Aktif per Modul</h3>
+<button class="text-label-sm font-label-sm text-primary hover:text-primary-fixed border border-primary px-3 py-1.5 rounded">Terapkan Perubahan</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-border-subtle">
+<th class="py-3 px-4 text-label-sm font-label-sm text-on-surface-variant">Modul</th>
+<th class="py-3 px-4 text-center text-label-sm font-label-sm text-on-surface-variant">Mengamati</th>
+<th class="py-3 px-4 text-center text-label-sm font-label-sm text-on-surface-variant">Mengklasifikasi</th>
+<th class="py-3 px-4 text-center text-label-sm font-label-sm text-on-surface-variant">Mengukur</th>
+<th class="py-3 px-4 text-center text-label-sm font-label-sm text-on-surface-variant">Memprediksi</th>
+<th class="py-3 px-4 text-center text-label-sm font-label-sm text-on-surface-variant">Komunikasi</th>
+<th class="py-3 px-4 text-center text-label-sm font-label-sm text-on-surface-variant">Menyimpulkan</th>
+</tr>
+</thead>
+<tbody>
+<!-- Sample Rows -->
+<tr class="border-b border-border-subtle/50 hover:bg-surface-container-high transition-colors">
+<td class="py-3 px-4 text-body-md font-body-md font-semibold">M-1</td>
+<td class="py-3 px-4 text-center"><input checked="" class="rounded border-border-subtle bg-surface text-primary focus:ring-primary focus:ring-offset-surface-charcoal" type="checkbox"></td>
+<td class="py-3 px-4 text-center"><input checked="" class="rounded border-border-subtle bg-surface text-primary focus:ring-primary focus:ring-offset-surface-charcoal" type="checkbox"></td>
+<td class="py-3 px-4 text-center"><input class="rounded border-border-subtle bg-surface text-primary focus:ring-primary focus:ring-offset-surface-charcoal" type="checkbox"></td>
+<td class="py-3 px-4 text-center"><input checked="" class="rounded border-border-subtle bg-surface text-primary focus:ring-primary focus:ring-offset-surface-charcoal" type="checkbox"></td>
+<td class="py-3 px-4 text-center"><input class="rounded border-border-subtle bg-surface text-primary focus:ring-primary focus:ring-offset-surface-charcoal" type="checkbox"></td>
+<td class="py-3 px-4 text-center"><input checked="" class="rounded border-border-subtle bg-surface text-primary focus:ring-primary focus:ring-offset-surface-charcoal" type="checkbox"></td>
+</tr>
+<tr class="border-b border-border-subtle/50 hover:bg-surface-container-high transition-colors">
+<td class="py-3 px-4 text-body-md font-body-md font-semibold">K-1</td>
+<td class="py-3 px-4 text-center"><input class="rounded border-border-subtle bg-surface text-primary focus:ring-primary focus:ring-offset-surface-charcoal" type="checkbox"></td>
+<td class="py-3 px-4 text-center"><input checked="" class="rounded border-border-subtle bg-surface text-primary focus:ring-primary focus:ring-offset-surface-charcoal" type="checkbox"></td>
+<td class="py-3 px-4 text-center"><input checked="" class="rounded border-border-subtle bg-surface text-primary focus:ring-primary focus:ring-offset-surface-charcoal" type="checkbox"></td>
+<td class="py-3 px-4 text-center"><input class="rounded border-border-subtle bg-surface text-primary focus:ring-primary focus:ring-offset-surface-charcoal" type="checkbox"></td>
+<td class="py-3 px-4 text-center"><input checked="" class="rounded border-border-subtle bg-surface text-primary focus:ring-primary focus:ring-offset-surface-charcoal" type="checkbox"></td>
+<td class="py-3 px-4 text-center"><input checked="" class="rounded border-border-subtle bg-surface text-primary focus:ring-primary focus:ring-offset-surface-charcoal" type="checkbox"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Bank Soal Upload -->
+<section class="col-span-12 lg:col-span-4 bg-surface-charcoal border border-border-subtle rounded-xl p-6 flex flex-col">
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-4">Bank Soal (Upload)</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mb-6">Unggah berkas soal dalam format PDF atau JSON terstruktur.</p>
+<div class="border-2 border-dashed border-border-subtle rounded-lg flex-1 flex flex-col items-center justify-center p-8 hover:bg-surface-container-high hover:border-primary transition-all cursor-pointer group">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant group-hover:text-primary mb-3">cloud_upload</span>
+<p class="text-body-md font-body-md text-on-surface text-center mb-1">Tarik &amp; Lepas berkas di sini</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant text-center">atau klik untuk menelusuri</p>
+</div>
+<button class="w-full mt-4 bg-surface border border-border-subtle hover:bg-surface-container text-on-surface font-label-md text-label-md py-2.5 rounded-DEFAULT transition-colors duration-200">
+                        Lihat Direktori Bank Soal
+                    </button>
+</section>
+</div>
+</main>
+</div>
+</body></html>

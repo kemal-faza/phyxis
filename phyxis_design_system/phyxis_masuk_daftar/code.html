@@ -1,0 +1,299 @@
+<!DOCTYPE html><html class="dark" lang="id"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>PhyXis - Login &amp; Register</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: 300;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Design System Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary": "#00390a",
+                        "on-secondary-container": "#eaf0ff",
+                        "on-secondary-fixed": "#001c3a",
+                        "surface-container-high": "#282a2d",
+                        "surface-container-lowest": "#0c0e11",
+                        "on-surface": "#e2e2e6",
+                        "surface-bright": "#37393d",
+                        "surface-container-highest": "#333538",
+                        "on-secondary": "#00315f",
+                        "secondary": "#a5c8ff",
+                        "secondary-fixed-dim": "#a5c8ff",
+                        "on-primary-fixed": "#002204",
+                        "on-error": "#690005",
+                        "surface-container": "#1e2023",
+                        "primary-container": "#4caf50",
+                        "on-tertiary-fixed-variant": "#861948",
+                        "error-container": "#93000a",
+                        "outline": "#899484",
+                        "on-tertiary-fixed": "#3e001c",
+                        "inverse-on-surface": "#2f3034",
+                        "surface-variant": "#333538",
+                        "on-surface-variant": "#becab9",
+                        "glow-green": "rgba(76, 175, 80, 0.15)",
+                        "primary-fixed": "#94f990",
+                        "inverse-surface": "#e2e2e6",
+                        "surface-tint": "#78dc77",
+                        "on-background": "#e2e2e6",
+                        "on-primary-fixed-variant": "#005313",
+                        "error": "#ffb4ab",
+                        "data-blue": "#0D47A1",
+                        "tertiary-container": "#f26f9d",
+                        "border-subtle": "#2C323A",
+                        "on-primary-container": "#003c0b",
+                        "surface-container-low": "#1a1c1f",
+                        "secondary-container": "#006ec9",
+                        "on-tertiary": "#650032",
+                        "surface": "#111316",
+                        "secondary-fixed": "#d4e3ff",
+                        "tertiary-fixed-dim": "#ffb1c7",
+                        "inverse-primary": "#006e1c",
+                        "tertiary-fixed": "#ffd9e2",
+                        "on-error-container": "#ffdad6",
+                        "tertiary": "#ffb1c7",
+                        "primary-fixed-dim": "#78dc77",
+                        "surface-dim": "#111316",
+                        "surface-charcoal": "#1E2227",
+                        "outline-variant": "#3f4a3c",
+                        "on-secondary-fixed-variant": "#004786",
+                        "on-tertiary-container": "#690034",
+                        "indicator-blue": "#2196F3",
+                        "background": "#111316",
+                        "primary": "#78dc77"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    spacing: {
+                        "gutter": "16px",
+                        "sidebar-width": "260px",
+                        "unit": "4px",
+                        "margin-desktop": "32px",
+                        "margin-mobile": "16px"
+                    },
+                    fontFamily: {
+                        "headline-sm": ["Inter", "sans-serif"],
+                        "headline-lg": ["Inter", "sans-serif"],
+                        "headline-lg-mobile": ["Inter", "sans-serif"],
+                        "body-lg": ["Inter", "sans-serif"],
+                        "headline-md": ["Inter", "sans-serif"],
+                        "body-md": ["Inter", "sans-serif"],
+                        "label-md": ["Inter", "sans-serif"],
+                        "label-sm": ["Inter", "sans-serif"]
+                    },
+                    fontSize: {
+                        "headline-sm": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["26px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "label-sm": ["11px", { "lineHeight": "1", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-md antialiased overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container">
+<main class="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
+<!-- Left Panel: Branding & Visuals (Hidden on small screens) -->
+<div class="hidden lg:flex flex-col justify-between relative bg-surface-charcoal border-r border-border-subtle p-12 overflow-hidden">
+<!-- Background Image with Gradient Overlay -->
+<div class="absolute inset-0 z-0" data-alt="A sleek, monochromatic silhouette illustration of modern physics laboratory equipment, such as oscilloscopes, lasers, and optical lenses, set against a deep charcoal background. Subtle glowing green accents, hex code #78dc77, highlight key components, evoking a sense of technological sophistication and academic precision. The style is minimalist engineering blueprint meets digital interface, using dark gradients and high contrast to ensure a clean, professional aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuATWgMyJP3S_VPtVBEqs6BCEYIIMoen7IxgFzklKkbGjbaFsCOV9A3y-7CqUdVFbGNjGEv41f11o8UnfuGHPlOoSL4rSCs7KqXpUlw0A1xC6sIo_3qX33_0JsczwuhjItJIK1jWnQpmBccSTWzdjVJhhuidmZqTUyTFTF1dI17MraRNGuhEQFdRfEubjRyNL-RK2sbzWVFVg1k5qQX-7hp4o3dDbUcVv3dg_Yig9Q_JE5_GxvrD60jDAKG7ZEo-6Itn_jCyijjARaRx'); background-size: cover; background-position: center;">
+</div>
+<div class="absolute inset-0 bg-gradient-to-br from-surface-charcoal/90 via-surface-charcoal/80 to-surface/90 z-10"></div>
+<!-- Content -->
+<div class="relative z-20 flex flex-col items-start pt-8">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">science</span>
+<h1 class="text-headline-lg font-headline-lg tracking-tight text-primary">PhyXis</h1>
+</div>
+<p class="text-headline-sm font-headline-sm text-on-surface max-w-md leading-relaxed border-l-2 border-primary pl-4">
+                    Ekosistem Digital Praktikum Fisika Dasar
+                </p>
+</div>
+<div class="relative z-20 pb-8">
+<div class="flex gap-2">
+<div class="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_rgba(120,220,119,0.6)]"></div>
+<div class="w-2 h-2 rounded-full bg-surface-variant"></div>
+<div class="w-2 h-2 rounded-full bg-surface-variant"></div>
+</div>
+</div>
+</div>
+<!-- Right Panel: Authentication Forms -->
+<div class="flex flex-col items-center justify-center p-6 sm:p-12 lg:p-16 bg-surface relative">
+<!-- Mobile Branding (Visible only on small screens) -->
+<div class="lg:hidden flex items-center justify-center gap-2 mb-10 w-full">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">science</span>
+<h1 class="text-headline-lg-mobile font-headline-lg-mobile text-primary">PhyXis</h1>
+</div>
+<div class="w-full max-w-[420px] bg-surface-container-low border border-border-subtle rounded-xl p-8 shadow-2xl shadow-black/50">
+<!-- Tab Switcher -->
+<div class="flex gap-6 border-b border-border-subtle mb-8">
+<button class="pb-3 text-headline-sm font-headline-sm text-primary border-b-2 border-primary transition-colors focus:outline-none" id="tab-masuk" onclick="switchTab('masuk')">
+                        Masuk
+                    </button>
+<button class="pb-3 text-headline-sm font-headline-sm text-on-surface-variant hover:text-on-surface transition-colors focus:outline-none" id="tab-daftar" onclick="switchTab('daftar')">
+                        Daftar
+                    </button>
+</div>
+<!-- MASUK FORM -->
+<div class="space-y-5 animate-fade-in" id="form-masuk">
+<div>
+<label class="block text-label-md font-label-md text-on-surface-variant mb-1.5" for="login-email">Email</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">mail</span>
+<input class="w-full bg-surface-container border border-border-subtle rounded-lg pl-10 pr-4 py-2.5 text-body-md font-body-md text-on-surface placeholder:text-surface-variant focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" id="login-email" placeholder="nim@mahasiswa.univ.edu" type="email">
+</div>
+</div>
+<div>
+<div class="flex justify-between items-center mb-1.5">
+<label class="block text-label-md font-label-md text-on-surface-variant" for="login-password">Password</label>
+<a class="text-label-sm font-label-sm text-primary hover:underline underline-offset-2" href="#">Lupa Password?</a>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">lock</span>
+<input class="w-full bg-surface-container border border-border-subtle rounded-lg pl-10 pr-10 py-2.5 text-body-md font-body-md text-on-surface placeholder:text-surface-variant focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" id="login-password" placeholder="••••••••" type="password">
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-on-surface focus:outline-none" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility_off</span>
+</button>
+</div>
+</div>
+<button class="w-full mt-2 bg-primary text-on-primary-container text-body-lg font-headline-sm py-2.5 rounded-lg hover:bg-surface-tint active:scale-[0.98] transition-all flex justify-center items-center gap-2 shadow-[0_0_15px_rgba(120,220,119,0.15)] hover:shadow-[0_0_20px_rgba(120,220,119,0.25)]">
+                        Masuk
+                        <span class="material-symbols-outlined text-[20px]">login</span>
+</button>
+</div>
+<!-- DAFTAR FORM (Hidden by default) -->
+<div class="space-y-4 hidden animate-fade-in" id="form-daftar">
+<div>
+<label class="block text-label-md font-label-md text-on-surface-variant mb-1.5" for="reg-nama">Nama Lengkap</label>
+<input class="w-full bg-surface-container border border-border-subtle rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" id="reg-nama" type="text">
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-label-md font-label-md text-on-surface-variant mb-1.5" for="reg-nim">NIM/NIP</label>
+<input class="w-full bg-surface-container border border-border-subtle rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" id="reg-nim" type="text">
+</div>
+<div>
+<label class="block text-label-md font-label-md text-on-surface-variant mb-1.5" for="reg-peran">Pilih Peran</label>
+<div class="relative">
+<select class="w-full bg-surface-container border border-border-subtle rounded-lg pl-3 pr-8 py-2 text-body-md font-body-md text-on-surface appearance-none focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all cursor-pointer" id="reg-peran">
+<option disabled="" selected="" value="">Pilih...</option>
+<option value="praktikan">Praktikan</option>
+<option value="asisten">Asisten Laboratorium</option>
+<option value="dosen">Dosen</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-[20px]">arrow_drop_down</span>
+</div>
+</div>
+</div>
+<div>
+<label class="block text-label-md font-label-md text-on-surface-variant mb-1.5" for="reg-email">Email</label>
+<input class="w-full bg-surface-container border border-border-subtle rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" id="reg-email" type="email">
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-label-md font-label-md text-on-surface-variant mb-1.5" for="reg-password">Password</label>
+<input class="w-full bg-surface-container border border-border-subtle rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" id="reg-password" type="password">
+</div>
+<div>
+<label class="block text-label-md font-label-md text-on-surface-variant mb-1.5" for="reg-confirm">Konfirmasi</label>
+<input class="w-full bg-surface-container border border-border-subtle rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" id="reg-confirm" type="password">
+</div>
+</div>
+<button class="w-full mt-4 bg-primary text-on-primary-container text-body-lg font-headline-sm py-2.5 rounded-lg hover:bg-surface-tint active:scale-[0.98] transition-all flex justify-center items-center gap-2 shadow-[0_0_15px_rgba(120,220,119,0.15)] hover:shadow-[0_0_20px_rgba(120,220,119,0.25)]">
+                        Daftar
+                        <span class="material-symbols-outlined text-[20px]">person_add</span>
+</button>
+</div>
+<!-- Divider -->
+<div class="relative my-8 flex items-center">
+<div class="flex-grow border-t border-border-subtle"></div>
+<span class="flex-shrink-0 mx-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">atau</span>
+<div class="flex-grow border-t border-border-subtle"></div>
+</div>
+<!-- SSO Button -->
+<button class="w-full bg-surface-charcoal border border-border-subtle text-on-surface text-body-md font-headline-sm py-2.5 rounded-lg hover:bg-surface-container hover:border-surface-variant active:scale-[0.98] transition-all flex justify-center items-center gap-3">
+<svg class="w-5 h-5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+</svg>
+                    Masuk dengan Google
+                </button>
+</div>
+<p class="mt-8 text-label-sm font-label-sm text-on-surface-variant text-center max-w-sm">
+                Dengan mendaftar, Anda menyetujui Ketentuan Layanan dan Kebijakan Privasi PhyXis.
+            </p>
+</div>
+</main>
+<script>
+        function switchTab(tab) {
+            const btnMasuk = document.getElementById('tab-masuk');
+            const btnDaftar = document.getElementById('tab-daftar');
+            const formMasuk = document.getElementById('form-masuk');
+            const formDaftar = document.getElementById('form-daftar');
+
+            const activeClass = ['text-primary', 'border-b-2', 'border-primary'];
+            const inactiveClass = ['text-on-surface-variant', 'hover:text-on-surface', 'border-transparent'];
+
+            if (tab === 'masuk') {
+                btnMasuk.classList.add(...activeClass);
+                btnMasuk.classList.remove(...inactiveClass);
+                
+                btnDaftar.classList.remove(...activeClass);
+                btnDaftar.classList.add(...inactiveClass);
+                
+                formMasuk.classList.remove('hidden');
+                formDaftar.classList.add('hidden');
+            } else {
+                btnDaftar.classList.add(...activeClass);
+                btnDaftar.classList.remove(...inactiveClass);
+                
+                btnMasuk.classList.remove(...activeClass);
+                btnMasuk.classList.add(...inactiveClass);
+                
+                formDaftar.classList.remove('hidden');
+                formMasuk.classList.add('hidden');
+            }
+        }
+    </script>
+<style>
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</body></html>

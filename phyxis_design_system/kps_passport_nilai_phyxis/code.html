@@ -1,0 +1,336 @@
+<!DOCTYPE html><html class="dark" lang="id"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>PhyXis - Rapor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#00390a",
+                        "on-secondary-container": "#eaf0ff",
+                        "on-secondary-fixed": "#001c3a",
+                        "surface-container-high": "#282a2d",
+                        "surface-container-lowest": "#0c0e11",
+                        "on-surface": "#e2e2e6",
+                        "surface-bright": "#37393d",
+                        "surface-container-highest": "#333538",
+                        "on-secondary": "#00315f",
+                        "secondary": "#a5c8ff",
+                        "secondary-fixed-dim": "#a5c8ff",
+                        "on-primary-fixed": "#002204",
+                        "on-error": "#690005",
+                        "surface-container": "#1e2023",
+                        "primary-container": "#4caf50",
+                        "on-tertiary-fixed-variant": "#861948",
+                        "error-container": "#93000a",
+                        "outline": "#899484",
+                        "on-tertiary-fixed": "#3e001c",
+                        "inverse-on-surface": "#2f3034",
+                        "surface-variant": "#333538",
+                        "on-surface-variant": "#becab9",
+                        "glow-green": "rgba(76, 175, 80, 0.15)",
+                        "primary-fixed": "#94f990",
+                        "inverse-surface": "#e2e2e6",
+                        "surface-tint": "#78dc77",
+                        "on-background": "#e2e2e6",
+                        "on-primary-fixed-variant": "#005313",
+                        "error": "#ffb4ab",
+                        "data-blue": "#0D47A1",
+                        "tertiary-container": "#f26f9d",
+                        "border-subtle": "#2C323A",
+                        "on-primary-container": "#003c0b",
+                        "surface-container-low": "#1a1c1f",
+                        "secondary-container": "#006ec9",
+                        "on-tertiary": "#650032",
+                        "surface": "#111316",
+                        "secondary-fixed": "#d4e3ff",
+                        "tertiary-fixed-dim": "#ffb1c7",
+                        "inverse-primary": "#006e1c",
+                        "tertiary-fixed": "#ffd9e2",
+                        "on-error-container": "#ffdad6",
+                        "tertiary": "#ffb1c7",
+                        "primary-fixed-dim": "#78dc77",
+                        "surface-dim": "#111316",
+                        "surface-charcoal": "#1E2227",
+                        "outline-variant": "#3f4a3c",
+                        "on-secondary-fixed-variant": "#004786",
+                        "on-tertiary-container": "#690034",
+                        "indicator-blue": "#2196F3",
+                        "background": "#111316",
+                        "primary": "#78dc77"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "sidebar-width": "260px",
+                        "unit": "4px",
+                        "margin-desktop": "32px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "label-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["26px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "label-sm": ["11px", { "lineHeight": "1", "fontWeight": "500" }]
+                    }
+                }
+            }
+        };
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md h-screen overflow-hidden flex">
+<!-- SideNavBar -->
+<nav class="bg-surface-charcoal dark:bg-surface-container docked left w-sidebar-width h-full border-r border-border-subtle flat no shadows flex flex-col fixed left-0 top-0 overflow-y-auto z-20">
+<div class="p-6">
+<div class="flex items-center gap-4">
+<img class="w-10 h-10 rounded-full bg-surface-variant object-cover" data-alt="A small, stylized circular avatar image representing a university physics laboratory administrator or 'PhyXis Admin Avatar'. The avatar features a minimal, modern icon of an atom or scientific instrument on a dark background, reflecting a professional and academic engineering tool aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEq7xvqafMYiS0EpcTDBMKv_mTM2UZlkQUEwDg672jnip4UWlf3u2ytuLcpqLZRSia49j968rxXeAOWC3g_NhLyTWchpBDNK-c8jZ6733muaUWbkEQ1tjbBgWQ6OvvbXa0_dIchydixk4qHFPI_O_-LM5Ae_PH93rhz5HA3m3NpnHl25WLIyKpD4TfLt4mJHU7KZl5Y3xNQrOtiXZkSKmj3Ux14EUoU2WoVMTTJ_zZ_LVE946TatBmApSHMBUXEq5dTtvUG6oq8y_E">
+<div>
+<h1 class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed">PhyXis</h1>
+<p class="text-label-md font-label-md text-on-surface-variant">Physics Lab Ecosystem</p>
+</div>
+</div>
+<button class="mt-6 w-full py-2 px-4 rounded bg-primary text-on-primary font-headline-sm text-headline-sm hover:bg-surface-tint transition-colors duration-200">
+                Mulai Praktikum
+            </button>
+</div>
+<div class="flex-1 mt-4">
+<ul class="space-y-1">
+<li><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 scale-100 active:scale-95" href="#"><span class="material-symbols-outlined" data-icon="dashboard">dashboard</span> <span class="text-label-md font-label-md">Dashboard</span></a></li>
+<li><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 scale-100 active:scale-95" href="#"><span class="material-symbols-outlined" data-icon="verified">verified</span> <span class="text-label-md font-label-md">Indikator KPS</span></a></li>
+<li><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 scale-100 active:scale-95" href="#"><span class="material-symbols-outlined" data-icon="assignment">assignment</span> <span class="text-label-md font-label-md">Rubrik Penilaian</span></a></li>
+<li><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 scale-100 active:scale-95" href="#"><span class="material-symbols-outlined" data-icon="database">database</span> <span class="text-label-md font-label-md">Bank Soal</span></a></li>
+<li><a class="flex items-center gap-3 px-4 py-3 border-l-4 border-primary bg-glow-green text-primary font-bold hover:bg-surface-container-high transition-colors duration-200 scale-100 active:scale-95" href="#"><span class="material-symbols-outlined" data-icon="analytics" data-weight="fill" style="font-variation-settings: 'FILL' 1;">analytics</span> <span class="text-label-md font-label-md">Rapor</span></a></li>
+<li><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 scale-100 active:scale-95" href="#"><span class="material-symbols-outlined" data-icon="monitor_heart">monitor_heart</span> <span class="text-label-md font-label-md">Monitoring Fitur</span></a></li>
+</ul>
+</div>
+<div class="p-4 border-t border-border-subtle mt-auto">
+<ul class="space-y-1">
+<li><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 scale-100 active:scale-95" href="#"><span class="material-symbols-outlined" data-icon="help">help</span> <span class="text-label-md font-label-md">Bantuan</span></a></li>
+<li><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 scale-100 active:scale-95" href="#"><span class="material-symbols-outlined" data-icon="settings">settings</span> <span class="text-label-md font-label-md">Pengaturan</span></a></li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col ml-sidebar-width h-screen overflow-hidden">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-surface-dim docked full-width top-0 border-b border-border-subtle flat no shadows flex justify-between items-center w-full h-16 px-gutter z-10 shrink-0">
+<div class="flex items-center gap-8">
+<span class="text-headline-md font-headline-md font-black tracking-tight text-primary dark:text-primary">PhyXis</span>
+<nav class="hidden md:flex gap-6">
+<a class="text-on-surface-variant hover:text-on-surface text-body-md font-body-md transition-all duration-200" href="#">Modul</a>
+<a class="text-on-surface-variant hover:text-on-surface text-body-md font-body-md transition-all duration-200" href="#">Jadwal</a>
+<a class="text-on-surface-variant hover:text-on-surface text-body-md font-body-md transition-all duration-200" href="#">Laboratorium</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="bg-surface-container-high border-none rounded pl-10 pr-4 py-2 text-body-md text-on-surface focus:ring-1 focus:ring-primary w-64" placeholder="Search..." type="text">
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-all duration-200"><span class="material-symbols-outlined" data-icon="notifications">notifications</span></button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-all duration-200"><span class="material-symbols-outlined" data-icon="history">history</span></button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-all duration-200"><span class="material-symbols-outlined" data-icon="help_outline">help_outline</span></button>
+</div>
+<button class="flex items-center gap-2 Active: opacity-80 pl-2 border-l border-border-subtle">
+<img class="w-8 h-8 rounded-full bg-surface-variant object-cover" data-alt="A generic profile avatar for a university student. The image is a simple headshot against a neutral dark grey background. The style is clean, modern, and suitable for a professional academic portal. The lighting is soft and even." src="https://lh3.googleusercontent.com/aida-public/AB6AXuALrYXdgolypK6mpvm2i27arFHaCE1d5ypKbTbKlrkzO3Gf37OgI-ReBH9D-z8mfXTHfQFfjB1vALIl17Q5bTTsV8xx9p3UaOqBJNLlnN1MDfVbX963OtrX5w2wr6gs8F19rB6mI5FzTfDV2qtgR5mGC0-1Asfwy_36ZvIJkyqzM36vCts9FNSTCY6no9VF2rpyKMqxoj_hdw6CmlVWm2q-RWUQovuJNmWpegfeCO8yb23_DqiJmQI7bQFG5H-CxPbTf-uevEpPrqjI">
+</button>
+</div>
+</header>
+<!-- Page Canvas -->
+<main class="flex-1 overflow-y-auto p-margin-desktop bg-surface-container-lowest">
+<!-- Context Header & Tabs -->
+<div class="flex flex-col gap-6 mb-8">
+<div class="flex justify-between items-end border-b border-border-subtle pb-4">
+<div>
+<h2 class="text-headline-lg font-headline-lg text-on-surface">Andi Pratama</h2>
+<p class="text-body-lg font-body-lg text-on-surface-variant mt-1 font-mono">24030118140123</p>
+</div>
+<div class="flex gap-4">
+<button class="px-4 py-2 text-primary border-b-2 border-primary font-label-md text-label-md -mb-[17px]">Per Mahasiswa</button>
+<button class="px-4 py-2 text-on-surface-variant hover:text-on-surface font-label-md text-label-md">Per Kelas</button>
+<button class="px-4 py-2 text-on-surface-variant hover:text-on-surface font-label-md text-label-md">Finalisasi</button>
+</div>
+</div>
+</div>
+<!-- Dashboard Layout Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 h-[calc(100%-120px)]">
+<!-- Left Panel: Rubrik Penilaian (5 Columns) -->
+<div class="lg:col-span-5 flex flex-col gap-4">
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">assessment</span> Rubrik Penilaian
+                    </h3>
+<div class="flex-1 flex flex-col gap-3 overflow-y-auto pr-2">
+<!-- Card 1 -->
+<div class="bg-surface-charcoal border border-border-subtle rounded-lg p-4 flex justify-between items-center group hover:border-primary transition-colors">
+<div class="flex flex-col">
+<span class="text-label-md font-label-md text-on-surface-variant mb-1">20% Bobot</span>
+<span class="text-body-lg font-body-lg font-semibold text-on-surface group-hover:text-primary transition-colors">Pre-test</span>
+</div>
+<div class="text-headline-md font-headline-md text-on-surface">85</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-charcoal border border-primary rounded-lg p-4 flex flex-col gap-3 relative overflow-hidden">
+<div class="absolute inset-0 bg-glow-green opacity-20 pointer-events-none"></div>
+<div class="flex justify-between items-center z-10">
+<div class="flex flex-col">
+<span class="text-label-md font-label-md text-on-surface-variant mb-1">20% Bobot</span>
+<span class="text-body-lg font-body-lg font-semibold text-primary">Simulator</span>
+</div>
+<div class="text-headline-md font-headline-md text-on-surface">78</div>
+</div>
+<div class="grid grid-cols-2 gap-2 mt-2 pt-3 border-t border-border-subtle z-10">
+<div>
+<span class="text-label-sm font-label-sm text-on-surface-variant block mb-1">Errors</span>
+<span class="text-body-md font-body-md text-error">2</span>
+</div>
+<div>
+<span class="text-label-sm font-label-sm text-on-surface-variant block mb-1">Decision Time</span>
+<span class="text-body-md font-body-md text-on-surface font-mono">4.2s</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-charcoal border border-border-subtle rounded-lg p-4 flex justify-between items-center group hover:border-primary transition-colors">
+<div class="flex flex-col">
+<span class="text-label-md font-label-md text-on-surface-variant mb-1">20% Bobot</span>
+<span class="text-body-lg font-body-lg font-semibold text-on-surface group-hover:text-primary transition-colors">Lab Nyata</span>
+</div>
+<div class="text-headline-md font-headline-md text-on-surface">90</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-charcoal border border-border-subtle rounded-lg p-4 flex justify-between items-center group hover:border-primary transition-colors">
+<div class="flex flex-col">
+<span class="text-label-md font-label-md text-on-surface-variant mb-1">20% Bobot</span>
+<span class="text-body-lg font-body-lg font-semibold text-on-surface group-hover:text-primary transition-colors">Post-test</span>
+</div>
+<div class="text-headline-md font-headline-md text-on-surface">82</div>
+</div>
+<!-- Card 5 -->
+<div class="bg-surface-charcoal border border-border-subtle rounded-lg p-4 flex justify-between items-center group hover:border-primary transition-colors">
+<div class="flex flex-col">
+<span class="text-label-md font-label-md text-on-surface-variant mb-1">20% Bobot</span>
+<span class="text-body-lg font-body-lg font-semibold text-on-surface group-hover:text-primary transition-colors">Laporan</span>
+</div>
+<div class="text-headline-md font-headline-md text-on-surface">88</div>
+</div>
+</div>
+<!-- Final Score Summary -->
+<div class="mt-auto bg-surface border border-border-subtle rounded-xl p-6 flex justify-between items-center shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)]">
+<span class="text-headline-sm font-headline-sm text-on-surface-variant">Nilai Akhir</span>
+<div class="flex items-baseline gap-2">
+<span class="text-headline-lg font-headline-lg text-primary font-mono tracking-tight">84.6</span>
+<span class="text-headline-sm font-headline-sm text-on-surface">(A-)</span>
+</div>
+</div>
+</div>
+<!-- Right Panel: KPS Passport (7 Columns) -->
+<div class="lg:col-span-7 flex flex-col gap-4">
+<div class="flex justify-between items-center mb-2">
+<h3 class="text-headline-sm font-headline-sm text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-lg">verified</span> KPS Passport
+                        </h3>
+<span class="px-3 py-1 bg-surface-charcoal border border-border-subtle rounded text-label-md font-label-md text-on-surface-variant">
+                            Summary: <strong class="text-on-surface">4/6 Indikator Lulus</strong>
+</span>
+</div>
+<div class="flex-1 bg-surface-charcoal border border-border-subtle rounded-xl overflow-hidden flex flex-col">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface border-b border-border-subtle">
+<th class="p-4 text-label-md font-label-md text-on-surface-variant font-medium">Indikator</th>
+<th class="p-4 text-label-md font-label-md text-on-surface-variant font-medium">Status AI</th>
+<th class="p-4 text-label-md font-label-md text-on-surface-variant font-medium">Status Aslab</th>
+<th class="p-4 text-label-md font-label-md text-on-surface-variant font-medium">Status Dosen</th>
+</tr>
+</thead>
+<tbody class="text-body-md font-body-md divide-y divide-border-subtle">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="p-4 text-on-surface font-medium flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span> Mengamati
+                                        </td>
+<td class="p-4"><span class="inline-flex items-center px-2 py-1 rounded bg-surface-container border border-primary/30 text-primary text-label-sm font-label-sm">Lulus</span></td>
+<td class="p-4"><span class="inline-flex items-center px-2 py-1 rounded bg-surface-container border border-primary/30 text-primary text-label-sm font-label-sm">Lulus</span></td>
+<td class="p-4"><span class="inline-flex items-center px-2 py-1 rounded bg-surface-container border border-primary/30 text-primary text-label-sm font-label-sm">Lulus</span></td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="p-4 text-on-surface font-medium flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span> Mengklasifikasi
+                                        </td>
+<td class="p-4"><span class="inline-flex items-center px-2 py-1 rounded bg-surface-container border border-primary/30 text-primary text-label-sm font-label-sm">Lulus</span></td>
+<td class="p-4"><span class="inline-flex items-center px-2 py-1 rounded bg-surface-container border border-primary/30 text-primary text-label-sm font-label-sm">Lulus</span></td>
+<td class="p-4"><span class="inline-flex items-center px-2 py-1 rounded bg-surface-container border border-primary/30 text-primary text-label-sm font-label-sm">Lulus</span></td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="p-4 text-on-surface font-medium flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-surface-variant"></span> Memprediksi
+                                        </td>
+<td class="p-4"><span class="inline-flex items-center px-2 py-1 rounded bg-surface-container border border-border-subtle text-on-surface-variant text-label-sm font-label-sm">Belum Lulus</span></td>
+<td class="p-4"><span class="inline-flex items-center px-2 py-1 rounded bg-surface-container border border-primary/30 text-primary text-label-sm font-label-sm">Lulus</span></td>
+<td class="p-4"><span class="inline-flex items-center px-2 py-1 rounded bg-surface-container border border-border-subtle text-on-surface-variant text-label-sm font-label-sm">-</span></td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="p-4 text-on-surface font-medium flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span> Menyimpulkan
+                                        </td>
+<td class="p-4"><span class="inline-flex items-center px-2 py-1 rounded bg-surface-container border border-primary/30 text-primary text-label-sm font-label-sm">Lulus</span></td>
+<td class="p-4"><span class="inline-flex items-center px-2 py-1 rounded bg-surface-container border border-primary/30 text-primary text-label-sm font-label-sm">Lulus</span></td>
+<td class="p-4"><span class="inline-flex items-center px-2 py-1 rounded bg-surface-container border border-primary/30 text-primary text-label-sm font-label-sm">Lulus</span></td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="p-4 text-on-surface font-medium flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-surface-variant"></span> Mengkomunikasikan
+                                        </td>
+<td class="p-4"><span class="inline-flex items-center px-2 py-1 rounded bg-surface-container border border-border-subtle text-on-surface-variant text-label-sm font-label-sm">Belum Lulus</span></td>
+<td class="p-4"><span class="inline-flex items-center px-2 py-1 rounded bg-surface-container border border-border-subtle text-on-surface-variant text-label-sm font-label-sm">Belum Lulus</span></td>
+<td class="p-4"><span class="inline-flex items-center px-2 py-1 rounded bg-surface-container border border-border-subtle text-on-surface-variant text-label-sm font-label-sm">-</span></td>
+</tr>
+<!-- Row 6 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="p-4 text-on-surface font-medium flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span> Merancang Percobaan
+                                        </td>
+<td class="p-4"><span class="inline-flex items-center px-2 py-1 rounded bg-surface-container border border-primary/30 text-primary text-label-sm font-label-sm">Lulus</span></td>
+<td class="p-4"><span class="inline-flex items-center px-2 py-1 rounded bg-surface-container border border-primary/30 text-primary text-label-sm font-label-sm">Lulus</span></td>
+<td class="p-4"><span class="inline-flex items-center px-2 py-1 rounded bg-surface-container border border-primary/30 text-primary text-label-sm font-label-sm">Lulus</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

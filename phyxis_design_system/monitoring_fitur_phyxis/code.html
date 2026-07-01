@@ -1,0 +1,550 @@
+<!DOCTYPE html><html class="dark" lang="id"><head></head><body class="bg-surface text-on-surface font-body-md antialiased overflow-hidden flex h-screen"><svg class="inline-defs-container" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden"></svg>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Monitoring Fitur - PhyXis Lab</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#becab9",
+                        "surface-container": "#1e2023",
+                        "surface": "#111316",
+                        "on-primary-container": "#003c0b",
+                        "on-primary": "#00390a",
+                        "primary": "#78dc77",
+                        "glow-green": "rgba(76, 175, 80, 0.15)",
+                        "surface-container-lowest": "#0c0e11",
+                        "surface-container-low": "#1a1c1f",
+                        "on-secondary": "#00315f",
+                        "data-blue": "#0D47A1",
+                        "tertiary-fixed-dim": "#ffb1c7",
+                        "error-container": "#93000a",
+                        "tertiary": "#ffb1c7",
+                        "surface-charcoal": "#1E2227",
+                        "outline": "#899484",
+                        "on-tertiary-fixed-variant": "#861948",
+                        "surface-container-high": "#282a2d",
+                        "on-primary-fixed": "#002204",
+                        "surface-variant": "#333538",
+                        "on-primary-fixed-variant": "#005313",
+                        "on-background": "#e2e2e6",
+                        "on-tertiary": "#650032",
+                        "primary-container": "#4caf50",
+                        "inverse-surface": "#e2e2e6",
+                        "tertiary-fixed": "#ffd9e2",
+                        "on-error-container": "#ffdad6",
+                        "secondary-container": "#006ec9",
+                        "indicator-blue": "#2196F3",
+                        "on-error": "#690005",
+                        "tertiary-container": "#f26f9d",
+                        "inverse-primary": "#006e1c",
+                        "on-tertiary-container": "#690034",
+                        "background": "#111316",
+                        "surface-bright": "#37393d",
+                        "on-secondary-container": "#eaf0ff",
+                        "border-subtle": "#2C323A",
+                        "surface-container-highest": "#333538",
+                        "outline-variant": "#3f4a3c",
+                        "error": "#ffb4ab",
+                        "primary-fixed-dim": "#78dc77",
+                        "secondary-fixed-dim": "#a5c8ff",
+                        "on-surface": "#e2e2e6",
+                        "surface-dim": "#111316",
+                        "primary-fixed": "#94f990",
+                        "secondary-fixed": "#d4e3ff",
+                        "on-secondary-fixed-variant": "#004786",
+                        "on-secondary-fixed": "#001c3a",
+                        "secondary": "#a5c8ff",
+                        "on-tertiary-fixed": "#3e001c",
+                        "surface-tint": "#78dc77",
+                        "inverse-on-surface": "#2f3034"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "gutter": "16px",
+                        "unit": "4px",
+                        "sidebar-width": "260px",
+                        "margin-desktop": "32px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "label-sm": ["11px", { "lineHeight": "1", "fontWeight": "500" }],
+                        "body-lg": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["26px", { "lineHeight": "1.2", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Custom scrollbar for data dense areas */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #111316; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2C323A; 
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3f4a3c; 
+        }
+    </style>
+
+
+<!-- SideNavBar (Shared Component) -->
+<nav class="bg-surface-container border-r border-outline-variant flat no shadows fixed left-0 top-0 h-full w-sidebar-width hidden md:flex flex-col py-6 px-4 gap-2 z-40">
+<!-- Header -->
+<div class="flex items-center gap-3 mb-8 px-2">
+<div class="w-10 h-10 rounded-lg bg-surface-charcoal flex items-center justify-center border border-border-subtle">
+<span class="material-symbols-outlined text-primary text-xl" data-weight="fill">science</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary tracking-tight">PhyXis Lab</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Precision Science</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<div class="flex flex-col gap-1 flex-grow">
+<!-- Dashboard (Inactive) -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors text-[20px]">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<!-- Indikator KPS (Inactive) -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors text-[20px]">analytics</span>
+<span class="font-label-md text-label-md">Indikator KPS</span>
+</a>
+<!-- Rubrik Penilaian (Inactive) -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors text-[20px]">assignment</span>
+<span class="font-label-md text-label-md">Rubrik Penilaian</span>
+</a>
+<!-- Bank Soal (Inactive) -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors text-[20px]">database</span>
+<span class="font-label-md text-label-md">Bank Soal</span>
+</a>
+<!-- Rapor (Inactive) -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors text-[20px]">assessment</span>
+<span class="font-label-md text-label-md">Rapor</span>
+</a>
+<!-- Monitoring Fitur (Active - Exact Match) -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT border-l-4 border-primary bg-glow-green text-primary font-bold scale-95 duration-100 shadow-[0_0_12px_rgba(76,175,80,0.15)] relative" href="#">
+<span class="material-symbols-outlined text-[20px]" data-weight="fill">monitoring</span>
+<span class="font-label-md text-label-md">Monitoring Fitur</span>
+</a>
+</div>
+<!-- Footer Actions -->
+<div class="flex flex-col gap-1 mt-auto pt-4 border-t border-border-subtle">
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors text-[20px]">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors text-[20px]">help_outline</span>
+<span class="font-label-md text-label-md">Help</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 ml-0 md:ml-sidebar-width h-full flex flex-col relative overflow-hidden bg-background">
+<!-- TopNavBar (Shared Component - Web variant hidden on mobile logic handled by responsive display in actual use, but we keep the structure here as top header) -->
+<header class="bg-surface flex justify-between items-center w-full px-margin-desktop h-16 z-30 sticky top-0 border-b border-outline-variant flat no shadows">
+<div class="flex items-center gap-4">
+<!-- Mobile Menu Toggle (Visible only on mobile) -->
+<button class="md:hidden text-primary hover:bg-surface-container-high p-2 rounded-lg transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="flex flex-col">
+<h2 class="font-headline-sm text-headline-sm text-on-surface tracking-tight hidden md:block">Analytics Dashboard</h2>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider hidden md:block">Dosen View</span>
+</div>
+</div>
+<!-- Global Search & Actions -->
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+<input class="bg-surface-container-low border border-border-subtle rounded-full py-1.5 pl-9 pr-4 font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary w-64 transition-all placeholder:text-on-surface-variant/50" placeholder="Search analytics..." type="text">
+</div>
+<button class="text-on-surface-variant hover:text-primary hover:bg-surface-container-high p-2 rounded-full transition-colors relative group opacity-80 duration-150">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-primary rounded-full shadow-[0_0_8px_rgba(120,220,119,0.8)]"></span>
+</button>
+<button class="w-8 h-8 rounded-full bg-surface-charcoal border border-border-subtle overflow-hidden hover:border-primary transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">person</span>
+</button>
+</div>
+</header>
+<!-- Scrollable Canvas -->
+<div class="flex-1 overflow-y-auto p-gutter md:p-margin-desktop space-y-6">
+<!-- Filters & Context Bar -->
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-surface-charcoal border border-border-subtle rounded-lg p-3">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]">filter_list</span>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase">Filter Aktif</span>
+</div>
+<div class="flex flex-wrap gap-3">
+<div class="flex items-center gap-2 bg-surface-container-low px-3 py-1.5 rounded-DEFAULT border border-border-subtle">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Periode:</span>
+<select class="bg-transparent border-none p-0 pr-4 font-label-md text-label-md text-on-surface focus:ring-0 cursor-pointer appearance-none">
+<option>Semester Genap 2025/2026</option>
+<option>Semester Ganjil 2025/2026</option>
+</select>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant pointer-events-none -ml-5">arrow_drop_down</span>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-low px-3 py-1.5 rounded-DEFAULT border border-border-subtle">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Modul:</span>
+<select class="bg-transparent border-none p-0 pr-4 font-label-md text-label-md text-on-surface focus:ring-0 cursor-pointer appearance-none">
+<option>Semua</option>
+<option>Mekanika Dasar</option>
+<option>Termodinamika</option>
+</select>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant pointer-events-none -ml-5">arrow_drop_down</span>
+</div>
+</div>
+</div>
+<!-- Top Summary Row (Bento Style Top) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Card 1 -->
+<div class="bg-surface-charcoal border border-border-subtle rounded-lg p-5 relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-24 h-24 bg-glow-green blur-2xl rounded-full opacity-30 -mr-10 -mt-10 group-hover:opacity-60 transition-opacity"></div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Total Praktikan Aktif</h3>
+<span class="material-symbols-outlined text-primary text-[20px]">groups</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-on-surface">247</span>
+<span class="font-label-sm text-label-sm text-primary flex items-center"><span class="material-symbols-outlined text-[14px]">arrow_upward</span> 12%</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-charcoal border border-border-subtle rounded-lg p-5 relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-24 h-24 bg-secondary-container blur-2xl rounded-full opacity-20 -mr-10 -mt-10 group-hover:opacity-40 transition-opacity"></div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Sesi Simulasi</h3>
+<span class="material-symbols-outlined text-indicator-blue text-[20px]">science</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-on-surface">1,203</span>
+<span class="font-label-sm text-label-sm text-primary flex items-center"><span class="material-symbols-outlined text-[14px]">arrow_upward</span> 5%</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-charcoal border border-border-subtle rounded-lg p-5 relative overflow-hidden group">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Rata-rata Durasi Sesi</h3>
+<span class="material-symbols-outlined text-tertiary text-[20px]">timer</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-on-surface">8.5</span>
+<span class="font-body-md text-body-md text-on-surface-variant">menit</span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-charcoal border border-border-subtle rounded-lg p-5 relative overflow-hidden group">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Tingkat Partisipasi</h3>
+<span class="material-symbols-outlined text-primary text-[20px]">donut_large</span>
+</div>
+<div class="flex items-baseline gap-2 mb-2">
+<span class="font-headline-lg text-headline-lg text-on-surface">78%</span>
+</div>
+<!-- Minimalist mini progress bar -->
+<div class="w-full h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full shadow-[0_0_8px_rgba(120,220,119,0.8)]" style="width: 78%"></div>
+</div>
+</div>
+</div>
+<!-- Main Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Left Panel: Penggunaan Fitur (Horizontal Bar) -->
+<div class="lg:col-span-4 bg-surface-charcoal border border-border-subtle rounded-lg p-5 flex flex-col">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">bar_chart</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Penggunaan Fitur</h3>
+</div>
+<div class="flex-1 flex flex-col gap-4 justify-center">
+<!-- Bar Item 1 -->
+<div>
+<div class="flex justify-between items-end mb-1">
+<span class="font-label-md text-label-md text-on-surface">Simulator</span>
+<span class="font-label-sm text-label-sm text-primary">94%</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full shadow-[0_0_4px_rgba(120,220,119,0.5)]" style="width: 94%"></div>
+</div>
+</div>
+<!-- Bar Item 2 -->
+<div>
+<div class="flex justify-between items-end mb-1">
+<span class="font-label-md text-label-md text-on-surface">Pre-test</span>
+<span class="font-label-sm text-label-sm text-primary">89%</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full shadow-[0_0_4px_rgba(120,220,119,0.5)] opacity-90" style="width: 89%"></div>
+</div>
+</div>
+<!-- Bar Item 3 -->
+<div>
+<div class="flex justify-between items-end mb-1">
+<span class="font-label-md text-label-md text-on-surface">Post-test</span>
+<span class="font-label-sm text-label-sm text-primary">82%</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full shadow-[0_0_4px_rgba(120,220,119,0.5)] opacity-80" style="width: 82%"></div>
+</div>
+</div>
+<!-- Bar Item 4 -->
+<div>
+<div class="flex justify-between items-end mb-1">
+<span class="font-label-md text-label-md text-on-surface">Upload Laporan</span>
+<span class="font-label-sm text-label-sm text-primary">76%</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full shadow-[0_0_4px_rgba(120,220,119,0.5)] opacity-70" style="width: 76%"></div>
+</div>
+</div>
+<!-- Bar Item 5 -->
+<div>
+<div class="flex justify-between items-end mb-1">
+<span class="font-label-md text-label-md text-on-surface">Lihat Rapor</span>
+<span class="font-label-sm text-label-sm text-indicator-blue">68%</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-indicator-blue rounded-full opacity-90" style="width: 68%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Center Panel: Aktivitas Harian (Line Chart Mockup) -->
+<div class="lg:col-span-8 bg-surface-charcoal border border-border-subtle rounded-lg p-5 flex flex-col relative overflow-hidden">
+<div class="flex justify-between items-center mb-4 z-10 relative">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">show_chart</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Aktivitas Harian (30 Hari)</h3>
+</div>
+<div class="flex gap-2">
+<span class="w-2 h-2 rounded-full bg-primary mt-1.5 shadow-[0_0_8px_rgba(120,220,119,0.8)]"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">User Aktif</span>
+</div>
+</div>
+<!-- Abstract CSS Line Chart Representation -->
+<div class="flex-1 w-full relative min-h-[200px] mt-4 flex items-end">
+<!-- Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-20 z-0 border-l border-b border-border-subtle">
+<div class="border-t border-dashed border-outline-variant w-full h-0"></div>
+<div class="border-t border-dashed border-outline-variant w-full h-0"></div>
+<div class="border-t border-dashed border-outline-variant w-full h-0"></div>
+<div class="border-t border-dashed border-outline-variant w-full h-0"></div>
+</div>
+<!-- SVG Line Graph Mockup -->
+<div class="absolute inset-0 z-10 w-full h-full pb-[1px] pl-[1px]">
+<svg class="overflow-visible" height="100%" preserveAspectRatio="none" viewBox="0 0 100 100" width="100%">
+<defs>
+<linearGradient id="chartGlow" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="rgba(120, 220, 119, 0.4)"></stop>
+<stop offset="100%" stop-color="rgba(120, 220, 119, 0)"></stop>
+</linearGradient>
+<filter height="140%" id="glow" width="140%" x="-20%" y="-20%">
+<feGaussianBlur result="blur" stdDeviation="1"></feGaussianBlur>
+<feComposite in="SourceGraphic" in2="blur" operator="over"></feComposite>
+</filter>
+</defs>
+<!-- Area Fill -->
+<path d="M0,80 Q10,70 20,85 T40,60 T60,20 T80,50 T100,30 L100,100 L0,100 Z" fill="url(#chartGlow)"></path>
+<!-- Line Path -->
+<path d="M0,80 Q10,70 20,85 T40,60 T60,20 T80,50 T100,30" fill="none" filter="url(#glow)" stroke="#78dc77" stroke-width="1.5" vector-effect="non-scaling-stroke"></path>
+<!-- Peak Highlight Node -->
+<circle cx="60" cy="20" fill="#111316" r="2.5" stroke="#78dc77" stroke-width="1.5" vector-effect="non-scaling-stroke"></circle>
+</svg>
+</div>
+<!-- X-Axis Labels -->
+<div class="absolute -bottom-6 left-0 w-full flex justify-between px-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant/50">1 Mar</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant/50">15 Mar</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant/50">30 Mar</span>
+</div>
+<!-- Y-Axis Labels -->
+<div class="absolute -left-8 top-0 h-full flex flex-col justify-between py-1 items-end">
+<span class="font-label-sm text-label-sm text-on-surface-variant/50">200</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant/50">100</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant/50">0</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Row: Heatmap & Histogram -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 pb-4">
+<!-- Right Panel (Mock): Heatmap Jam Aktif -->
+<div class="bg-surface-charcoal border border-border-subtle rounded-lg p-5">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">grid_on</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Heatmap Jam Aktif</h3>
+</div>
+<div class="overflow-x-auto">
+<div class="min-w-[400px]">
+<!-- Heatmap Grid -->
+<div class="grid grid-cols-[auto_repeat(8,1fr)] gap-1 text-center">
+<!-- Header Row -->
+<div class="h-6"></div>
+<div class="font-label-sm text-label-sm text-on-surface-variant/70">08:00</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant/70">10:00</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant/70">12:00</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant/70">14:00</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant/70">16:00</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant/70">18:00</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant/70">20:00</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant/70">22:00</div>
+<!-- Rows -->
+<!-- Sen -->
+<div class="font-label-sm text-label-sm text-on-surface-variant flex items-center pr-2 justify-end">Sen</div>
+<div class="h-6 rounded bg-primary/20 hover:border border-primary"></div>
+<div class="h-6 rounded bg-primary/60 hover:border border-primary"></div>
+<div class="h-6 rounded bg-primary/10 hover:border border-primary"></div>
+<div class="h-6 rounded bg-primary/80 hover:border border-primary"></div>
+<div class="h-6 rounded bg-primary/40 hover:border border-primary"></div>
+<div class="h-6 rounded bg-surface-container hover:border border-primary"></div>
+<div class="h-6 rounded bg-primary/90 hover:border border-primary shadow-[0_0_8px_rgba(120,220,119,0.3)]"></div>
+<div class="h-6 rounded bg-primary/30 hover:border border-primary"></div>
+<!-- Sel -->
+<div class="font-label-sm text-label-sm text-on-surface-variant flex items-center pr-2 justify-end">Sel</div>
+<div class="h-6 rounded bg-primary/40"></div>
+<div class="h-6 rounded bg-primary/50"></div>
+<div class="h-6 rounded bg-primary/20"></div>
+<div class="h-6 rounded bg-primary/90 shadow-[0_0_8px_rgba(120,220,119,0.3)]"></div>
+<div class="h-6 rounded bg-primary/30"></div>
+<div class="h-6 rounded bg-primary/10"></div>
+<div class="h-6 rounded bg-primary/70"></div>
+<div class="h-6 rounded bg-surface-container"></div>
+<!-- Rab -->
+<div class="font-label-sm text-label-sm text-on-surface-variant flex items-center pr-2 justify-end">Rab</div>
+<div class="h-6 rounded bg-primary/10"></div>
+<div class="h-6 rounded bg-primary/80"></div>
+<div class="h-6 rounded bg-primary/30"></div>
+<div class="h-6 rounded bg-primary/40"></div>
+<div class="h-6 rounded bg-primary/100 shadow-[0_0_8px_rgba(120,220,119,0.4)] border border-primary"></div>
+<div class="h-6 rounded bg-primary/50"></div>
+<div class="h-6 rounded bg-primary/20"></div>
+<div class="h-6 rounded bg-surface-container"></div>
+<!-- Kam -->
+<div class="font-label-sm text-label-sm text-on-surface-variant flex items-center pr-2 justify-end">Kam</div>
+<div class="h-6 rounded bg-primary/30"></div>
+<div class="h-6 rounded bg-primary/20"></div>
+<div class="h-6 rounded bg-surface-container"></div>
+<div class="h-6 rounded bg-primary/70"></div>
+<div class="h-6 rounded bg-primary/60"></div>
+<div class="h-6 rounded bg-primary/30"></div>
+<div class="h-6 rounded bg-primary/80"></div>
+<div class="h-6 rounded bg-primary/10"></div>
+<!-- Jum -->
+<div class="font-label-sm text-label-sm text-on-surface-variant flex items-center pr-2 justify-end">Jum</div>
+<div class="h-6 rounded bg-primary/80"></div>
+<div class="h-6 rounded bg-primary/70"></div>
+<div class="h-6 rounded bg-primary/40"></div>
+<div class="h-6 rounded bg-primary/20"></div>
+<div class="h-6 rounded bg-primary/10"></div>
+<div class="h-6 rounded bg-surface-container"></div>
+<div class="h-6 rounded bg-primary/30"></div>
+<div class="h-6 rounded bg-primary/50"></div>
+</div>
+</div>
+</div>
+<div class="mt-4 flex items-center justify-end gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant/70">Rendah</span>
+<div class="flex h-2 w-24 rounded overflow-hidden">
+<div class="flex-1 bg-surface-container"></div>
+<div class="flex-1 bg-primary/20"></div>
+<div class="flex-1 bg-primary/50"></div>
+<div class="flex-1 bg-primary/80"></div>
+<div class="flex-1 bg-primary"></div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant/70">Tinggi</span>
+</div>
+</div>
+<!-- Bottom Panel (Mock): Distribusi Durasi Sesi -->
+<div class="bg-surface-charcoal border border-border-subtle rounded-lg p-5 flex flex-col">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">leaderboard</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Distribusi Durasi Sesi</h3>
+</div>
+<div class="flex-1 flex items-end justify-around gap-2 px-4 pb-6 pt-10 border-b border-border-subtle relative">
+<!-- Y-Axis Lines -->
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-20 border-l border-border-subtle pl-1 pb-6 pt-10">
+<div class="border-t border-dashed border-outline-variant w-full h-0"></div>
+<div class="border-t border-dashed border-outline-variant w-full h-0"></div>
+<div class="border-t border-dashed border-outline-variant w-full h-0"></div>
+</div>
+<!-- Bar 1: 0-5 min -->
+<div class="flex flex-col items-center w-1/4 group relative z-10">
+<div class="font-label-sm text-label-sm text-on-surface opacity-0 group-hover:opacity-100 transition-opacity mb-1 absolute -top-6">15%</div>
+<div class="w-full max-w-[40px] bg-secondary-container/60 group-hover:bg-indicator-blue rounded-t-sm h-[30%] transition-colors border-t border-indicator-blue/50"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-2 absolute -bottom-6 whitespace-nowrap">0-5 m</span>
+</div>
+<!-- Bar 2: 5-10 min -->
+<div class="flex flex-col items-center w-1/4 group relative z-10">
+<div class="font-label-sm text-label-sm text-on-surface opacity-0 group-hover:opacity-100 transition-opacity mb-1 absolute -top-6">45%</div>
+<div class="w-full max-w-[40px] bg-primary/80 group-hover:bg-primary shadow-[0_0_8px_rgba(120,220,119,0.2)] rounded-t-sm h-[90%] transition-colors border-t border-primary/50"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-2 absolute -bottom-6 whitespace-nowrap">5-10 m</span>
+</div>
+<!-- Bar 3: 10-15 min -->
+<div class="flex flex-col items-center w-1/4 group relative z-10">
+<div class="font-label-sm text-label-sm text-on-surface opacity-0 group-hover:opacity-100 transition-opacity mb-1 absolute -top-6">30%</div>
+<div class="w-full max-w-[40px] bg-secondary-container/60 group-hover:bg-indicator-blue rounded-t-sm h-[60%] transition-colors border-t border-indicator-blue/50"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-2 absolute -bottom-6 whitespace-nowrap">10-15 m</span>
+</div>
+<!-- Bar 4: 15+ min -->
+<div class="flex flex-col items-center w-1/4 group relative z-10">
+<div class="font-label-sm text-label-sm text-on-surface opacity-0 group-hover:opacity-100 transition-opacity mb-1 absolute -top-6">10%</div>
+<div class="w-full max-w-[40px] bg-secondary-container/60 group-hover:bg-indicator-blue rounded-t-sm h-[20%] transition-colors border-t border-indicator-blue/50"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-2 absolute -bottom-6 whitespace-nowrap">15+ m</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Disclaimer -->
+<div class="flex items-center justify-center gap-2 py-4 text-on-surface-variant/60">
+<span class="material-symbols-outlined text-[16px]">info</span>
+<span class="font-label-sm text-label-sm">Data dianonimkan. Partisipasi bersifat sukarela dan tidak memengaruhi nilai.</span>
+</div>
+</div>
+</main>
+</body></html>
