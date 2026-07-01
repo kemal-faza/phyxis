@@ -7,6 +7,7 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'PhyXis',
   description: 'Physics Experience & Intelligent System',
+  manifest: '/manifest.json',
 }
 
 export default function RootLayout({
