@@ -32,6 +32,7 @@ const config: Config = {
         error: '#ffb4ab',
         'data-blue': '#0D47A1',
         'indicator-blue': '#2196F3',
+        'glow-green': 'rgba(76, 175, 80, 0.15)',
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
