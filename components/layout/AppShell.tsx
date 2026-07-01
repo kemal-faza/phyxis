@@ -52,7 +52,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <main
           className={`${
             collapsed ? 'lg:ml-sidebar-collapsed' : 'lg:ml-sidebar-width'
-          } ml-0 flex-1 p-4 pt-14 transition-all duration-200 sm:p-6 lg:pt-6`}
+          } ml-0 flex-1 p-4 pt-14 transition-all duration-200 sm:p-6 sm:pt-14 lg:pt-6`}
         >
           {children}
         </main>

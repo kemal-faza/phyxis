@@ -44,3 +44,18 @@ test('report review shows card layout on mobile for asisten', async ({ page }) =
   await expect(page.locator('text=MODUL').first()).toBeVisible()
   await expect(page.locator('text=TANGGAL').first()).toBeVisible()
 })
+
+test('monitoring shows card layout on mobile for dosen', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 667 })
+  await page.goto('/')
+
+  // Login sebagai dosen
+  await page.click('text=Dosen Pengampu')
+  await expect(page).toHaveURL('/dashboard')
+
+  // Navigasi ke monitoring
+  await page.goto('/monitoring')
+  // Card labels — hanya muncul di layout kartu, bukan di tabel
+  await expect(page.locator('text=JUMLAH PEMBUKAAN').first()).toBeVisible()
+  await expect(page.locator('text=RATA-RATA DURASI').first()).toBeVisible()
+})
