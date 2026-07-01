@@ -14,3 +14,5 @@ dist/
 .vercel
 test-results/
 playwright-report/
+tmp/
+*.tsbuildinfo
