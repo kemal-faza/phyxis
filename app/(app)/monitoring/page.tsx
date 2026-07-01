@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuthStore } from '@/features/auth/stores/authStore'
+import { usePageTitle } from '@/components/layout/PageTitleContext'
 import { Card } from '@/components/ui/Card'
 import { MONITORING_DATA } from '@/features/monitoring/data/mockMonitoring'
 
@@ -17,6 +18,8 @@ export default function MonitoringPage() {
   const role = useAuthStore((s) => s.role)
   const router = useRouter()
 
+  usePageTitle(role === 'dosen' || role === 'admin' ? 'Monitoring Fitur' : '')
+
   useEffect(() => {
     if (!role || !ALLOWED_ROLES.includes(role)) router.push('/login')
   }, [role, router])
@@ -25,7 +28,7 @@ export default function MonitoringPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="page-title">Monitoring Fitur</h1>
+      <h1 className="page-title hidden lg:block">Monitoring Fitur</h1>
       <Card>
         <h2 className="mb-4 text-headline-sm">Aktivitas Fitur (anonim, sukarela)</h2>
         <div className="overflow-x-auto">

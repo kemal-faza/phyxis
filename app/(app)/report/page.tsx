@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuthStore } from '@/features/auth/stores/authStore'
+import { usePageTitle } from '@/components/layout/PageTitleContext'
 import { Card } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
 import { ReportUpload } from '@/features/report/components/ReportUpload'
@@ -14,6 +15,14 @@ export default function ReportPage() {
   const role = useAuthStore((s) => s.role)
   const router = useRouter()
 
+  const title =
+    role === 'asisten' || role === 'dosen'
+      ? 'Laporan Praktikan'
+      : role === 'praktikan'
+        ? 'Laporan Akhir Praktikan'
+        : ''
+  usePageTitle(title)
+
   useEffect(() => {
     if (!role || !ALLOWED_ROLES.includes(role)) router.push('/login')
   }, [role, router])
@@ -24,7 +33,7 @@ export default function ReportPage() {
   if (role === 'asisten' || role === 'dosen') {
     return (
       <div className="space-y-6">
-        <h1 className="page-title">Laporan Praktikan</h1>
+        <h1 className="page-title hidden lg:block">Laporan Praktikan</h1>
         <ReportReviewTable />
       </div>
     )
@@ -33,7 +42,7 @@ export default function ReportPage() {
   /* ---------- PRAKTIKAN: upload laporan ---------- */
   return (
     <div className="space-y-6">
-      <h1 className="page-title">Laporan Akhir Praktikan</h1>
+        <h1 className="page-title hidden lg:block">Laporan Akhir Praktikan</h1>
       <div className="grid gap-4 md:grid-cols-3">
         <Card>
           <div className="text-label-md text-on-surface-variant">MODUL AKTIF</div>

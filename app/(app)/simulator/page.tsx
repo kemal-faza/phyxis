@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuthStore } from '@/features/auth/stores/authStore'
+import { usePageTitle } from '@/components/layout/PageTitleContext'
 import { SimulatorCanvas } from '@/features/simulator/components/SimulatorCanvas'
 import { StepPanel } from '@/features/simulator/components/StepPanel'
 import { MetricSummary } from '@/features/simulator/components/MetricSummary'
@@ -16,6 +17,14 @@ export default function SimulatorPage() {
   const status = useSimulatorStore((s) => s.status)
   const router = useRouter()
 
+  const title =
+    role === 'asisten' || role === 'dosen'
+      ? 'Simulator M-4: Review Praktikan'
+      : role === 'praktikan'
+        ? 'Simulator M-4: Gerak Jatuh Bebas'
+        : ''
+  usePageTitle(title)
+
   useEffect(() => {
     if (!role || !ALLOWED_ROLES.includes(role)) router.push('/login')
   }, [role, router])
@@ -26,7 +35,7 @@ export default function SimulatorPage() {
   if (role === 'asisten' || role === 'dosen') {
     return (
       <div className="space-y-6">
-        <h1 className="page-title">Simulator M-4: Review Praktikan</h1>
+        <h1 className="page-title hidden lg:block">Simulator M-4: Review Praktikan</h1>
         <ReviewTable />
       </div>
     )
@@ -35,7 +44,7 @@ export default function SimulatorPage() {
   /* ---------- PRAKTIKAN: interactive simulator ---------- */
   return (
     <div className="space-y-6">
-      <h1 className="page-title">Simulator M-4: Gerak Jatuh Bebas</h1>
+        <h1 className="page-title hidden lg:block">Simulator M-4: Gerak Jatuh Bebas</h1>
       <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
         <SimulatorCanvas />
         <div className="space-y-4">

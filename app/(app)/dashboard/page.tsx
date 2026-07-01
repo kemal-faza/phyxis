@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuthStore } from '@/features/auth/stores/authStore'
+import { usePageTitle } from '@/components/layout/PageTitleContext'
 import { Card } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
 import { StatCard } from '@/features/dashboard/components/StatCard'
@@ -19,6 +20,17 @@ export default function DashboardPage() {
   const role = useAuthStore((s) => s.role)
   const router = useRouter()
 
+  const title = role
+    ? role === 'praktikan'
+      ? 'Dashboard Praktikan'
+      : role === 'asisten'
+        ? 'Dashboard Asisten'
+        : role === 'dosen'
+          ? 'Dashboard Dosen'
+          : 'Dashboard Admin'
+    : ''
+  usePageTitle(title)
+
   useEffect(() => {
     if (!role) router.push('/login')
   }, [role, router])
@@ -29,7 +41,7 @@ export default function DashboardPage() {
   if (role === 'praktikan') {
     return (
       <div className="space-y-6">
-        <h1 className="page-title">Dashboard Praktikan</h1>
+        <h1 className="page-title hidden lg:block">Dashboard Praktikan</h1>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           {PRAKTIKAN_STATS.map((s) => (
             <Card key={s.label}>
@@ -46,7 +58,7 @@ export default function DashboardPage() {
   if (role === 'asisten') {
     return (
       <div className="space-y-6">
-        <h1 className="page-title">Dashboard Asisten</h1>
+        <h1 className="page-title hidden lg:block">Dashboard Asisten</h1>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           {ASISTEN_STATS.map((s) => (
             <Card key={s.label}>
@@ -81,7 +93,7 @@ export default function DashboardPage() {
   if (role === 'dosen') {
     return (
       <div className="space-y-6">
-        <h1 className="page-title">Dashboard Dosen</h1>
+        <h1 className="page-title hidden lg:block">Dashboard Dosen</h1>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {DOSEN_STATS.map((stat) => (
             <StatCard key={stat.label} {...stat} />
@@ -114,7 +126,7 @@ export default function DashboardPage() {
   if (role === 'admin') {
     return (
       <div className="space-y-6">
-        <h1 className="page-title">Dashboard Admin</h1>
+        <h1 className="page-title hidden lg:block">Dashboard Admin</h1>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           {ADMIN_STATS.map((s) => (
             <Card key={s.label}>

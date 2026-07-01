@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuthStore } from '@/features/auth/stores/authStore'
+import { usePageTitle } from '@/components/layout/PageTitleContext'
 import { QuizForm } from '@/features/quiz/components/QuizForm'
 import { QuizResult } from '@/features/quiz/components/QuizResult'
 import { QuizReviewTable } from '@/features/quiz/components/QuizReviewTable'
@@ -14,6 +15,14 @@ export default function QuizPage() {
   const role = useAuthStore((s) => s.role)
   const router = useRouter()
 
+  const title =
+    role === 'asisten' || role === 'dosen'
+      ? 'Pre-test & Post-test: Review'
+      : role === 'praktikan'
+        ? 'Pre-test & Post-test'
+        : ''
+  usePageTitle(title)
+
   useEffect(() => {
     if (!role || !ALLOWED_ROLES.includes(role)) router.push('/login')
   }, [role, router])
@@ -24,7 +33,7 @@ export default function QuizPage() {
   if (role === 'asisten' || role === 'dosen') {
     return (
       <div className="space-y-6">
-        <h1 className="page-title">Pre-test & Post-test: Review</h1>
+        <h1 className="page-title hidden lg:block">Pre-test & Post-test: Review</h1>
         <QuizReviewTable />
       </div>
     )
@@ -33,7 +42,7 @@ export default function QuizPage() {
   /* ---------- PRAKTIKAN: quiz form ---------- */
   return (
     <div className="space-y-6">
-      <h1 className="page-title">Pre-test & Post-test</h1>
+        <h1 className="page-title hidden lg:block">Pre-test & Post-test</h1>
       <QuizForm questions={PRE_TEST_QUESTIONS} title="Pre-test" />
       <QuizForm questions={POST_TEST_QUESTIONS} title="Post-test" />
       <QuizResult />

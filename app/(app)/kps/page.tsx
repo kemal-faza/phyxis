@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuthStore } from '@/features/auth/stores/authStore'
+import { usePageTitle } from '@/components/layout/PageTitleContext'
 import { KPSPassport } from '@/features/kps/components/KPSPassport'
 import { KPSReviewTable } from '@/features/kps/components/KPSReviewTable'
 import { IndicatorList } from '@/features/kps/components/IndicatorList'
@@ -13,6 +14,14 @@ const ALLOWED_ROLES: Array<string> = ['praktikan', 'asisten', 'dosen', 'admin']
 export default function KpsPage() {
   const role = useAuthStore((s) => s.role)
   const router = useRouter()
+
+  const title =
+    role === 'asisten' || role === 'dosen' || role === 'admin'
+      ? 'KPS Passport — Rekap Praktikan'
+      : role === 'praktikan'
+        ? 'KPS Passport Nilai'
+        : ''
+  usePageTitle(title)
 
   useEffect(() => {
     if (!role || !ALLOWED_ROLES.includes(role)) router.push('/login')
@@ -25,7 +34,7 @@ export default function KpsPage() {
     const canEdit = role === 'dosen'
     return (
       <div className="space-y-6">
-        <h1 className="page-title">KPS Passport — Rekap Praktikan</h1>
+        <h1 className="page-title hidden lg:block">KPS Passport — Rekap Praktikan</h1>
         <IndicatorList canEdit={canEdit} />
         <KPSReviewTable canEdit={canEdit} />
       </div>
@@ -35,7 +44,7 @@ export default function KpsPage() {
   /* ---------- PRAKTIKAN: lihat KPS sendiri ---------- */
   return (
     <div className="space-y-6">
-      <h1 className="page-title">KPS Passport Nilai</h1>
+        <h1 className="page-title hidden lg:block">KPS Passport Nilai</h1>
       <KPSPassport indicators={MOCK_KPS} />
     </div>
   )
