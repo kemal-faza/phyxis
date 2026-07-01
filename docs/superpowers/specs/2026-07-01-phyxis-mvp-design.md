@@ -335,14 +335,54 @@ Dev dependencies:
 | Scope creep ke fitur backend | Patuhi out-of-scope list dan dokumentasikan untuk iterasi berikutnya. |
 | Animator belum familiar glTF | Berikan spesifikasi `docs/animator-spec-m4.md` dan link validator. |
 
-## 16. Decisions & Assumptions
+## 16. Future Plan & Roadmap
+
+Item yang out-of-scope di MVP dibagi menjadi dua kategori: yang direncanakan untuk iterasi berikutnya, dan yang tidak akan diimplementasikan karena tidak sesuai arsitektur produk.
+
+### 16.1 Iterasi 2 — Backend & Autentikasi
+
+Fitur-fitur ini akan dibangun setelah MVP valid:
+
+1. **Autentikasi nyata**: Firebase Authentication atau NextAuth dengan email/password universitas.
+2. **Backend/API**: Firebase (Firestore, Cloud Functions) atau REST API untuk menyimpan data pengguna, skor, dan progress.
+3. **Database**: Menyimpan data praktikan, asisten, dosen, modul, soal, dan rubrik.
+4. **Offline sync**: Service worker menyimpan data sementara dan sinkronisasi saat online.
+5. **Dashboard admin**: Mengelola pengguna, role, dan hak akses.
+
+### 16.2 Iterasi 3 — AI & Konfigurasi
+
+Fitur-fitur ini akan dibangun setelah backend stabil:
+
+1. **AI Question Generator**: LLM menghasilkan soal essay dari file presentasi praktikan.
+2. **AI Grading Engine**: LLM menilai jawaban essay dengan semantic similarity.
+3. **Konfigurasi langkah simulator**: Admin/dosen dapat menambah, mengedit, dan menghapus langkah simulator melalui UI.
+4. **Upload dan grading laporan PDF**: Laporan diunggah ke storage, asisten memberi nilai melalui UI.
+5. **Pelacakan KPS otomatis**: AI dan asisten bersama-sama menentukan status lulus/belum lulus indikator KPS.
+
+### 16.3 Tidak Akan Diimplementasikan
+
+Item ini sengaja dihapus dari roadmap karena bertentangan dengan desain produk:
+
+1. **Fisika real-time / physics engine**: Produk menggunakan animasi prosedur dari Blender, bukan simulasi fisika interaktif. Rapier.js tidak akan digunakan.
+2. **Aplikasi native (APK/iOS)**: Produk tetap berbentuk PWA, bukan aplikasi native store.
+3. **Integrasi langsung dengan Sistem Informasi Akademik**: Tidak akan dibangun dalam waktu dekat karena memerlukan kerja sama institusi dan regulasi data.
+
+### 16.4 Timeline Kasar
+
+| Fase | Deliverable | Estimasi |
+|------|-------------|----------|
+| MVP | UI 7 halaman + simulator interaktif + dummy data | 2–3 minggu |
+| Iterasi 2 | Auth nyata + backend + database | 3–4 minggu |
+| Iterasi 3 | AI grading + konfigurasi langkah + KPS otomatis | 4–6 minggu |
+
+## 17. Decisions & Assumptions
 
 - Mockup HTML di `phyxis_design_system/` dikonversi ke React semi-1:1. Struktur layout, warna, tipografi, dan komponen utama dipertahankan. Penyederhanaan boleh dilakukan pada elemen dekoratif yang tidak memengaruhi fungsi.
 - Setiap quiz (pre-test dan post-test) di-hardcode dengan 3 soal essay untuk demo.
 - Loading state wajib ada saat GLB di-fetch dan diparsing.
 - Integrasi GLB asli dari Blender ditunda sampai asset tersedia. Selama pengembangan, simulator bisa menggunakan GLB placeholder sederhana atau mode non-3D untuk menguji state machine.
 
-## 17. Open Questions / Next Steps
+## 18. Open Questions / Next Steps
 
 1. Kapan asset GLB dari Blender akan tersedia untuk integrasi?
 2. Siapa yang akan menyusun 7 langkah prosedur beserta soal pilihan gandanya?
