@@ -67,28 +67,37 @@ export function Sidebar({ collapsed, onToggleCollapse, mobileOpen, onCloseMobile
       )}
     >
       {/* Header: Logo + Toggle */}
-      <div className="flex h-14 items-center border-b border-border-subtle shrink-0">
-        {/* Logo — klik ke /login */}
-        <Link
-          href="/login"
-          onClick={handleNavClick}
-          className={cn(
-            'flex items-center font-bold text-primary transition-colors hover:bg-surface-container h-full',
-            collapsed ? 'flex-1 justify-center' : 'flex-1 pl-4'
-          )}
-        >
-          {collapsed ? <span className="text-lg">Px</span> : <span>PhyXis</span>}
-        </Link>
-
-        {/* Toggle: Chevron di desktop, X close di mobile */}
+      <div
+        className={cn(
+          'flex border-b border-border-subtle shrink-0',
+          collapsed ? 'flex-col h-auto py-2' : 'h-14 items-center'
+        )}
+      >
+        {/* Toggle — collapse/expand di desktop */}
         <button
-          onClick={collapsed ? onToggleCollapse : mobileOpen ? onCloseMobile : onToggleCollapse}
-          className="hidden lg:flex h-14 w-10 items-center justify-center text-on-surface-variant transition-colors hover:bg-surface-container shrink-0"
+          onClick={onToggleCollapse}
+          className={cn(
+            'hidden lg:flex items-center justify-center text-on-surface-variant transition-colors hover:bg-surface-container shrink-0',
+            collapsed ? 'h-8 w-full order-1' : 'h-14 w-10'
+          )}
           aria-label={collapsed ? 'Perluas sidebar' : 'Ciutkan sidebar'}
         >
           {collapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
         </button>
 
+        {/* Logo — klik ke /login */}
+        <Link
+          href="/login"
+          onClick={handleNavClick}
+          className={cn(
+            'flex items-center font-bold text-primary transition-colors hover:bg-surface-container',
+            collapsed ? 'order-2 flex-1 justify-center h-8 text-lg' : 'flex-1 pl-4 h-14'
+          )}
+        >
+          {collapsed ? <span>Px</span> : <span>PhyXis</span>}
+        </Link>
+
+        {/* Close — hanya di mobile */}
         <button
           onClick={onCloseMobile}
           className="flex lg:hidden h-14 w-10 items-center justify-center text-on-surface-variant transition-colors hover:bg-surface-container shrink-0"
