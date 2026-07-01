@@ -1,4 +1,8 @@
 .superpowers/
+AGENTS.md
+CONTEXT.md
+docs/
+phyxis_design_system/
 node_modules/
 .next/
 out/
