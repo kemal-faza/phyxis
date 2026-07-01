@@ -10,14 +10,16 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="flex min-h-screen">
-      {/* Hamburger button — hanya mobile */}
-      <button
-        onClick={() => setMobileOpen(true)}
-        className="fixed top-4 left-4 z-50 rounded p-2 text-on-surface-variant hover:bg-surface-container lg:hidden"
-        aria-label="Buka menu"
-      >
-        <Menu size={20} />
-      </button>
+      {/* Top bar — hanya mobile, opaque */}
+      <header className="fixed top-0 left-0 right-0 z-50 h-14 border-b border-border-subtle bg-surface-charcoal lg:hidden flex items-center">
+        <button
+          onClick={() => setMobileOpen(true)}
+          className="ml-2 p-2 text-on-surface-variant hover:bg-surface-container rounded"
+          aria-label="Buka menu"
+        >
+          <Menu size={20} />
+        </button>
+      </header>
 
       {/* Backdrop — hanya mobile, saat sidebar terbuka */}
       {mobileOpen && (
@@ -37,7 +39,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <main
         className={`${
           collapsed ? 'lg:ml-sidebar-collapsed' : 'lg:ml-sidebar-width'
-        } ml-0 flex-1 p-4 pt-16 transition-all duration-200 sm:p-6 lg:pt-6`}
+        } ml-0 flex-1 p-4 pt-14 transition-all duration-200 sm:p-6 lg:pt-6`}
       >
         {children}
       </main>

@@ -24,7 +24,7 @@ export function StepPanel() {
           <Button
             key={index}
             variant="outline"
-            className="w-full justify-start"
+            className="w-full justify-start text-left"
             disabled={status === 'playing'}
             onClick={() => submitAnswer(index)}
           >
