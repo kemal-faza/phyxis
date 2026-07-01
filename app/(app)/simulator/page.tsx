@@ -19,7 +19,7 @@ export default function SimulatorPage() {
 
   const title =
     role === 'asisten' || role === 'dosen'
-      ? 'Simulator M-4: Review Praktikan'
+      ? 'Simulator Review'
       : role === 'praktikan'
         ? 'Simulator M-4: Gerak Jatuh Bebas'
         : ''
@@ -35,7 +35,7 @@ export default function SimulatorPage() {
   if (role === 'asisten' || role === 'dosen') {
     return (
       <div className="space-y-6">
-        <h1 className="page-title hidden lg:block">Simulator M-4: Review Praktikan</h1>
+        <h1 className="page-title hidden lg:block">Simulator Review</h1>
         <ReviewTable />
       </div>
     )

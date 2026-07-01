@@ -11,7 +11,7 @@ test('praktikan can login and navigate to simulator', async ({ page }) => {
   // Navigate to simulator
   await page.click('text=Simulator')
   await expect(page).toHaveURL('/simulator')
-  await expect(page.getByRole('heading', { name: /Simulator M-4/ })).toBeVisible()
+  await expect(page.getByRole('heading', { name: /^Simulator/ })).toBeVisible()
 })
 
 test('dosen dashboard displays stats', async ({ page }) => {

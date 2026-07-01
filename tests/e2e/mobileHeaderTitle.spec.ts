@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test'
 
 const cases = [
   { path: '/dashboard', label: 'Dashboard Dosen' },
-  { path: '/simulator', label: 'Simulator M-4: Review Praktikan' },
+  { path: '/simulator', label: 'Simulator Review' },
   { path: '/quiz', label: 'Pre-test & Post-test: Review' },
   { path: '/report', label: 'Laporan Praktikan' },
   { path: '/kps', label: 'KPS Passport — Rekap Praktikan' },
