@@ -24,7 +24,7 @@ export function StepPanel() {
           <Button
             key={index}
             variant="outline"
-            className="w-full justify-start text-left"
+            className="h-auto min-h-10 w-full justify-start py-3 text-left leading-relaxed"
             disabled={status === 'playing'}
             onClick={() => submitAnswer(index)}
           >

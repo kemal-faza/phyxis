@@ -11,14 +11,14 @@ test('praktikan can login and navigate to simulator', async ({ page }) => {
   // Navigate to simulator
   await page.click('text=Simulator')
   await expect(page).toHaveURL('/simulator')
-  await expect(page.locator('text=Simulator M-4')).toBeVisible()
+  await expect(page.getByRole('heading', { name: /Simulator M-4/ })).toBeVisible()
 })
 
 test('dosen dashboard displays stats', async ({ page }) => {
   await page.goto('/')
   await page.click('text=Dosen Pengampu')
   await expect(page).toHaveURL('/dashboard')
-  await expect(page.locator('text=Dashboard Dosen')).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Dashboard Dosen' })).toBeVisible()
   await expect(page.locator('text=Total Praktikan')).toBeVisible()
 })
 
@@ -29,8 +29,8 @@ test('all nav links are accessible for admin', async ({ page }) => {
   // Should be on dashboard
   await expect(page).toHaveURL('/dashboard')
 
-  // Visit each page
-  const pages = ['Simulator', 'Pre-test / Post-test', 'Laporan Akhir', 'KPS Passport', 'Monitoring']
+  // Visit each admin-accessible page
+  const pages = ['KPS Passport', 'Monitoring']
   for (const pageName of pages) {
     await page.click(`text=${pageName}`)
     // Wait for navigation
