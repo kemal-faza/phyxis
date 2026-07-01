@@ -34,7 +34,7 @@ export function ReportUpload() {
       />
       {file && (
         <div className="space-y-2">
-          <div className="text-sm text-on-surface-variant">{file.name}</div>
+          <div className="text-sm text-on-surface-variant truncate max-w-full">{file.name}</div>
           <Progress value={progress} />
           <Button onClick={handleUpload} disabled={progress > 0 && progress < 100}>
             {submitted ? 'Terkirim' : 'Upload'}

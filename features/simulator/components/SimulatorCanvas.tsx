@@ -17,7 +17,7 @@ export function SimulatorCanvas() {
   }, [])
 
   return (
-    <Card className="relative flex h-[500px] items-center justify-center overflow-hidden">
+    <Card className="relative flex h-72 sm:h-[400px] lg:h-[500px] items-center justify-center overflow-hidden">
       {!webglSupported && (
         <div className="absolute inset-0 z-10 flex items-center justify-center bg-surface/90 p-6 text-center">
           <div>

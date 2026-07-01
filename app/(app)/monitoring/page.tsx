@@ -25,7 +25,7 @@ export default function MonitoringPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-headline-lg">Monitoring Fitur</h1>
+      <h1 className="page-title">Monitoring Fitur</h1>
       <Card>
         <h2 className="mb-4 text-headline-sm">Aktivitas Fitur (anonim, sukarela)</h2>
         <div className="overflow-x-auto">

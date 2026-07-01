@@ -24,7 +24,7 @@ export default function ReportPage() {
   if (role === 'asisten' || role === 'dosen') {
     return (
       <div className="space-y-6">
-        <h1 className="text-headline-lg">Laporan Praktikan</h1>
+        <h1 className="page-title">Laporan Praktikan</h1>
         <ReportReviewTable />
       </div>
     )
@@ -33,7 +33,7 @@ export default function ReportPage() {
   /* ---------- PRAKTIKAN: upload laporan ---------- */
   return (
     <div className="space-y-6">
-      <h1 className="text-headline-lg">Laporan Akhir Praktikan</h1>
+      <h1 className="page-title">Laporan Akhir Praktikan</h1>
       <div className="grid gap-4 md:grid-cols-3">
         <Card>
           <div className="text-label-md text-on-surface-variant">MODUL AKTIF</div>

@@ -12,6 +12,7 @@ import {
   Activity,
   ChevronLeft,
   ChevronRight,
+  X,
 } from 'react-feather'
 import { useAuthStore } from '@/features/auth/stores/authStore'
 import { NAV_ITEMS } from '@/lib/navigation'
@@ -28,10 +29,12 @@ const iconMap: Record<string, React.ComponentType<{ size?: number }>> = {
 
 interface SidebarProps {
   collapsed: boolean
-  onToggle: () => void
+  onToggleCollapse: () => void
+  mobileOpen: boolean
+  onCloseMobile: () => void
 }
 
-export function Sidebar({ collapsed, onToggle }: SidebarProps) {
+export function Sidebar({ collapsed, onToggleCollapse, mobileOpen, onCloseMobile }: SidebarProps) {
   const role = useAuthStore((s) => s.role)
   const pathname = usePathname()
   const router = useRouter()
@@ -44,23 +47,56 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
 
   const items = NAV_ITEMS.filter((item) => item.roles.includes(role))
 
+  const handleNavClick = () => {
+    // On mobile, close sidebar after navigating
+    if (window.innerWidth < 1024) {
+      onCloseMobile()
+    }
+  }
+
   return (
     <aside
       className={cn(
-        'fixed left-0 top-0 h-screen border-r border-border-subtle bg-surface-charcoal transition-all duration-200 flex flex-col',
-        collapsed ? 'w-sidebar-collapsed' : 'w-sidebar-width'
+        'fixed left-0 top-0 h-screen z-50 border-r border-border-subtle bg-surface-charcoal transition-all duration-200 flex flex-col',
+        // Desktop: always visible, width controlled by collapsed
+        'lg:translate-x-0',
+        collapsed ? 'lg:w-sidebar-collapsed' : 'lg:w-sidebar-width',
+        // Mobile: overlay full-width, controlled by translateX
+        'w-sidebar-width',
+        mobileOpen ? 'translate-x-0' : '-translate-x-full'
       )}
     >
-      {/* Logo — klik ke /login */}
-      <Link
-        href="/login"
-        className={cn(
-          'flex h-14 items-center border-b border-border-subtle font-bold text-primary transition-colors hover:bg-surface-container',
-          collapsed ? 'justify-center' : 'px-4'
-        )}
-      >
-        {collapsed ? <span className="text-lg">Px</span> : <span>PhyXis</span>}
-      </Link>
+      {/* Header: Logo + Toggle */}
+      <div className="flex h-14 items-center border-b border-border-subtle shrink-0">
+        {/* Logo — klik ke /login */}
+        <Link
+          href="/login"
+          onClick={handleNavClick}
+          className={cn(
+            'flex items-center font-bold text-primary transition-colors hover:bg-surface-container h-full',
+            collapsed ? 'flex-1 justify-center' : 'flex-1 pl-4'
+          )}
+        >
+          {collapsed ? <span className="text-lg">Px</span> : <span>PhyXis</span>}
+        </Link>
+
+        {/* Toggle: Chevron di desktop, X close di mobile */}
+        <button
+          onClick={collapsed ? onToggleCollapse : mobileOpen ? onCloseMobile : onToggleCollapse}
+          className="hidden lg:flex h-14 w-10 items-center justify-center text-on-surface-variant transition-colors hover:bg-surface-container shrink-0"
+          aria-label={collapsed ? 'Perluas sidebar' : 'Ciutkan sidebar'}
+        >
+          {collapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
+        </button>
+
+        <button
+          onClick={onCloseMobile}
+          className="flex lg:hidden h-14 w-10 items-center justify-center text-on-surface-variant transition-colors hover:bg-surface-container shrink-0"
+          aria-label="Tutup menu"
+        >
+          <X size={18} />
+        </button>
+      </div>
 
       {/* Nav Items */}
       <nav className="flex-1 overflow-y-auto p-2 space-y-1">
@@ -72,12 +108,11 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
             <Link
               key={item.href}
               href={item.href}
+              onClick={handleNavClick}
               title={collapsed ? item.label : undefined}
               className={cn(
                 'flex items-center gap-3 rounded text-sm transition-colors',
-                collapsed
-                  ? 'justify-center px-2 py-2'
-                  : 'px-3 py-2',
+                collapsed ? 'justify-center px-2 py-2' : 'px-3 py-2',
                 isActive
                   ? 'bg-glow-green text-primary'
                   : 'text-on-surface-variant hover:bg-surface-container hover:text-on-surface'
@@ -90,18 +125,11 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
         })}
       </nav>
 
-      {/* Bottom: Role + Toggle */}
-      <div className="border-t border-border-subtle">
+      {/* Bottom: Role */}
+      <div className="border-t border-border-subtle shrink-0">
         {!collapsed && (
           <div className="p-3 text-xs text-on-surface-variant">Role: {role}</div>
         )}
-        <button
-          onClick={onToggle}
-          className="flex w-full items-center justify-center p-2 text-on-surface-variant transition-colors hover:bg-surface-container"
-          title={collapsed ? 'Perluas sidebar' : 'Ciutkan sidebar'}
-        >
-          {collapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
-        </button>
       </div>
     </aside>
   )

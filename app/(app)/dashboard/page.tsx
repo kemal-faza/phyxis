@@ -29,7 +29,7 @@ export default function DashboardPage() {
   if (role === 'praktikan') {
     return (
       <div className="space-y-6">
-        <h1 className="text-headline-lg">Dashboard Praktikan</h1>
+        <h1 className="page-title">Dashboard Praktikan</h1>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           {PRAKTIKAN_STATS.map((s) => (
             <Card key={s.label}>
@@ -46,7 +46,7 @@ export default function DashboardPage() {
   if (role === 'asisten') {
     return (
       <div className="space-y-6">
-        <h1 className="text-headline-lg">Dashboard Asisten</h1>
+        <h1 className="page-title">Dashboard Asisten</h1>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           {ASISTEN_STATS.map((s) => (
             <Card key={s.label}>
@@ -61,7 +61,7 @@ export default function DashboardPage() {
             {ASISTEN_QUEUE.map((item) => (
               <div
                 key={item.nama}
-                className="flex items-center justify-between rounded border border-border-subtle bg-surface-container p-3"
+                className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 rounded border border-border-subtle bg-surface-container p-3"
               >
                 <span className="text-sm">
                   {item.nama} &mdash; {item.modul}
@@ -81,7 +81,7 @@ export default function DashboardPage() {
   if (role === 'dosen') {
     return (
       <div className="space-y-6">
-        <h1 className="text-headline-lg">Dashboard Dosen</h1>
+        <h1 className="page-title">Dashboard Dosen</h1>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {DOSEN_STATS.map((stat) => (
             <StatCard key={stat.label} {...stat} />
@@ -93,7 +93,7 @@ export default function DashboardPage() {
             {RECENT_MODULES.map((mod) => (
               <div
                 key={mod.id}
-                className="flex items-center justify-between rounded border border-border-subtle bg-surface-container p-3"
+                className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 rounded border border-border-subtle bg-surface-container p-3"
               >
                 <div>
                   <div className="font-medium">
@@ -114,7 +114,7 @@ export default function DashboardPage() {
   if (role === 'admin') {
     return (
       <div className="space-y-6">
-        <h1 className="text-headline-lg">Dashboard Admin</h1>
+        <h1 className="page-title">Dashboard Admin</h1>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           {ADMIN_STATS.map((s) => (
             <Card key={s.label}>

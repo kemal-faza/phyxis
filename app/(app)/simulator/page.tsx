@@ -26,7 +26,7 @@ export default function SimulatorPage() {
   if (role === 'asisten' || role === 'dosen') {
     return (
       <div className="space-y-6">
-        <h1 className="text-headline-lg">Simulator M-4: Review Praktikan</h1>
+        <h1 className="page-title">Simulator M-4: Review Praktikan</h1>
         <ReviewTable />
       </div>
     )
@@ -35,7 +35,7 @@ export default function SimulatorPage() {
   /* ---------- PRAKTIKAN: interactive simulator ---------- */
   return (
     <div className="space-y-6">
-      <h1 className="text-headline-lg">Simulator M-4: Gerak Jatuh Bebas</h1>
+      <h1 className="page-title">Simulator M-4: Gerak Jatuh Bebas</h1>
       <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
         <SimulatorCanvas />
         <div className="space-y-4">

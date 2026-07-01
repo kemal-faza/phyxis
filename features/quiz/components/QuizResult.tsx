@@ -24,7 +24,7 @@ export function QuizResult() {
           return (
             <div
               key={result.questionId}
-              className="flex items-center justify-between rounded border border-border-subtle bg-surface-container p-3"
+              className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 rounded border border-border-subtle bg-surface-container p-3"
             >
               <span className="text-sm">{question?.question ?? result.questionId}</span>
               <Badge variant={result.score >= 60 ? 'success' : 'error'}>{result.score}</Badge>

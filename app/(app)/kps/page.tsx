@@ -25,7 +25,7 @@ export default function KpsPage() {
     const canEdit = role === 'dosen'
     return (
       <div className="space-y-6">
-        <h1 className="text-headline-lg">KPS Passport — Rekap Praktikan</h1>
+        <h1 className="page-title">KPS Passport — Rekap Praktikan</h1>
         <IndicatorList canEdit={canEdit} />
         <KPSReviewTable canEdit={canEdit} />
       </div>
@@ -35,7 +35,7 @@ export default function KpsPage() {
   /* ---------- PRAKTIKAN: lihat KPS sendiri ---------- */
   return (
     <div className="space-y-6">
-      <h1 className="text-headline-lg">KPS Passport Nilai</h1>
+      <h1 className="page-title">KPS Passport Nilai</h1>
       <KPSPassport indicators={MOCK_KPS} />
     </div>
   )

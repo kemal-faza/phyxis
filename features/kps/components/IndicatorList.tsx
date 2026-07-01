@@ -60,7 +60,7 @@ export function IndicatorList({ canEdit }: IndicatorListProps) {
         {indicatorDefs.map((def) => (
           <div
             key={def.id}
-            className="flex items-center justify-between rounded border border-border-subtle bg-surface-container p-3"
+            className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 rounded border border-border-subtle bg-surface-container p-3"
           >
             {editingId === def.id ? (
               <div className="flex flex-1 items-center gap-2">

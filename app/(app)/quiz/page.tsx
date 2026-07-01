@@ -24,7 +24,7 @@ export default function QuizPage() {
   if (role === 'asisten' || role === 'dosen') {
     return (
       <div className="space-y-6">
-        <h1 className="text-headline-lg">Pre-test & Post-test: Review</h1>
+        <h1 className="page-title">Pre-test & Post-test: Review</h1>
         <QuizReviewTable />
       </div>
     )
@@ -33,7 +33,7 @@ export default function QuizPage() {
   /* ---------- PRAKTIKAN: quiz form ---------- */
   return (
     <div className="space-y-6">
-      <h1 className="text-headline-lg">Pre-test & Post-test</h1>
+      <h1 className="page-title">Pre-test & Post-test</h1>
       <QuizForm questions={PRE_TEST_QUESTIONS} title="Pre-test" />
       <QuizForm questions={POST_TEST_QUESTIONS} title="Post-test" />
       <QuizResult />
