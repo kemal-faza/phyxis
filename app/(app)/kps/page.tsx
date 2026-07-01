@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useAuthStore } from '@/features/auth/stores/authStore'
 import { KPSPassport } from '@/features/kps/components/KPSPassport'
 import { KPSReviewTable } from '@/features/kps/components/KPSReviewTable'
+import { IndicatorList } from '@/features/kps/components/IndicatorList'
 import { MOCK_KPS } from '@/features/kps/data/mockKps'
 
 const ALLOWED_ROLES: Array<string> = ['praktikan', 'asisten', 'dosen', 'admin']
@@ -21,10 +22,12 @@ export default function KpsPage() {
 
   /* ---------- ASISTEN / DOSEN / ADMIN: rekap semua praktikan ---------- */
   if (role === 'asisten' || role === 'dosen' || role === 'admin') {
+    const canEdit = role === 'dosen'
     return (
       <div className="space-y-6">
         <h1 className="text-headline-lg">KPS Passport — Rekap Praktikan</h1>
-        <KPSReviewTable />
+        <IndicatorList canEdit={canEdit} />
+        <KPSReviewTable canEdit={canEdit} />
       </div>
     )
   }

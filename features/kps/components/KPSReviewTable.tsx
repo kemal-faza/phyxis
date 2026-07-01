@@ -2,9 +2,33 @@
 
 import { Card } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
-import { INDICATOR_DEFINITIONS, MOCK_PRAKTIKAN_KPS } from '@/features/kps/data/mockKps'
+import { useKpsStore } from '@/features/kps/stores/kpsStore'
 
-export function KPSReviewTable() {
+interface KPSReviewTableProps {
+  canEdit: boolean
+}
+
+export function KPSReviewTable({ canEdit }: KPSReviewTableProps) {
+  const indicatorDefs = useKpsStore((s) => s.indicatorDefs)
+  const praktikanList = useKpsStore((s) => s.praktikanList)
+  const toggleStatus = useKpsStore((s) => s.toggleStatus)
+
+  const handleToggle = (nim: string, indicatorId: string) => {
+    if (!canEdit) return
+    toggleStatus(nim, indicatorId)
+  }
+
+  if (indicatorDefs.length === 0) {
+    return (
+      <Card>
+        <h2 className="mb-4 text-headline-sm">Rekap KPS Praktikan</h2>
+        <p className="text-sm text-on-surface-variant">
+          Belum ada indikator KPS yang ditambahkan.
+        </p>
+      </Card>
+    )
+  }
+
   return (
     <Card>
       <h2 className="mb-4 text-headline-sm">Rekap KPS Praktikan</h2>
@@ -14,7 +38,7 @@ export function KPSReviewTable() {
             <tr className="border-b border-border-subtle text-on-surface-variant">
               <th className="pb-2 pr-4 whitespace-nowrap">Nama</th>
               <th className="pb-2 pr-4 whitespace-nowrap">NIM</th>
-              {INDICATOR_DEFINITIONS.map((def) => (
+              {indicatorDefs.map((def) => (
                 <th key={def.id} className="pb-2 pr-4 whitespace-nowrap" title={def.name}>
                   {def.id.toUpperCase()}
                 </th>
@@ -23,22 +47,35 @@ export function KPSReviewTable() {
             </tr>
           </thead>
           <tbody>
-            {MOCK_PRAKTIKAN_KPS.map((p) => {
-              const passed = p.indicators.filter((i) => i.status === 'lulus').length
-              const total = p.indicators.length
+            {praktikanList.map((p) => {
+              const statuses = indicatorDefs.map(
+                (d) => p.indicatorStatuses[d.id] ?? 'belum-lulus'
+              )
+              const passed = statuses.filter((s) => s === 'lulus').length
+              const total = statuses.length
               return (
                 <tr key={p.nim} className="border-b border-border-subtle last:border-0">
                   <td className="py-3 pr-4 whitespace-nowrap">{p.nama}</td>
                   <td className="py-3 pr-4 whitespace-nowrap text-on-surface-variant">
                     {p.nim}
                   </td>
-                  {p.indicators.map((ind) => (
-                    <td key={ind.id} className="py-3 pr-4">
-                      <Badge variant={ind.status === 'lulus' ? 'success' : 'neutral'}>
-                        {ind.status === 'lulus' ? 'Lulus' : '-'}
-                      </Badge>
-                    </td>
-                  ))}
+                  {indicatorDefs.map((d) => {
+                    const status = p.indicatorStatuses[d.id] ?? 'belum-lulus'
+                    return (
+                      <td key={d.id} className="py-3 pr-4">
+                        <button
+                          type="button"
+                          disabled={!canEdit}
+                          onClick={() => handleToggle(p.nim, d.id)}
+                          className={canEdit ? 'cursor-pointer' : 'cursor-default'}
+                        >
+                          <Badge variant={status === 'lulus' ? 'success' : 'neutral'}>
+                            {status === 'lulus' ? 'Lulus' : '-'}
+                          </Badge>
+                        </button>
+                      </td>
+                    )
+                  })}
                   <td className="py-3 whitespace-nowrap">
                     <span className="text-on-surface-variant">
                       {passed}/{total}
