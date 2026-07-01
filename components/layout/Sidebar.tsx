@@ -1,7 +1,8 @@
 'use client'
 
+import { useEffect } from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useAuthStore } from '@/features/auth/stores/authStore'
 import { NAV_ITEMS } from '@/lib/navigation'
 import { cn } from '@/lib/utils'
@@ -9,8 +10,15 @@ import { cn } from '@/lib/utils'
 export function Sidebar() {
   const role = useAuthStore((s) => s.role)
   const pathname = usePathname()
+  const router = useRouter()
 
-  const items = NAV_ITEMS.filter((item) => item.roles.includes(role ?? 'praktikan'))
+  useEffect(() => {
+    if (!role) router.push('/login')
+  }, [role, router])
+
+  if (!role) return null
+
+  const items = NAV_ITEMS.filter((item) => item.roles.includes(role))
 
   return (
     <aside className="fixed left-0 top-0 h-screen w-sidebar-width border-r border-border-subtle bg-surface-charcoal">

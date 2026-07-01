@@ -1,5 +1,12 @@
+'use client'
+
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import { useAuthStore } from '@/features/auth/stores/authStore'
 import { Card } from '@/components/ui/Card'
 import { MONITORING_DATA } from '@/features/monitoring/data/mockMonitoring'
+
+const ALLOWED_ROLES: Array<string> = ['dosen', 'admin']
 
 function formatDuration(seconds: number) {
   const m = Math.floor(seconds / 60)
@@ -7,6 +14,15 @@ function formatDuration(seconds: number) {
 }
 
 export default function MonitoringPage() {
+  const role = useAuthStore((s) => s.role)
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!role || !ALLOWED_ROLES.includes(role)) router.push('/login')
+  }, [role, router])
+
+  if (!role || !ALLOWED_ROLES.includes(role)) return null
+
   return (
     <div className="space-y-6">
       <h1 className="text-headline-lg">Monitoring Fitur</h1>
