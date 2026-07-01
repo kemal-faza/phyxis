@@ -13,9 +13,38 @@ const MOCK_REVIEW = [
 
 export function ReportReviewTable() {
   return (
-    <Card>
-      <h2 className="mb-4 text-headline-sm">Laporan Praktikan &mdash; M-4 Gerak Jatuh Bebas</h2>
-      <div className="overflow-x-auto">
+    <div className="space-y-4">
+      <h2 className="text-headline-sm">
+        Laporan Praktikan &mdash; M-4 Gerak Jatuh Bebas
+      </h2>
+
+      {/* Mobile: Card list */}
+      <div className="space-y-3 md:hidden">
+        {MOCK_REVIEW.map((row) => (
+          <Card key={row.nama} className="space-y-3">
+            <div className="flex items-center justify-between gap-3">
+              <span className="text-body-lg font-semibold">{row.nama}</span>
+              <Badge variant={row.submitted ? 'success' : 'warning'}>
+                {row.submitted ? 'Terkumpul' : 'Belum dikumpulkan'}
+              </Badge>
+            </div>
+            <div className="border-t border-border-subtle" />
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <div className="text-label-md text-on-surface-variant">MODUL</div>
+                <div className="mt-1 text-headline-sm font-semibold">{row.modul}</div>
+              </div>
+              <div>
+                <div className="text-label-md text-on-surface-variant">TANGGAL</div>
+                <div className="mt-1 text-headline-sm font-semibold">{row.tanggal}</div>
+              </div>
+            </div>
+          </Card>
+        ))}
+      </div>
+
+      {/* Tablet/Desktop: Table */}
+      <Card className="hidden md:block">
         <table className="w-full text-left text-sm">
           <thead>
             <tr className="border-b border-border-subtle text-on-surface-variant">
@@ -40,7 +69,7 @@ export function ReportReviewTable() {
             ))}
           </tbody>
         </table>
-      </div>
-    </Card>
+      </Card>
+    </div>
   )
 }
