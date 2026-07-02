@@ -73,7 +73,27 @@ export function DashboardMockup() {
                   <span className="text-xs text-muted">Lab A-102 telemetry</span>
                   <span className="font-mono text-xs text-muted">24h</span>
                 </div>
-                <div className="h-16 rounded-lg bg-surface" />
+                <div className="h-16 overflow-hidden rounded-lg">
+                  <svg viewBox="0 0 384 96" preserveAspectRatio="none" className="h-full w-full" aria-hidden="true">
+                    <defs>
+                      <linearGradient id="telemetry-fill" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#3264f2" stopOpacity="0.35" />
+                        <stop offset="100%" stopColor="#3264f2" stopOpacity="0" />
+                      </linearGradient>
+                    </defs>
+                    <path
+                      d="M0,68 C51,62 84,38 128,42 C172,46 206,68 256,40 C306,12 333,28 384,32 L384,96 L0,96 Z"
+                      fill="url(#telemetry-fill)"
+                    />
+                    <path
+                      d="M0,68 C51,62 84,38 128,42 C172,46 206,68 256,40 C306,12 333,28 384,32"
+                      fill="none"
+                      stroke="#3264f2"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                </div>
               </div>
               <div className="rounded-2xl border border-border bg-white p-4">
                 <p className="mb-3 text-[10px] font-semibold uppercase tracking-wider text-muted">KPS Skills</p>

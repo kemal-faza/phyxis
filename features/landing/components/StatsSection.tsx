@@ -43,7 +43,7 @@ export function StatsSection() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             {STATS.map(({ value, label }) => (
-              <Card key={label} className="text-center">
+              <Card key={label} className="flex flex-col items-center justify-center text-center">
                 <div className="font-heading text-headline-lg font-bold text-foreground">{value}</div>
                 <div className="mt-1 text-body-sm text-muted">{label}</div>
               </Card>

@@ -29,7 +29,7 @@ export function HeroSection() {
             </p>
             <div className="flex flex-wrap gap-3">
               <Button icon={<ArrowRight size={16} />} href="/login">Start Learning</Button>
-              <Button icon={<PlayCircle size={16} />} iconPosition="left" variant="outline" href="/login">Try Demo</Button>
+              <Button icon={<PlayCircle size={16} />} iconPosition="left" variant="outline" className="bg-white" href="/login">Try Demo</Button>
             </div>
             <div className="flex flex-wrap items-center gap-4 pt-2">
               {TRUST.map((item) => (

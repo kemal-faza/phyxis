@@ -6,7 +6,7 @@ export function CTASection() {
   return (
     <section className="bg-background py-16 md:py-24">
       <LandingContainer>
-        <div className="relative overflow-hidden rounded-[26px] bg-gradient-to-b from-primary via-purple to-[#1a3fad] px-6 py-14 text-center shadow-btn-primary md:px-12 md:py-16">
+        <div className="relative overflow-hidden rounded-[26px] bg-gradient-to-tr from-primary via-purple to-[#1a3fad] px-6 py-14 text-center shadow-btn-primary md:px-12 md:py-16">
           <h2 className="font-heading text-headline-lg font-bold text-white">
             Ready to modernise your physics laboratory?
           </h2>
