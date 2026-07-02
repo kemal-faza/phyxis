@@ -8,10 +8,10 @@ interface StatCardProps {
 
 export function StatCard({ label, value, change }: StatCardProps) {
   return (
-    <Card>
-      <div className="text-label-md text-on-surface-variant uppercase">{label}</div>
-      <div className="mt-2 text-headline-md text-on-surface">{value}</div>
-      {change && <div className="mt-1 text-sm text-primary">{change}</div>}
+    <Card className="flex flex-col justify-between">
+      <div className="text-label text-muted uppercase tracking-wide">{label}</div>
+      <div className="mt-2 font-heading text-headline-xl text-foreground">{value}</div>
+      {change && <div className="mt-1 text-body-sm text-primary">{change}</div>}
     </Card>
   )
 }

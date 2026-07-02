@@ -1,3 +1,30 @@
+export const DASHBOARD_STATS = [
+  { label: 'Student console', value: '08' },
+  { label: 'Avg Score', value: '86.4%' },
+  { label: 'KPS Level', value: 'Level 5' },
+  { label: 'Completion', value: '23/30' },
+]
+
+export const TODAY_SCHEDULE = [
+  { time: '08:00', title: 'Pretest M-4 Gerak Jatuh Bebas', location: 'Lab Fisika Lt. 2', status: 'ongoing' as const },
+  { time: '10:00', title: 'Simulasi M-4 Sesi 03', location: 'Lab Virtual A', status: 'upcoming' as const },
+  { time: '13:00', title: 'Pengumpulan Laporan M-3', location: 'Online', status: 'upcoming' as const },
+  { time: '15:30', title: 'Review KPS Indikator', location: 'Rapat Dosen', status: 'upcoming' as const },
+]
+
+export const RECENT_ACTIVITY = [
+  { id: 1, text: 'Report graded (score 92)', time: '2 hours ago' },
+  { id: 2, text: 'New data uploaded for M-4', time: '4 hours ago' },
+  { id: 3, text: 'Rubric updated by Dosen', time: 'Yesterday' },
+]
+
+export const MODULE_PROGRESS = [
+  { id: 'M-4', name: 'Gerak Jatuh Bebas', progress: 76 },
+  { id: 'M-3', name: 'Hukum Newton', progress: 100 },
+  { id: 'M-5', name: 'Gerak Parabola', progress: 30 },
+]
+
+// Legacy role-specific arrays kept for compatibility
 export const DOSEN_STATS = [
   { label: 'Total Praktikan', value: 124, change: '+4%' },
   { label: 'Rata-rata Nilai', value: 78.5, change: '+2.1%' },
