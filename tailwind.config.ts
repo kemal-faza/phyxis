@@ -53,6 +53,7 @@ const config: Config = {
         mono: ['var(--font-mono)', '"JetBrains Mono"', 'monospace'],
       },
       fontSize: {
+        'headline-hero': ['68px', { lineHeight: '70px', fontWeight: '700', letterSpacing: '-0.025em' }],
         'headline-xl': ['36px', { lineHeight: '40px', fontWeight: '700', letterSpacing: '-0.025em' }],
         'headline-lg': ['30px', { lineHeight: '36px', fontWeight: '700', letterSpacing: '-0.025em' }],
         'headline-md': ['24px', { lineHeight: '32px', fontWeight: '700', letterSpacing: '-0.025em' }],
@@ -61,6 +62,7 @@ const config: Config = {
         'body-sm': ['12px', { lineHeight: '16px', fontWeight: '400' }],
         label: ['11px', { lineHeight: '16.5px', fontWeight: '600', letterSpacing: '0.05em' }],
         'label-sm': ['10px', { lineHeight: '15px', fontWeight: '600', letterSpacing: '0.1em' }],
+        eyebrow: ['11px', { lineHeight: '16px', fontWeight: '600', letterSpacing: '0.05em' }],
       },
       borderRadius: {
         app: '0.875rem', // 14px — buttons, nav items, search bar

@@ -14,4 +14,11 @@ body {
   .page-title {
     @apply font-heading text-headline-lg text-foreground;
   }
+
+  .gradient-text {
+    background: linear-gradient(180deg, #3264f2 0%, #626fee 50%, #00c3f3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 }
