@@ -64,6 +64,9 @@ const config: Config = {
         'label-sm': ['10px', { lineHeight: '15px', fontWeight: '600', letterSpacing: '0.1em' }],
         eyebrow: ['11px', { lineHeight: '16px', fontWeight: '600', letterSpacing: '0.05em' }],
       },
+      screens: {
+        'desktop': '1440px',
+      },
       borderRadius: {
         app: '0.875rem', // 14px — buttons, nav items, search bar
         logo: '1.125rem', // 18px — logo circle
