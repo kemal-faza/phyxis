@@ -1,23 +1,24 @@
 'use client'
 
 import { useState } from 'react'
-import { Menu } from 'react-feather'
+import { Menu } from 'lucide-react'
 import { Sidebar } from './Sidebar'
+import { TopHeader } from './TopHeader'
 import { PageTitleProvider, useCurrentPageTitle } from './PageTitleContext'
 
 function MobileHeader({ onOpenSidebar }: { onOpenSidebar: () => void }) {
   const title = useCurrentPageTitle()
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 h-14 border-b border-border-subtle bg-surface-charcoal lg:hidden flex items-center px-4">
+    <header className="fixed top-0 left-0 right-0 z-50 h-16 border-b border-border bg-card lg:hidden flex items-center px-4">
       <div className="flex items-center gap-3">
         <button
           onClick={onOpenSidebar}
-          className="p-2 text-on-surface-variant hover:bg-surface-container rounded"
+          className="p-2 text-muted hover:bg-surface rounded-app"
           aria-label="Buka menu"
         >
           <Menu size={20} />
         </button>
-        <span className="text-body-lg font-semibold text-on-surface truncate">
+        <span className="text-body font-semibold text-foreground truncate">
           {title}
         </span>
       </div>
@@ -31,10 +32,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <PageTitleProvider>
-      <div className="flex min-h-screen">
+      <div className="flex min-h-screen bg-background">
         <MobileHeader onOpenSidebar={() => setMobileOpen(true)} />
 
-        {/* Backdrop — hanya mobile, saat sidebar terbuka */}
         {mobileOpen && (
           <div
             className="fixed inset-0 z-40 bg-black/50 lg:hidden"
@@ -49,13 +49,16 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           onCloseMobile={() => setMobileOpen(false)}
         />
 
-        <main
+        <div
           className={`${
-            collapsed ? 'lg:ml-sidebar-collapsed' : 'lg:ml-sidebar-width'
-          } ml-0 flex-1 p-4 pt-14 transition-all duration-200 sm:p-6 sm:pt-14 lg:pt-6`}
+            collapsed ? 'lg:ml-16' : 'lg:ml-64'
+          } ml-0 flex-1 flex flex-col transition-all duration-200`}
         >
-          {children}
-        </main>
+          <TopHeader />
+          <main className="flex-1 p-4 pt-20 lg:pt-6">
+            {children}
+          </main>
+        </div>
       </div>
     </PageTitleProvider>
   )

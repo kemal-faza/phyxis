@@ -4,7 +4,7 @@ import { AppShell } from '@/components/layout/AppShell'
 import { usePageTitle } from '@/components/layout/PageTitleContext'
 
 vi.mock('next/navigation', () => ({
-  usePathname: () => '/dashboard',
+  usePathname: () => '/app/dashboard',
   useRouter: () => ({ push: vi.fn() }),
 }))
 
@@ -20,6 +20,8 @@ describe('AppShell', () => {
         <TitleSetter />
       </AppShell>
     )
-    expect(screen.getByText('Dashboard Dosen')).toBeTruthy()
+    // Title appears in both mobile header and top header breadcrumb
+    const titles = screen.getAllByText('Dashboard Dosen')
+    expect(titles.length).toBeGreaterThanOrEqual(1)
   })
 })
