@@ -10,19 +10,19 @@ export function MetricSummary() {
 
   return (
     <Card className="space-y-4">
-      <h2 className="text-headline-sm">Ringkasan Simulator</h2>
+      <h2 className="font-heading text-headline-sm text-foreground">Ringkasan Simulator</h2>
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <div className="text-label-md text-on-surface-variant">TOTAL SALAH</div>
-          <div className="text-headline-md">{metrics.totalErrors}</div>
+          <div className="text-label text-muted uppercase tracking-wide">TOTAL SALAH</div>
+          <div className="mt-1 font-heading text-headline-md text-foreground">{metrics.totalErrors}</div>
         </div>
         <div>
-          <div className="text-label-md text-on-surface-variant">RATA-RATA WAKTU</div>
-          <div className="text-headline-md">{Math.round(avgTime / 1000)}s</div>
+          <div className="text-label text-muted uppercase tracking-wide">RATA-RATA WAKTU</div>
+          <div className="mt-1 font-heading text-headline-md text-foreground">{Math.round(avgTime / 1000)}s</div>
         </div>
       </div>
       {!isFirstAttempt && (
-        <div className="text-sm text-on-surface-variant">
+        <div className="text-body text-muted">
           Ini adalah percobaan latihan. Metrik pertama sudah tercatat.
         </div>
       )}

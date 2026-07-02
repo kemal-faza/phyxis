@@ -14,10 +14,10 @@ export function StepPanel() {
   return (
     <Card className="space-y-4">
       <div>
-        <div className="text-label-md text-on-surface-variant">
+        <div className="font-mono text-label text-primary uppercase tracking-wide">
           LANGKAH {currentStepIndex + 1} DARI {M4_STEPS.length}
         </div>
-        <h2 className="mt-1 text-headline-sm">{step.question}</h2>
+        <h2 className="mt-1 font-heading text-headline-sm text-foreground">{step.question}</h2>
       </div>
       <div className="space-y-2">
         {step.options.map((option, index) => (
@@ -33,7 +33,7 @@ export function StepPanel() {
         ))}
       </div>
       {lastError && (
-        <div className="rounded bg-error/10 p-3 text-sm text-error">
+        <div className="rounded-xl bg-error/10 p-3 text-body text-error">
           {lastError}
         </div>
       )}

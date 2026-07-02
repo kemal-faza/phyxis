@@ -31,18 +31,18 @@ export function ReviewTable() {
         {MOCK_REVIEW.map((row) => (
           <Card key={row.nama} className="space-y-3">
             <div className="flex items-center justify-between gap-3">
-              <span className="text-body-lg font-semibold">{row.nama}</span>
+              <span className="text-body font-semibold text-foreground">{row.nama}</span>
               {statusBadge(row.status)}
             </div>
-            <div className="border-t border-border-subtle" />
+            <div className="border-t border-border" />
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <div className="text-label-md text-on-surface-variant">TOTAL SALAH</div>
-                <div className="mt-1 text-headline-sm font-semibold">{row.errors}</div>
+                <div className="text-label text-muted uppercase tracking-wide">TOTAL SALAH</div>
+                <div className="mt-1 font-heading text-headline-sm text-foreground">{row.errors}</div>
               </div>
               <div>
-                <div className="text-label-md text-on-surface-variant">RATA-RATA WAKTU</div>
-                <div className="mt-1 text-headline-sm font-semibold">{row.avgTime}</div>
+                <div className="text-label text-muted uppercase tracking-wide">RATA-RATA WAKTU</div>
+                <div className="mt-1 font-heading text-headline-sm text-foreground">{row.avgTime}</div>
               </div>
             </div>
           </Card>
@@ -53,7 +53,7 @@ export function ReviewTable() {
       <Card className="hidden md:block">
         <table className="w-full text-left text-sm">
           <thead>
-            <tr className="border-b border-border-subtle text-on-surface-variant">
+            <tr className="border-b border-border text-muted">
               <th className="pb-2 pr-4">Nama</th>
               <th className="pb-2 pr-4">Status</th>
               <th className="pb-2 pr-4">Total Salah</th>
@@ -62,7 +62,7 @@ export function ReviewTable() {
           </thead>
           <tbody>
             {MOCK_REVIEW.map((row) => (
-              <tr key={row.nama} className="border-b border-border-subtle last:border-0">
+              <tr key={row.nama} className="border-b border-border last:border-0">
                 <td className="py-3 pr-4">{row.nama}</td>
                 <td className="py-3 pr-4">{statusBadge(row.status)}</td>
                 <td className="py-3 pr-4">{row.errors}</td>
