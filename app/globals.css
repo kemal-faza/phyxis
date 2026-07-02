@@ -3,15 +3,15 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 body {
-  @apply bg-surface text-on-surface font-sans antialiased;
+  @apply bg-background text-foreground font-sans antialiased;
 }
 
 @layer components {
   .page-title {
-    @apply text-2xl sm:text-3xl lg:text-[32px] font-bold text-on-surface leading-tight;
+    @apply font-heading text-headline-lg text-foreground;
   }
 }
