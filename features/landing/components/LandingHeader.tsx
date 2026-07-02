@@ -20,7 +20,7 @@ export function LandingHeader() {
         </nav>
         <div className="flex items-center gap-2">
           <Button variant="ghost" size="sm" href="/login">Sign in</Button>
-          <Button size="sm" href="/login">Launch app</Button>
+          <Button href="/login">Launch app</Button>
         </div>
       </div>
     </header>

@@ -71,6 +71,7 @@ const config: Config = {
       },
       boxShadow: {
         dropdown: '0 4px 12px rgba(0,0,0,0.08)',
+        'btn-primary': '0 12px 32px -8px rgba(50,100,242,0.18), 0 4px 12px -2px rgba(50,100,242,0.15)',
       },
     },
   },

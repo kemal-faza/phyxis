@@ -10,6 +10,8 @@ describe('Button', () => {
     expect(button.className).toContain('bg-primary')
     expect(button.className).toContain('text-primary-foreground')
     expect(button.className).toContain('rounded-full')
+    expect(button.className).toContain('font-semibold')
+    expect(button.className).toContain('shadow-btn-primary')
   })
 
   it('renders outline variant', () => {
