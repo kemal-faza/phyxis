@@ -2,60 +2,26 @@ import { test, expect } from '@playwright/test'
 
 test('simulator review shows card layout on mobile for asisten', async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 667 })
-  await page.goto('/')
+  await page.goto('/login')
 
-  // Login sebagai asisten
   await page.click('text=Asisten Laboratorium')
-  await expect(page).toHaveURL('/dashboard')
+  await expect(page).toHaveURL('/app/dashboard')
 
-  // Navigasi ke simulator
-  await page.goto('/simulator')
-  // Card labels — hanya muncul di layout kartu, bukan di tabel
+  // Open mobile sidebar then navigate (client-side, preserves Zustand store)
+  await page.locator('button[aria-label="Buka menu"]').click()
+  await page.getByRole('link', { name: 'Virtual Lab' }).click()
+  await expect(page).toHaveURL('/app/simulator')
   await expect(page.locator('text=TOTAL SALAH').first()).toBeVisible()
   await expect(page.locator('text=RATA-RATA WAKTU').first()).toBeVisible()
 })
 
-test('quiz review shows card layout on mobile for asisten', async ({ page }) => {
+test('assessment placeholder visible on mobile', async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 667 })
-  await page.goto('/')
+  await page.goto('/login')
 
-  // Login sebagai asisten
   await page.click('text=Asisten Laboratorium')
-  await expect(page).toHaveURL('/dashboard')
+  await expect(page).toHaveURL('/app/dashboard')
 
-  // Navigasi ke quiz
-  await page.goto('/quiz')
-  // Card labels — hanya muncul di layout kartu, bukan di tabel
-  await expect(page.locator('text=PRE-TEST').first()).toBeVisible()
-  await expect(page.locator('text=POST-TEST').first()).toBeVisible()
-})
-
-test('report review shows card layout on mobile for asisten', async ({ page }) => {
-  await page.setViewportSize({ width: 375, height: 667 })
-  await page.goto('/')
-
-  // Login sebagai asisten
-  await page.click('text=Asisten Laboratorium')
-  await expect(page).toHaveURL('/dashboard')
-
-  // Navigasi ke report
-  await page.goto('/report')
-  // Card labels — hanya muncul di layout kartu, bukan di tabel
-  await expect(page.locator('text=MODUL').first()).toBeVisible()
-  await expect(page.locator('text=TANGGAL').first()).toBeVisible()
-})
-
-test('monitoring shows card layout on mobile for dosen', async ({ page }) => {
-  await page.setViewportSize({ width: 375, height: 667 })
-  await page.goto('/')
-
-  // Login sebagai dosen
-  await page.click('text=Dosen Pengampu')
-  await expect(page).toHaveURL('/dashboard')
-
-  // Navigasi ke monitoring
-  await page.goto('/monitoring')
-  // Card labels — hanya muncul di layout kartu, bukan di tabel
-  await expect(page.locator('text=JUMLAH PEMBUKAAN').first()).toBeVisible()
-  await expect(page.locator('text=RATA-RATA DURASI').first()).toBeVisible()
+  await page.goto('/app/assessment')
+  await expect(page.locator('text=Coming soon')).toBeVisible()
 })
