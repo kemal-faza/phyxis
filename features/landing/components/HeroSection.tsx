@@ -14,6 +14,7 @@ export function HeroSection() {
   return (
     <section className="relative overflow-hidden bg-background pb-16 pt-12 md:pb-24 md:pt-20">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-[600px] bg-gradient-to-b from-primary/[0.06] to-transparent" />
+      <div className="pointer-events-none absolute left-1/2 top-0 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-primary/10 blur-[64px]" />
       <LandingContainer className="relative">
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <div className="space-y-6">
