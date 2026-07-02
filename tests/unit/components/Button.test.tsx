@@ -9,7 +9,7 @@ describe('Button', () => {
     expect(button).toBeTruthy()
     expect(button.className).toContain('bg-primary')
     expect(button.className).toContain('text-primary-foreground')
-    expect(button.className).toContain('rounded-app')
+    expect(button.className).toContain('rounded-full')
   })
 
   it('renders outline variant', () => {
