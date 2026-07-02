@@ -50,15 +50,15 @@ export function FileUpload({ value, onChange, accept, disabled, className }: Fil
         onDragLeave={handleDragLeave}
         onClick={handleClick}
         className={cn(
-          'flex flex-col items-center justify-center w-full h-32 px-4 transition rounded cursor-pointer border-2 border-dashed',
+          'flex flex-col items-center justify-center w-full h-32 px-4 transition rounded-xl cursor-pointer border-2 border-dashed',
           dragging
             ? 'border-primary bg-primary/5'
-            : 'border-border-subtle hover:border-on-surface-variant bg-surface-container',
+            : 'border-border hover:border-primary bg-surface',
           disabled && 'opacity-50 pointer-events-none'
         )}
       >
         {value ? (
-          <div className="flex items-center gap-2 text-sm text-on-surface">
+          <div className="flex items-center gap-2 text-sm text-foreground">
             <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
@@ -70,7 +70,7 @@ export function FileUpload({ value, onChange, accept, disabled, className }: Fil
                 onChange(null)
                 if (inputRef.current) inputRef.current.value = ''
               }}
-              className="ml-1 text-on-surface-variant hover:text-error transition-colors"
+              className="ml-1 text-muted hover:text-error transition-colors"
               aria-label="Hapus file"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -80,10 +80,10 @@ export function FileUpload({ value, onChange, accept, disabled, className }: Fil
           </div>
         ) : (
           <div className="flex flex-col items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-on-surface-variant" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-muted-light" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
             </svg>
-            <span className="text-sm text-on-surface-variant">
+            <span className="text-sm text-muted-light">
               Seret file ke sini, atau{' '}
               <span className="text-primary underline ml-1">pilih file</span>
             </span>
