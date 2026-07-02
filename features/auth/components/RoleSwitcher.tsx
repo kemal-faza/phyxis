@@ -12,7 +12,7 @@ export function RoleSwitcher() {
 
   const handleSelect = (role: (typeof ROLES)[number]['value']) => {
     setRole(role)
-    router.push('/dashboard')
+    router.push('/app/dashboard')
   }
 
   return (
@@ -25,8 +25,8 @@ export function RoleSwitcher() {
             onClick={() => handleSelect(role.value)}
           >
             <div>
-              <div className="font-medium text-on-surface">{role.label}</div>
-              <div className="text-sm text-on-surface-variant">{role.description}</div>
+              <div className="font-medium text-foreground">{role.label}</div>
+              <div className="text-sm text-muted">{role.description}</div>
             </div>
           </Button>
         </Card>
