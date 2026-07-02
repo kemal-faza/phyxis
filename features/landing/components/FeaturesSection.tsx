@@ -1,21 +1,29 @@
 import { FlaskConical, Brain, Award, Wifi, BarChart3, FileCheck } from 'lucide-react'
 import { Card } from '@/components/ui/Card'
+import { LandingContainer } from '@/features/landing/components/LandingContainer'
+import { LandingSection } from '@/features/landing/components/LandingSection'
+import { LandingEyebrow } from '@/features/landing/components/LandingEyebrow'
+import { LandingHeading } from '@/features/landing/components/LandingHeading'
 
 const FEATURES = [
-  { icon: FlaskConical, title: 'Virtual Experiment', desc: 'Run physics simulations in the browser with real-time data and 3D visualisations.' },
-  { icon: Brain, title: 'AI Assessment', desc: 'Get instant feedback on open-ended pre-test and post-test answers.' },
-  { icon: Award, title: 'KPS Passport', desc: 'Track science process skills across every module and semester.' },
-  { icon: Wifi, title: 'Smart Lab IoT', desc: 'Connect physical sensors and bridge classroom hardware with digital worksheets.' },
-  { icon: BarChart3, title: 'Learning Analytics', desc: 'Turn lab activity into actionable insights for lecturers and assistants.' },
-  { icon: FileCheck, title: 'Digital Rubric', desc: 'Standardise grading with transparent, editable rubrics tied to KPS indicators.' },
+  { icon: FlaskConical, title: 'Virtual Experiment', desc: 'Hyper-realistic 3D physics simulations with data streaming into your report.' },
+  { icon: Brain, title: 'AI Assessment', desc: 'Instant essay grading and question generation aligned to Bloom taxonomy.' },
+  { icon: Award, title: 'KPS Passport', desc: 'Track Science Process Skills across every practicum with visual mastery maps.' },
+  { icon: Wifi, title: 'Smart Lab IoT', desc: 'Live telemetry from temperature, humidity, CO₂ and power sensors.' },
+  { icon: BarChart3, title: 'Learning Analytics', desc: 'Cohort insights, concept mastery, and predictive weakness detection.' },
+  { icon: FileCheck, title: 'Digital Rubric', desc: 'Weighted 5-component rubric with radar visualisation and export.' },
 ]
 
 export function FeaturesSection() {
   return (
-    <section id="platform" className="bg-background py-16">
-      <div className="mx-auto max-w-6xl px-4">
+    <LandingSection id="platform" className="bg-background">
+      <LandingContainer>
         <div className="mb-10 text-center">
-          <h2 className="font-heading text-headline-lg text-foreground">One platform for every lab need</h2>
+          <LandingEyebrow className="mb-3 inline-block">One workspace, every practicum</LandingEyebrow>
+          <LandingHeading as="h2" variant="section">Built for how physics is actually taught.</LandingHeading>
+          <p className="mx-auto mt-4 max-w-2xl text-body text-muted">
+            Every module maps to your existing curriculum and assessment rubric. No forklift migration required.
+          </p>
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {FEATURES.map(({ icon: Icon, title, desc }) => (
@@ -28,7 +36,7 @@ export function FeaturesSection() {
             </Card>
           ))}
         </div>
-      </div>
-    </section>
+      </LandingContainer>
+    </LandingSection>
   )
 }
