@@ -8,10 +8,12 @@ export type NavItem = {
 }
 
 export const NAV_ITEMS: NavItem[] = [
-  { label: 'Dashboard',          href: '/dashboard',  roles: ['praktikan', 'asisten', 'dosen', 'admin'], icon: 'Grid' },
-  { label: 'Simulator',          href: '/simulator',  roles: ['praktikan', 'asisten', 'dosen'],          icon: 'Cpu' },
-  { label: 'Pre-test / Post-test', href: '/quiz',     roles: ['praktikan', 'asisten', 'dosen'],          icon: 'FileText' },
-  { label: 'Laporan Akhir',      href: '/report',     roles: ['praktikan', 'asisten', 'dosen'],          icon: 'Clipboard' },
-  { label: 'KPS Passport',       href: '/kps',        roles: ['praktikan', 'asisten', 'dosen', 'admin'], icon: 'Award' },
-  { label: 'Monitoring',         href: '/monitoring', roles: ['dosen', 'admin'],                         icon: 'Activity' },
+  { label: 'Dashboard',    href: '/app/dashboard',  roles: ['praktikan', 'asisten', 'dosen', 'admin'], icon: 'LayoutDashboard' },
+  { label: 'Virtual Lab',  href: '/app/simulator',  roles: ['praktikan', 'asisten', 'dosen'],          icon: 'FlaskConical' },
+  { label: 'KPS Passport', href: '/app/kps',        roles: ['praktikan', 'asisten', 'dosen', 'admin'], icon: 'Award' },
+]
+
+export const ACCOUNT_ITEMS: NavItem[] = [
+  { label: 'Notifications', href: '/app/notifications', roles: ['praktikan', 'asisten', 'dosen', 'admin'], icon: 'Bell' },
+  { label: 'Settings',      href: '/app/settings',      roles: ['praktikan', 'asisten', 'dosen', 'admin'], icon: 'Settings' },
 ]
