@@ -1,7 +1,6 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { ROLES } from '@/features/auth/data/roles'
 import { useAuthStore } from '@/features/auth/stores/authStore'
@@ -18,17 +17,17 @@ export function RoleSwitcher() {
   return (
     <div className="grid gap-3">
       {ROLES.map((role) => (
-        <Card key={role.value} className="overflow-hidden rounded-full p-0">
-          <Button
-            variant="ghost"
-            className="h-auto w-full justify-start p-4 text-left"
-            onClick={() => handleSelect(role.value)}
-          >
-            <div>
-              <div className="font-medium text-foreground">{role.label}</div>
-              <div className="text-sm text-muted">{role.description}</div>
-            </div>
-          </Button>
+        <Card
+          key={role.value}
+          className="cursor-pointer p-4 transition duration-150 hover:bg-surface active:scale-[0.98]"
+          onClick={() => handleSelect(role.value)}
+          role="button"
+          tabIndex={0}
+        >
+          <div>
+            <div className="font-medium text-foreground">{role.label}</div>
+            <div className="text-sm text-muted">{role.description}</div>
+          </div>
         </Card>
       ))}
     </div>
