@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { PhyXisLogo } from '@/components/icons/PhyXisLogo'
 
@@ -20,7 +21,7 @@ export function LandingHeader() {
         </nav>
         <div className="flex items-center gap-2">
           <Button variant="ghost" size="sm" href="/login">Sign in</Button>
-          <Button size="sm" href="/login">Launch app</Button>
+          <Button size="sm" icon={<ArrowRight size={16} />} href="/login">Launch app</Button>
         </div>
       </div>
     </header>

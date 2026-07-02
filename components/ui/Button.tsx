@@ -6,12 +6,14 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost'
   size?: 'sm' | 'md' | 'lg'
   href?: string
+  icon?: React.ReactNode
+  iconPosition?: 'left' | 'right'
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = 'primary', size = 'md', href, children, ...props }, ref) => {
+  ({ className, variant = 'primary', size = 'md', href, icon, iconPosition = 'right', children, ...props }, ref) => {
     const classes = cn(
-      'inline-flex items-center justify-center rounded-full font-semibold text-body transition-colors',
+      'inline-flex items-center justify-center gap-2 rounded-full font-semibold text-body transition-colors',
       'active:translate-y-0.5 transition-transform duration-100',
       'disabled:opacity-50 disabled:pointer-events-none',
       {
@@ -26,17 +28,25 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       className
     )
 
+    const content = (
+      <>
+        {icon && iconPosition === 'left' && icon}
+        {children}
+        {icon && iconPosition === 'right' && icon}
+      </>
+    )
+
     if (href) {
       return (
         <Link href={href} className={classes} {...(props as any)}>
-          {children}
+          {content}
         </Link>
       )
     }
 
     return (
       <button ref={ref} className={classes} {...props}>
-        {children}
+        {content}
       </button>
     )
   }

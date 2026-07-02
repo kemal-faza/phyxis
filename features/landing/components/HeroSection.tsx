@@ -1,8 +1,9 @@
-import { CheckCircle2 } from 'lucide-react'
+import { CheckCircle2, ArrowRight, PlayCircle } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { LandingContainer } from '@/features/landing/components/LandingContainer'
 import { GradientText } from '@/features/landing/components/GradientText'
 import { DashboardMockup } from '@/features/landing/components/DashboardMockup'
+import { WaveDecoration } from '@/features/landing/components/WaveDecoration'
 
 const TRUST = [
   '500+ students onboarded',
@@ -15,6 +16,7 @@ export function HeroSection() {
     <section className="relative overflow-hidden bg-background pb-16 pt-12 md:pb-24 md:pt-20">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-[600px] bg-gradient-to-b from-primary/[0.06] to-transparent" />
       <div className="pointer-events-none absolute left-1/2 top-0 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-primary/10 blur-[64px]" />
+      <WaveDecoration />
       <LandingContainer className="relative">
         <div className="grid items-center gap-12 desktop:grid-cols-2">
           <div className="space-y-6">
@@ -26,8 +28,8 @@ export function HeroSection() {
               PhyXis unifies virtual experiments, AI grading, KPS competency tracking, and IoT-powered smart labs into one enterprise-grade workspace for universities.
             </p>
             <div className="flex flex-wrap gap-3">
-              <Button href="/login">Start Learning</Button>
-              <Button variant="outline" href="/login">Try Demo</Button>
+              <Button icon={<ArrowRight size={16} />} href="/login">Start Learning</Button>
+              <Button icon={<PlayCircle size={16} />} iconPosition="left" variant="outline" href="/login">Try Demo</Button>
             </div>
             <div className="flex flex-wrap items-center gap-4 pt-2">
               {TRUST.map((item) => (
