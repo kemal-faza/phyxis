@@ -1,46 +1,45 @@
+import { CheckCircle2 } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
-import { Card } from '@/components/ui/Card'
+import { LandingContainer } from '@/features/landing/components/LandingContainer'
+import { GradientText } from '@/features/landing/components/GradientText'
+import { DashboardMockup } from '@/features/landing/components/DashboardMockup'
+
+const TRUST = [
+  '500+ students onboarded',
+  '20 physics modules',
+  '15 partner laboratories',
+]
 
 export function HeroSection() {
   return (
-    <section className="bg-background py-16 md:py-24">
-      <div className="mx-auto max-w-6xl px-4">
+    <section className="relative overflow-hidden bg-background pb-16 pt-12 md:pb-24 md:pt-20">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[600px] bg-gradient-to-b from-primary/[0.06] to-transparent" />
+      <LandingContainer className="relative">
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <div className="space-y-6">
-            <div className="inline-flex rounded-full bg-primary/10 px-3 py-1 text-label text-primary">
-              Physics lab, reimagined
-            </div>
-            <h1 className="font-heading text-headline-xl text-foreground">
-              Built for how physics is actually taught
+            <h1 className="font-heading text-headline-hero font-bold leading-[1.05] tracking-tight text-foreground">
+              The integrated<br />physics laboratory<br />
+              <GradientText>intelligence ecosystem.</GradientText>
             </h1>
-            <p className="max-w-lg text-body text-muted">
-              PhyXis combines virtual experiments, AI assessments, and competency tracking into one integrated platform for modern physics education.
+            <p className="max-w-lg text-lg text-muted">
+              PhyXis unifies virtual experiments, AI grading, KPS competency tracking, and IoT-powered smart labs into one enterprise-grade workspace for universities.
             </p>
             <div className="flex flex-wrap gap-3">
               <Button href="/login">Start Learning</Button>
               <Button variant="outline" href="/login">Try Demo</Button>
             </div>
-            <div className="flex flex-wrap gap-3 pt-2">
-              {['500+ students', '20 modules', '15 labs'].map((stat) => (
-                <span key={stat} className="rounded-full bg-card border border-border px-3 py-1 text-body-sm text-muted">
-                  {stat}
-                </span>
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              {TRUST.map((item) => (
+                <div key={item} className="flex items-center gap-1.5 text-xs text-muted">
+                  <CheckCircle2 size={14} className="text-success" />
+                  {item}
+                </div>
               ))}
             </div>
           </div>
-          <Card className="relative h-80 overflow-hidden bg-gradient-to-br from-surface to-card p-6">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="space-y-4">
-                <div className="h-32 w-48 rounded-xl bg-primary/10" />
-                <div className="flex gap-3">
-                  <div className="h-20 w-24 rounded-xl bg-surface" />
-                  <div className="h-20 w-24 rounded-xl bg-surface" />
-                </div>
-              </div>
-            </div>
-          </Card>
+          <DashboardMockup />
         </div>
-      </div>
+      </LandingContainer>
     </section>
   )
 }
