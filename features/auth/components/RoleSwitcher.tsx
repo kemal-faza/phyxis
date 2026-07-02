@@ -18,7 +18,7 @@ export function RoleSwitcher() {
   return (
     <div className="grid gap-3">
       {ROLES.map((role) => (
-        <Card key={role.value} className="p-0">
+        <Card key={role.value} className="overflow-hidden rounded-full p-0">
           <Button
             variant="ghost"
             className="h-auto w-full justify-start p-4 text-left"
