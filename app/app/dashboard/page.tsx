@@ -31,9 +31,9 @@ export default function DashboardPage() {
     if (!role) router.push('/login')
   }, [role, router])
 
-  if (!role) return null
-
   usePageTitle('Dashboard')
+
+  if (!role) return null
 
   const roleStats =
     role === 'dosen' ? DOSEN_STATS :

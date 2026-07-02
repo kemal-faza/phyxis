@@ -21,9 +21,9 @@ export default function SimulatorPage() {
     if (!role || !ALLOWED_ROLES.includes(role)) router.push('/login')
   }, [role, router])
 
-  if (!role || !ALLOWED_ROLES.includes(role)) return null
-
   usePageTitle('Virtual Lab')
+
+  if (!role || !ALLOWED_ROLES.includes(role)) return null
 
   const isReviewRole = role === 'asisten' || role === 'dosen'
 
