@@ -4,27 +4,27 @@ import { useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import {
-  Grid,
-  Cpu,
-  FileText,
-  Clipboard,
+  LayoutDashboard,
+  FlaskConical,
   Award,
-  Activity,
+  Bell,
+  Settings,
   ChevronLeft,
   ChevronRight,
   X,
-} from 'react-feather'
+  Search,
+  Zap,
+} from 'lucide-react'
 import { useAuthStore } from '@/features/auth/stores/authStore'
-import { NAV_ITEMS } from '@/lib/navigation'
+import { NAV_ITEMS, ACCOUNT_ITEMS } from '@/lib/navigation'
 import { cn } from '@/lib/utils'
 
 const iconMap: Record<string, React.ComponentType<{ size?: number }>> = {
-  Grid,
-  Cpu,
-  FileText,
-  Clipboard,
+  LayoutDashboard,
+  FlaskConical,
   Award,
-  Activity,
+  Bell,
+  Settings,
 }
 
 interface SidebarProps {
@@ -45,10 +45,10 @@ export function Sidebar({ collapsed, onToggleCollapse, mobileOpen, onCloseMobile
 
   if (!role) return null
 
-  const items = NAV_ITEMS.filter((item) => item.roles.includes(role))
+  const workspaceItems = NAV_ITEMS.filter((item) => item.roles.includes(role))
+  const accountItems = ACCOUNT_ITEMS.filter((item) => item.roles.includes(role))
 
   const handleNavClick = () => {
-    // On mobile, close sidebar after navigating
     if (window.innerWidth < 1024) {
       onCloseMobile()
     }
@@ -57,89 +57,127 @@ export function Sidebar({ collapsed, onToggleCollapse, mobileOpen, onCloseMobile
   return (
     <aside
       className={cn(
-        'fixed left-0 top-0 h-screen z-50 border-r border-border-subtle bg-surface-charcoal transition-all duration-200 flex flex-col',
-        // Desktop: always visible, width controlled by collapsed
+        'fixed left-0 top-0 h-screen z-50 border-r border-border bg-sidebar transition-all duration-200 flex flex-col',
         'lg:translate-x-0',
-        collapsed ? 'lg:w-sidebar-collapsed' : 'lg:w-sidebar-width',
-        // Mobile: overlay full-width, controlled by translateX
-        'w-sidebar-width',
+        collapsed ? 'lg:w-16' : 'lg:w-64',
+        'w-64',
         mobileOpen ? 'translate-x-0' : '-translate-x-full'
       )}
     >
       {/* Header: Logo + Toggle */}
-      <div
-        className={cn(
-          'flex border-b border-border-subtle shrink-0',
-          collapsed ? 'flex-col h-auto py-2' : 'h-14 items-center'
-        )}
-      >
-        {/* Toggle — collapse/expand di desktop */}
+      <div className="flex h-16 items-center border-b border-border px-4 shrink-0">
+        <div className="flex items-center gap-3 flex-1 overflow-hidden">
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-logo bg-primary text-primary-foreground font-heading text-headline-sm">
+            P
+          </div>
+          {!collapsed && <span className="font-heading text-headline-sm text-foreground">PhyXis</span>}
+        </div>
         <button
           onClick={onToggleCollapse}
-          className={cn(
-            'hidden lg:flex items-center justify-center text-on-surface-variant transition-colors hover:bg-surface-container shrink-0',
-            collapsed ? 'order-1 h-8 w-full' : 'order-2 h-14 w-10'
-          )}
+          className="hidden lg:flex h-8 w-8 shrink-0 items-center justify-center rounded-app text-muted hover:bg-sidebar-accent"
           aria-label={collapsed ? 'Perluas sidebar' : 'Ciutkan sidebar'}
         >
           {collapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
         </button>
-
-        {/* Logo — klik ke /login */}
-        <Link
-          href="/login"
-          onClick={handleNavClick}
-          className={cn(
-            'flex items-center font-bold text-primary transition-colors hover:bg-surface-container',
-            collapsed ? 'order-2 flex-1 justify-center h-8 text-lg' : 'order-1 flex-1 pl-4 h-14'
-          )}
-        >
-          {collapsed ? <span>Px</span> : <span>PhyXis</span>}
-        </Link>
-
-        {/* Close — hanya di mobile */}
         <button
           onClick={onCloseMobile}
-          className="flex lg:hidden h-14 w-10 items-center justify-center text-on-surface-variant transition-colors hover:bg-surface-container shrink-0"
+          className="flex lg:hidden h-8 w-8 items-center justify-center rounded-app text-muted hover:bg-sidebar-accent shrink-0"
           aria-label="Tutup menu"
         >
           <X size={18} />
         </button>
       </div>
 
-      {/* Nav Items */}
-      <nav className="flex-1 overflow-y-auto p-2 space-y-1">
-        {items.map((item) => {
-          const IconComponent = iconMap[item.icon]
-          const isActive = pathname === item.href
+      {/* Search */}
+      {!collapsed && (
+        <div className="px-4 pt-5 pb-2">
+          <div className="flex items-center gap-2 rounded-app bg-surface px-3 py-2 text-body text-muted-light">
+            <Search size={16} />
+            <span className="flex-1">Search...</span>
+            <kbd className="rounded bg-card px-1.5 py-0.5 text-label-sm text-muted border border-border">⌘K</kbd>
+          </div>
+        </div>
+      )}
 
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              onClick={handleNavClick}
-              title={collapsed ? item.label : undefined}
-              className={cn(
-                'flex items-center gap-3 rounded text-sm transition-colors active:translate-y-0.5 transition-transform duration-100',
-                collapsed ? 'justify-center px-2 py-2' : 'px-3 py-2',
-                isActive
-                  ? 'bg-glow-green text-primary'
-                  : 'text-on-surface-variant hover:bg-surface-container hover:text-on-surface'
-              )}
-            >
-              {IconComponent && <IconComponent size={18} />}
-              {!collapsed && <span>{item.label}</span>}
-            </Link>
-          )
-        })}
+      {/* Workspace */}
+      <nav className="flex-1 overflow-y-auto px-3 pt-2">
+        {!collapsed && (
+          <div className="mb-2 px-3 text-label-sm text-muted-light uppercase tracking-wider">Workspace</div>
+        )}
+        <div className="space-y-1">
+          {workspaceItems.map((item) => {
+            const IconComponent = iconMap[item.icon]
+            const isActive = pathname === item.href
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={handleNavClick}
+                title={collapsed ? item.label : undefined}
+                className={cn(
+                  'flex items-center gap-3 rounded-app px-3 py-2 text-body transition-colors active:translate-y-0.5',
+                  collapsed ? 'justify-center' : '',
+                  isActive
+                    ? 'bg-primary text-primary-foreground'
+                    : 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-foreground'
+                )}
+              >
+                {IconComponent && <IconComponent size={18} />}
+                {!collapsed && <span>{item.label}</span>}
+              </Link>
+            )
+          })}
+        </div>
+
+        {/* Account */}
+        {!collapsed && (
+          <div className="mt-5 mb-2 px-3 text-label-sm text-muted-light uppercase tracking-wider">Account</div>
+        )}
+        <div className="space-y-1">
+          {accountItems.map((item) => {
+            const IconComponent = iconMap[item.icon]
+            const isActive = pathname === item.href
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={handleNavClick}
+                title={collapsed ? item.label : undefined}
+                className={cn(
+                  'flex items-center gap-3 rounded-app px-3 py-2 text-body transition-colors active:translate-y-0.5',
+                  collapsed ? 'justify-center' : '',
+                  isActive
+                    ? 'bg-primary text-primary-foreground'
+                    : 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-foreground'
+                )}
+              >
+                {IconComponent && <IconComponent size={18} />}
+                {!collapsed && <span>{item.label}</span>}
+              </Link>
+            )
+          })}
+        </div>
       </nav>
 
-      {/* Bottom: Role */}
-      <div className="border-t border-border-subtle shrink-0">
-        {!collapsed && (
-          <div className="p-3 text-xs text-on-surface-variant">Role: {role}</div>
-        )}
-      </div>
+      {/* Support Card */}
+      {!collapsed && (
+        <div className="p-4 shrink-0">
+          <div className="rounded-support bg-surface p-4 space-y-3">
+            <div className="flex items-center gap-2">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
+                <Zap size={16} />
+              </div>
+              <div>
+                <div className="text-body font-semibold text-foreground">PhyXis Pro</div>
+                <div className="text-body-sm text-muted">Free plan</div>
+              </div>
+            </div>
+            <button className="w-full rounded-app bg-primary py-2 text-body font-medium text-primary-foreground hover:bg-primary-hover transition-colors">
+              Upgrade
+            </button>
+          </div>
+        </div>
+      )}
     </aside>
   )
 }
