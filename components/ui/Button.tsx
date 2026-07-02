@@ -13,8 +13,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'primary', size = 'md', href, icon, iconPosition = 'right', children, ...props }, ref) => {
     const classes = cn(
-      'inline-flex items-center justify-center gap-2 rounded-full font-semibold text-body transition-colors',
-      'active:translate-y-0.5 transition-transform duration-100',
+      'inline-flex items-center justify-center gap-2 rounded-full font-semibold text-body transition duration-150',
+      'hover:-translate-y-0.5 active:translate-y-0.5',
       'disabled:opacity-50 disabled:pointer-events-none',
       {
         'bg-primary text-primary-foreground hover:bg-primary-hover shadow-btn-primary': variant === 'primary',
