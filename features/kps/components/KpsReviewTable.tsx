@@ -4,6 +4,13 @@ import { useState } from 'react'
 import { Card } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import { useKpsStore } from '@/features/kps/stores/kpsStore'
 import { PraktikanKpsProfile } from '@/features/kps/types'
 import { KpsAssessmentModal } from './KpsAssessmentModal'
@@ -63,17 +70,17 @@ export function KpsReviewTable({ readOnly = false }: KpsReviewTableProps) {
       {/* Module filter + stat summary */}
       <Card className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div className="flex flex-col gap-2">
-          <label htmlFor="review-module-select" className="text-label-sm text-muted">PILIH MODUL</label>
-          <select
-            id="review-module-select"
-            value={selectedModuleId}
-            onChange={(e) => setSelectedModuleId(e.target.value)}
-            className="rounded-lg border border-border bg-card px-3 py-2 text-body md:w-72"
-          >
-            {moduleDefs.map((mod) => (
-              <option key={mod.id} value={mod.id}>{mod.name}</option>
-            ))}
-          </select>
+          <label className="text-label-sm text-muted">PILIH MODUL</label>
+          <Select value={selectedModuleId} onValueChange={setSelectedModuleId}>
+            <SelectTrigger className="md:w-72">
+              <SelectValue placeholder="Pilih modul..." />
+            </SelectTrigger>
+            <SelectContent>
+              {moduleDefs.map((mod) => (
+                <SelectItem key={mod.id} value={mod.id}>{mod.name}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
       </Card>
 

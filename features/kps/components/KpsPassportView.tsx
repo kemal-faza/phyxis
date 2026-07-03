@@ -2,6 +2,13 @@
 
 import { useState } from 'react'
 import { Card } from '@/components/ui/Card'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import { KpsModulePassport, KpsModule } from '@/features/kps/types'
 import { KpsRadarChart } from './KpsRadarChart'
 import { KpsSkillBreakdown } from './KpsSkillBreakdown'
@@ -38,22 +45,22 @@ export function KpsPassportView({ modules, moduleDefs }: KpsPassportViewProps) {
     <div className="space-y-6">
       {/* Module selector */}
       <div>
-        <label htmlFor="module-select" className="text-label-sm text-muted">PILIH MODUL</label>
-        <select
-          id="module-select"
-          value={selectedModuleId}
-          onChange={(e) => setSelectedModuleId(e.target.value)}
-          className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-body md:w-72"
-        >
-          {modules.map((mod) => {
-            const def = moduleDefs.find((d) => d.id === mod.moduleId)
-            return (
-              <option key={mod.moduleId} value={mod.moduleId}>
-                {def?.name ?? mod.moduleName}
-              </option>
-            )
-          })}
-        </select>
+        <label className="text-label-sm text-muted">PILIH MODUL</label>
+        <Select value={selectedModuleId} onValueChange={setSelectedModuleId}>
+          <SelectTrigger className="mt-1 w-full md:w-72">
+            <SelectValue placeholder="Pilih modul..." />
+          </SelectTrigger>
+          <SelectContent>
+            {modules.map((mod) => {
+              const def = moduleDefs.find((d) => d.id === mod.moduleId)
+              return (
+                <SelectItem key={mod.moduleId} value={mod.moduleId}>
+                  {def?.name ?? mod.moduleName}
+                </SelectItem>
+              )
+            })}
+          </SelectContent>
+        </Select>
       </div>
 
       {/* Stat cards */}
