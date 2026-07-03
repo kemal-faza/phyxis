@@ -10,6 +10,10 @@ export const metadata: Metadata = {
   title: 'PhyXis',
   description: 'Physics Experience & Intelligent System',
   manifest: '/manifest.json',
+  icons: {
+    icon: '/phyxis-logo.png',
+    apple: '/phyxis-logo.png',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
