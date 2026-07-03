@@ -14,6 +14,9 @@ import {
 	X,
 	Search,
 	Sparkles,
+	FileText,
+	ClipboardCheck,
+	BarChart3,
 } from 'lucide-react';
 import { useAuthStore } from '@/features/auth/stores/authStore';
 import { NAV_ITEMS, ACCOUNT_ITEMS } from '@/lib/navigation';
@@ -26,6 +29,9 @@ const iconMap: Record<string, React.ComponentType<{ size?: number }>> = {
 	Award,
 	Bell,
 	Settings,
+	FileText,
+	ClipboardCheck,
+	BarChart3,
 };
 
 interface SidebarProps {
@@ -78,10 +84,11 @@ export function Sidebar({
 				<Link
 					href="/"
 					className="flex items-center gap-3 flex-1 overflow-hidden">
-					<div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-btn-primary">
+					<div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full ">
 						<img
 							src="/phyxis-logo.png"
-							alt="logo"
+							alt="PhyXis"
+							className="h-full w-full object-cover"
 						/>
 					</div>
 					{!collapsed && (

@@ -1,23 +1,33 @@
 'use client'
 
-import { Card } from '@/components/ui/Card'
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import { useAuthStore } from '@/features/auth/stores/authStore'
 import { usePageTitle } from '@/components/layout/PageTitleContext'
+import { AnalyticsDashboard } from '@/features/analytics/components/AnalyticsDashboard'
+import { MOCK_ANALYTICS } from '@/features/analytics/data/mockAnalytics'
+
+const ALLOWED_ROLES: Array<string> = ['asisten', 'dosen']
 
 export default function AnalyticsPage() {
+  const role = useAuthStore((s) => s.role)
+  const router = useRouter()
+
   usePageTitle('Analytics')
+
+  useEffect(() => {
+    if (!role || !ALLOWED_ROLES.includes(role)) router.push('/app/dashboard')
+  }, [role, router])
+
+  if (!role || !ALLOWED_ROLES.includes(role)) return null
 
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="page-title">Analytics</h1>
-        <p className="mt-1 text-body text-muted">Learning activity and module usage insights.</p>
+        <h1 className="page-title">Learning Analytics</h1>
+        <p className="mt-1 text-body text-muted">Cohort performance and concept mastery insights.</p>
       </div>
-      <Card className="flex h-64 items-center justify-center">
-        <div className="text-center">
-          <div className="font-heading text-headline-sm text-foreground">Coming soon</div>
-          <p className="mt-2 text-body text-muted">Full analytics implementation is planned for the next iteration.</p>
-        </div>
-      </Card>
+      <AnalyticsDashboard data={MOCK_ANALYTICS} />
     </div>
   )
 }
