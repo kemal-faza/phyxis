@@ -19,4 +19,5 @@ export const NAV_ITEMS: NavItem[] = [
 export const ACCOUNT_ITEMS: NavItem[] = [
   { label: 'Notifications', href: '/app/notifications', roles: ['praktikan', 'asisten', 'dosen', 'admin'], icon: 'Bell' },
   { label: 'Settings',      href: '/app/settings',      roles: ['praktikan', 'asisten', 'dosen', 'admin'], icon: 'Settings' },
+  { label: 'Sign Out',      href: '/login',             roles: ['praktikan', 'asisten', 'dosen', 'admin'], icon: 'LogOut' },
 ]

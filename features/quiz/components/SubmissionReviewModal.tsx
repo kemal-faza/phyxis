@@ -3,6 +3,7 @@
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
+import { Dialog, DialogContent } from '@/components/ui/dialog'
 import { QuizSubmission } from '@/features/quiz/types'
 
 interface SubmissionReviewModalProps {
@@ -13,8 +14,8 @@ interface SubmissionReviewModalProps {
 
 export function SubmissionReviewModal({ submission, onClose, onConfirm }: SubmissionReviewModalProps) {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-      <Card className="max-h-[90vh] w-full max-w-4xl overflow-y-auto p-6">
+    <Dialog open onOpenChange={(open) => !open && onClose()}>
+      <DialogContent className="max-h-[90vh] max-w-4xl overflow-y-auto">
         <div className="mb-4 flex items-center justify-between">
           <div>
             <h2 className="text-headline-sm">{submission.studentName}</h2>
@@ -61,7 +62,7 @@ export function SubmissionReviewModal({ submission, onClose, onConfirm }: Submis
             <Button onClick={onConfirm}>Konfirmasi Nilai</Button>
           </div>
         </div>
-      </Card>
-    </div>
+      </DialogContent>
+    </Dialog>
   )
 }

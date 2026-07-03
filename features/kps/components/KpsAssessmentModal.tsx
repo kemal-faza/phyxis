@@ -1,10 +1,10 @@
 'use client'
 
 import { useState } from 'react'
-import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import { ScoreProgress } from '@/components/ui/ScoreProgress'
-import { KpsSkill, PraktikanKpsProfile, KpsModulePassport } from '@/features/kps/types'
+import { Dialog, DialogContent } from '@/components/ui/dialog'
+import { KpsSkill, PraktikanKpsProfile } from '@/features/kps/types'
 import { calculateOverallScore } from '@/features/kps/lib/scoreColor'
 
 interface KpsAssessmentModalProps {
@@ -44,8 +44,8 @@ export function KpsAssessmentModal({
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-      <Card className="max-h-[90vh] w-full max-w-2xl overflow-y-auto p-6">
+    <Dialog open onOpenChange={(open) => !open && onClose()}>
+      <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto">
         <div className="mb-4 flex items-center justify-between">
           <div>
             <h2 className="text-headline-sm">{readOnly ? 'Detail KPS' : 'Nilai KPS'}</h2>
@@ -98,7 +98,7 @@ export function KpsAssessmentModal({
           <Button variant="ghost" onClick={onClose}>Tutup</Button>
           {!readOnly && <Button onClick={handleSave}>Simpan</Button>}
         </div>
-      </Card>
-    </div>
+      </DialogContent>
+    </Dialog>
   )
 }

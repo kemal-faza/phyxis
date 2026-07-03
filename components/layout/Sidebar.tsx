@@ -17,6 +17,7 @@ import {
 	FileText,
 	ClipboardCheck,
 	BarChart3,
+	LogOut,
 } from 'lucide-react';
 import { useAuthStore } from '@/features/auth/stores/authStore';
 import { NAV_ITEMS, ACCOUNT_ITEMS } from '@/lib/navigation';
@@ -32,6 +33,7 @@ const iconMap: Record<string, React.ComponentType<{ size?: number }>> = {
 	FileText,
 	ClipboardCheck,
 	BarChart3,
+	LogOut,
 };
 
 interface SidebarProps {
@@ -48,6 +50,7 @@ export function Sidebar({
 	onCloseMobile,
 }: SidebarProps) {
 	const role = useAuthStore((s) => s.role);
+	const clearRole = useAuthStore((s) => s.clearRole);
 	const pathname = usePathname();
 	const router = useRouter();
 
@@ -145,7 +148,10 @@ export function Sidebar({
 							<Link
 								key={item.href}
 								href={item.href}
-								onClick={handleNavClick}
+								onClick={() => {
+									handleNavClick();
+									if (item.href === '/login') clearRole();
+								}}
 								title={collapsed ? item.label : undefined}
 								className={cn(
 									'flex items-center gap-3 rounded-app px-3 py-2 text-body transition-colors active:translate-y-0.5',
@@ -178,7 +184,10 @@ export function Sidebar({
 							<Link
 								key={item.href}
 								href={item.href}
-								onClick={handleNavClick}
+								onClick={() => {
+									handleNavClick();
+									if (item.href === '/login') clearRole();
+								}}
 								title={collapsed ? item.label : undefined}
 								className={cn(
 									'flex items-center gap-3 rounded-app px-3 py-2 text-body transition-colors active:translate-y-0.5',
