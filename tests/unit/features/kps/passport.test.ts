@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest'
 import { deriveStatus, calculateOverallScore } from '@/features/kps/lib/scoreColor'
 import { MOCK_PASSPORT } from '@/features/kps/data/mockPassport'
 
