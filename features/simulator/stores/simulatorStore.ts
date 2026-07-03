@@ -1,9 +1,9 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { SimulatorState } from '@/features/simulator/types'
-import { M4_STEPS } from '@/features/simulator/data/m4Steps'
+import { SimulatorState, ModuleProgress } from '@/features/simulator/types'
+import { MODULE_STEPS } from '@/features/simulator/data/mockSteps'
 
-const initialState: SimulatorState = {
+const initialProgress: ModuleProgress = {
   currentStepIndex: 0,
   status: 'idle',
   metrics: {
@@ -12,55 +12,132 @@ const initialState: SimulatorState = {
     stepCount: 0,
     startedAt: null,
   },
-  isFirstAttempt: true,
   hasCompleted: false,
   lastError: null,
 }
 
-interface SimulatorStore extends SimulatorState {
+const initialState: SimulatorState = {
+  currentModuleId: 'M-4',
+  modules: {
+    'M-1': { ...initialProgress, metrics: { ...initialProgress.metrics } },
+    'M-2': { ...initialProgress, metrics: { ...initialProgress.metrics } },
+    'M-3': { ...initialProgress, metrics: { ...initialProgress.metrics } },
+    'M-4': { ...initialProgress, metrics: { ...initialProgress.metrics } },
+  },
+  isFirstAttempt: true,
+}
+
+interface SimulatorStoreFull extends SimulatorState {
+  selectModule: (moduleId: string) => void
   submitAnswer: (optionIndex: number) => void
   completeAnimation: () => void
   restart: () => void
   getInitialState: () => SimulatorState
 }
 
-export const useSimulatorStore = create<SimulatorStore>()(
+export const useSimulatorStore = create<SimulatorStoreFull>()(
   persist(
     (set, get) => ({
       ...initialState,
       getInitialState: () => initialState,
+
+      selectModule: (moduleId: string) => {
+        const state = get()
+        if (!MODULE_STEPS[moduleId]) return
+        if (!state.modules[moduleId]) {
+          set((s) => ({
+            currentModuleId: moduleId,
+            modules: {
+              ...s.modules,
+              [moduleId]: { ...initialProgress, metrics: { ...initialProgress.metrics } },
+            },
+          }))
+        } else {
+          set({ currentModuleId: moduleId })
+        }
+      },
+
       submitAnswer: (optionIndex: number) => {
         const state = get()
-        const step = M4_STEPS[state.currentStepIndex]
-        if (!step || state.status === 'playing' || state.status === 'completed') return
+        const modId = state.currentModuleId
+        if (!modId) return
+        const progress = state.modules[modId]
+        const steps = MODULE_STEPS[modId]
+        if (!steps) return
+        const step = steps[progress.currentStepIndex]
+        if (!step || progress.status === 'playing' || progress.status === 'completed') return
 
-        if (!state.metrics.startedAt) {
-          set((s) => ({ metrics: { ...s.metrics, startedAt: Date.now() } }))
+        if (!progress.metrics.startedAt) {
+          set((s) => ({
+            modules: {
+              ...s.modules,
+              [modId]: {
+                ...progress,
+                metrics: { ...progress.metrics, startedAt: Date.now() },
+              },
+            },
+          }))
         }
 
         if (optionIndex === step.correctOptionIndex) {
-          set({ status: 'playing', lastError: null })
+          set((s) => ({
+            modules: {
+              ...s.modules,
+              [modId]: { ...s.modules[modId], status: 'playing', lastError: null },
+            },
+          }))
         } else {
           set((s) => ({
-            metrics: { ...s.metrics, totalErrors: s.metrics.totalErrors + 1 },
-            lastError: step.explanation,
+            modules: {
+              ...s.modules,
+              [modId]: {
+                ...s.modules[modId],
+                metrics: {
+                  ...s.modules[modId].metrics,
+                  totalErrors: s.modules[modId].metrics.totalErrors + 1,
+                },
+                lastError: step.explanation,
+              },
+            },
           }))
         }
       },
+
       completeAnimation: () => {
         const state = get()
-        const nextIndex = state.currentStepIndex + 1
-        if (nextIndex >= M4_STEPS.length) {
-          set({ status: 'completed', hasCompleted: true })
+        const modId = state.currentModuleId
+        if (!modId) return
+        const progress = state.modules[modId]
+        const steps = MODULE_STEPS[modId]
+        if (!steps) return
+        const nextIndex = progress.currentStepIndex + 1
+        if (nextIndex >= steps.length) {
+          set((s) => ({
+            modules: {
+              ...s.modules,
+              [modId]: { ...s.modules[modId], status: 'completed', hasCompleted: true },
+            },
+          }))
         } else {
-          set({ status: 'idle', currentStepIndex: nextIndex })
+          set((s) => ({
+            modules: {
+              ...s.modules,
+              [modId]: { ...s.modules[modId], status: 'idle', currentStepIndex: nextIndex },
+            },
+          }))
         }
       },
+
       restart: () => {
+        const state = get()
+        const modId = state.currentModuleId
+        if (!modId) return
         set((s) => ({
-          ...initialState,
           isFirstAttempt: false,
-          metrics: { ...initialState.metrics },
+          modules: {
+            ...s.modules,
+            [modId]: { ...initialProgress, metrics: { ...initialProgress.metrics } },
+          },
         }))
       },
     }),

@@ -6,7 +6,7 @@ import type { ExperimentItem } from '@/features/simulator/data/experiments'
 
 interface ExperimentsPanelProps {
   experiments: ExperimentItem[]
-  activeId: string
+  activeId: string | null
   onSelect: (id: string) => void
 }
 

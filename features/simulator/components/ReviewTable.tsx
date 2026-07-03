@@ -1,17 +1,56 @@
 'use client'
 
+import { useState } from 'react'
 import { Card } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { EXPERIMENTS } from '@/features/simulator/data/experiments'
 
 type ReviewStatus = 'completed' | 'in-progress' | 'not-started'
 
-const MOCK_REVIEW: { nama: string; status: ReviewStatus; errors: number; avgTime: string }[] = [
-  { nama: 'Budi Santoso', status: 'completed', errors: 3, avgTime: '12s' },
-  { nama: 'Ani Rahmawati', status: 'completed', errors: 1, avgTime: '8s' },
-  { nama: 'Citra Dewi', status: 'in-progress', errors: 5, avgTime: '-' },
-  { nama: 'Dedi Prasetyo', status: 'not-started', errors: 0, avgTime: '-' },
-  { nama: 'Eka Putri', status: 'completed', errors: 0, avgTime: '6s' },
-]
+interface ReviewRow {
+  nama: string
+  status: ReviewStatus
+  errors: number
+  avgTime: string
+}
+
+const MOCK_REVIEW_ALL: Record<string, ReviewRow[]> = {
+  'M-1': [
+    { nama: 'Budi Santoso', status: 'completed', errors: 1, avgTime: '5s' },
+    { nama: 'Ani Rahmawati', status: 'completed', errors: 0, avgTime: '4s' },
+    { nama: 'Citra Dewi', status: 'completed', errors: 2, avgTime: '7s' },
+    { nama: 'Dedi Prasetyo', status: 'completed', errors: 1, avgTime: '6s' },
+    { nama: 'Eka Putri', status: 'completed', errors: 0, avgTime: '3s' },
+  ],
+  'M-2': [
+    { nama: 'Budi Santoso', status: 'completed', errors: 2, avgTime: '8s' },
+    { nama: 'Ani Rahmawati', status: 'completed', errors: 1, avgTime: '6s' },
+    { nama: 'Citra Dewi', status: 'in-progress', errors: 3, avgTime: '-' },
+    { nama: 'Dedi Prasetyo', status: 'completed', errors: 0, avgTime: '5s' },
+    { nama: 'Eka Putri', status: 'not-started', errors: 0, avgTime: '-' },
+  ],
+  'M-3': [
+    { nama: 'Budi Santoso', status: 'completed', errors: 0, avgTime: '4s' },
+    { nama: 'Ani Rahmawati', status: 'completed', errors: 1, avgTime: '5s' },
+    { nama: 'Citra Dewi', status: 'in-progress', errors: 4, avgTime: '-' },
+    { nama: 'Dedi Prasetyo', status: 'completed', errors: 2, avgTime: '7s' },
+    { nama: 'Eka Putri', status: 'completed', errors: 0, avgTime: '3s' },
+  ],
+  'M-4': [
+    { nama: 'Budi Santoso', status: 'completed', errors: 3, avgTime: '12s' },
+    { nama: 'Ani Rahmawati', status: 'completed', errors: 1, avgTime: '8s' },
+    { nama: 'Citra Dewi', status: 'in-progress', errors: 5, avgTime: '-' },
+    { nama: 'Dedi Prasetyo', status: 'not-started', errors: 0, avgTime: '-' },
+    { nama: 'Eka Putri', status: 'completed', errors: 0, avgTime: '6s' },
+  ],
+}
 
 function statusBadge(status: ReviewStatus) {
   const variant = status === 'completed' ? 'success' : status === 'in-progress' ? 'warning' : 'neutral'
@@ -20,16 +59,34 @@ function statusBadge(status: ReviewStatus) {
 }
 
 export function ReviewTable() {
+  const [selectedModul, setSelectedModul] = useState('M-4')
+
+  const rows = MOCK_REVIEW_ALL[selectedModul] ?? []
+
   return (
     <div className="space-y-4">
+      <div className="flex items-center gap-3">
+        <label className="text-label-sm text-muted">PILIH MODUL</label>
+        <Select value={selectedModul} onValueChange={setSelectedModul}>
+          <SelectTrigger className="w-44">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            {EXPERIMENTS.filter((m) => m.status !== 'locked').map((m) => (
+              <SelectItem key={m.id} value={m.id}>{m.id}: {m.name}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+
       <h2 className="text-headline-sm">
-        Hasil Simulator Praktikan &mdash; M-4 Gerak Jatuh Bebas
+        Hasil Simulator Praktikan &mdash; {selectedModul}
       </h2>
 
       {/* Mobile: Card list */}
       <div className="space-y-3 md:hidden">
-        {MOCK_REVIEW.map((row) => (
-          <Card key={row.nama} className="space-y-3">
+        {rows.map((row) => (
+          <Card key={`${row.nama}-${selectedModul}`} className="space-y-3">
             <div className="flex items-center justify-between gap-3">
               <span className="text-body font-semibold text-foreground">{row.nama}</span>
               {statusBadge(row.status)}
@@ -61,8 +118,8 @@ export function ReviewTable() {
             </tr>
           </thead>
           <tbody>
-            {MOCK_REVIEW.map((row) => (
-              <tr key={row.nama} className="border-b border-border last:border-0">
+            {rows.map((row) => (
+              <tr key={`${row.nama}-${selectedModul}`} className="border-b border-border last:border-0">
                 <td className="py-3 pr-4">{row.nama}</td>
                 <td className="py-3 pr-4">{statusBadge(row.status)}</td>
                 <td className="py-3 pr-4">{row.errors}</td>

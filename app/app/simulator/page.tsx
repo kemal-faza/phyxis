@@ -16,7 +16,8 @@ const ALLOWED_ROLES: Array<string> = ['praktikan', 'asisten', 'dosen']
 
 export default function SimulatorPage() {
   const role = useAuthStore((s) => s.role)
-  const status = useSimulatorStore((s) => s.status)
+  const currentModuleId = useSimulatorStore((s) => s.currentModuleId)
+  const selectModule = useSimulatorStore((s) => s.selectModule)
   const router = useRouter()
 
   useEffect(() => {
@@ -29,16 +30,21 @@ export default function SimulatorPage() {
 
   const isReviewRole = role === 'asisten' || role === 'dosen'
 
+  const currentModule = EXPERIMENTS.find((m) => m.id === currentModuleId)
+  const moduleTitle = currentModule
+    ? `Simulator ${currentModule.id}: ${currentModule.name}`
+    : 'Virtual Lab'
+
   return (
     <div className="space-y-6">
       <div className="border-b border-border pb-8">
         <h1 className="page-title">
-          {isReviewRole ? 'Simulator Review' : 'Simulator M-4: Gerak Jatuh Bebas'}
+          {isReviewRole ? 'Simulator Review' : moduleTitle}
         </h1>
         <p className="mt-2 text-body text-muted">
           {isReviewRole
-            ? 'Ringkasan hasil percobaan praktikan pada modul M-4.'
-            : 'Ikuti langkah-langkah pengukuran dan analisis gerak jatuh bebas.'}
+            ? 'Ringkasan hasil percobaan praktikan.'
+            : currentModule?.subtitle ?? 'Ikuti langkah-langkah percobaan.'}
         </p>
       </div>
 
@@ -48,12 +54,8 @@ export default function SimulatorPage() {
         <div className="flex flex-col lg:flex-row gap-4">
           <ExperimentsPanel
             experiments={EXPERIMENTS}
-            activeId="M-4"
-            onSelect={(id) => {
-              if (id !== 'M-4') {
-                alert(`Module ${id} akan tersedia di versi berikutnya.`)
-              }
-            }}
+            activeId={currentModuleId}
+            onSelect={selectModule}
           />
           <div className="flex-1 grid gap-4 lg:grid-cols-3">
             <div className="lg:col-span-2">

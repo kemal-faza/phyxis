@@ -14,11 +14,16 @@ export interface SimulatorMetrics {
   startedAt: number | null
 }
 
-export interface SimulatorState {
+export interface ModuleProgress {
   currentStepIndex: number
   status: 'idle' | 'playing' | 'completed'
   metrics: SimulatorMetrics
-  isFirstAttempt: boolean
   hasCompleted: boolean
   lastError: string | null
+}
+
+export interface SimulatorState {
+  currentModuleId: string | null
+  modules: Record<string, ModuleProgress>
+  isFirstAttempt: boolean
 }
