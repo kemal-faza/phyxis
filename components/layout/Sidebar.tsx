@@ -151,11 +151,14 @@ export function Sidebar({
 									'flex items-center gap-3 rounded-app px-3 py-2 text-body transition-colors active:translate-y-0.5',
 									collapsed ? 'justify-center' : '',
 									isActive
-										? 'bg-primary text-primary-foreground'
+										? 'bg-primary/[0.08] text-primary font-medium'
 										: 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-foreground',
 								)}>
 								{IconComponent && <IconComponent size={18} />}
 								{!collapsed && <span>{item.label}</span>}
+								{isActive && !collapsed && (
+									<div className="ml-auto h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
+								)}
 							</Link>
 						);
 					})}
@@ -181,15 +184,19 @@ export function Sidebar({
 									'flex items-center gap-3 rounded-app px-3 py-2 text-body transition-colors active:translate-y-0.5',
 									collapsed ? 'justify-center' : '',
 									isActive
-										? 'bg-primary text-primary-foreground'
+										? 'bg-primary/[0.08] text-primary font-medium'
 										: 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-foreground',
 								)}>
 								{IconComponent && <IconComponent size={18} />}
 								{!collapsed && <span>{item.label}</span>}
+								{isActive && !collapsed && (
+									<div className="ml-auto h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
+								)}
 							</Link>
 						);
 					})}
 				</div>
+
 			</nav>
 
 			{/* AI Copilot */}
