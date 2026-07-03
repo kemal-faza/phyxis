@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { Card } from '@/components/ui/Card'
-import { PhyXisLogo } from '@/components/icons/PhyXisLogo'
 import { RoleSwitcher } from '@/features/auth/components/RoleSwitcher'
 
 export default function LoginPage() {
@@ -9,7 +8,7 @@ export default function LoginPage() {
       <div className="w-full max-w-md space-y-6">
         <Link href="/" className="flex items-center justify-center gap-3">
           <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-btn-primary">
-            <PhyXisLogo size={24} />
+            <img src="/phyxis-logo.png" alt="PhyXis" className="h-full w-full object-cover" />
           </div>
           <span className="font-heading text-headline-md text-foreground">PhyXis</span>
         </Link>

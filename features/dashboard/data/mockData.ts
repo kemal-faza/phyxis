@@ -1,21 +1,21 @@
 export const DASHBOARD_STATS = [
-  { label: 'Student console', value: '08' },
-  { label: 'Avg Score', value: '86.4%' },
-  { label: 'KPS Level', value: 'Level 5' },
-  { label: 'Completion', value: '23/30' },
+  { label: 'Active Practicum', value: '08', caption: 'Modules in progress' },
+  { label: 'Average Score', value: '86.4%', caption: 'vs last month', change: '▲ 2.4%' },
+  { label: 'KPS Level', value: 'Level 5', caption: '1,240 / 1,600 XP' },
+  { label: 'Completion', value: '23/30', caption: 'Modules finished' },
 ]
 
 export const TODAY_SCHEDULE = [
-  { time: '08:00', title: 'Pretest M-4 Gerak Jatuh Bebas', location: 'Lab Fisika Lt. 2', status: 'ongoing' as const },
-  { time: '10:00', title: 'Simulasi M-4 Sesi 03', location: 'Lab Virtual A', status: 'upcoming' as const },
-  { time: '13:00', title: 'Pengumpulan Laporan M-3', location: 'Online', status: 'upcoming' as const },
-  { time: '15:30', title: 'Review KPS Indikator', location: 'Rapat Dosen', status: 'upcoming' as const },
+  { time: '08:00', title: 'Mekanika — Gerak Parabola', location: 'Lab Mekanika A-102', status: 'ongoing' as const },
+  { time: '10:00', title: 'Optika — Pembiasan Cahaya', location: 'Lab Optik B-204', status: 'upcoming' as const },
+  { time: '13:00', title: 'Listrik — Hukum Ohm', location: 'Lab Listrik C-110', status: 'upcoming' as const },
+  { time: '15:00', title: 'Termodinamika — Kalorimeter', location: 'Lab Termo D-208', status: 'upcoming' as const },
 ]
 
 export const RECENT_ACTIVITY = [
-  { id: 1, text: 'Report graded (score 92)', time: '2 hours ago' },
-  { id: 2, text: 'New data uploaded for M-4', time: '4 hours ago' },
-  { id: 3, text: 'Rubric updated by Dosen', time: 'Yesterday' },
+  { id: 1, title: 'Report graded', detail: 'Gerak Harmonik Sederhana — Score 92 — AI reviewed', time: '2h ago' },
+  { id: 2, title: 'New data uploaded', detail: 'Hukum Ohm dataset — 128 samples', time: '4h ago' },
+  { id: 3, title: 'Rubric updated', detail: 'Kalorimeter — assistant weight adjusted', time: '5h ago' },
 ]
 
 export const MODULE_PROGRESS = [

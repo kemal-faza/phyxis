@@ -1,6 +1,5 @@
 'use client'
 
-import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { useSimulatorStore } from '@/features/simulator/stores/simulatorStore'
 import { M4_STEPS } from '@/features/simulator/data/m4Steps'
@@ -21,15 +20,14 @@ export function StepPanel() {
       </div>
       <div className="space-y-2">
         {step.options.map((option, index) => (
-          <Button
+          <button
             key={index}
-            variant="outline"
-            className="h-auto min-h-10 w-full justify-start py-3 text-left leading-relaxed"
+            className="w-full rounded-xl border border-border bg-card p-4 text-left shadow-sm transition duration-150 hover:bg-surface active:scale-[0.98] disabled:opacity-50"
             disabled={status === 'playing'}
             onClick={() => submitAnswer(index)}
           >
-            {option}
-          </Button>
+            <span className="text-body text-foreground">{option}</span>
+          </button>
         ))}
       </div>
       {lastError && (

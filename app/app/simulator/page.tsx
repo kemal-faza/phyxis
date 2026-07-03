@@ -6,6 +6,8 @@ import { SimulatorCanvas } from '@/features/simulator/components/SimulatorCanvas
 import { StepPanel } from '@/features/simulator/components/StepPanel'
 import { MetricSummary } from '@/features/simulator/components/MetricSummary'
 import { ReviewTable } from '@/features/simulator/components/ReviewTable'
+import { ExperimentsPanel } from '@/features/simulator/components/ExperimentsPanel'
+import { EXPERIMENTS } from '@/features/simulator/data/experiments'
 import { usePageTitle } from '@/components/layout/PageTitleContext'
 import { useAuthStore } from '@/features/auth/stores/authStore'
 import { useSimulatorStore } from '@/features/simulator/stores/simulatorStore'
@@ -29,11 +31,11 @@ export default function SimulatorPage() {
 
   return (
     <div className="space-y-6">
-      <div>
+      <div className="border-b border-border pb-8">
         <h1 className="page-title">
           {isReviewRole ? 'Simulator Review' : 'Simulator M-4: Gerak Jatuh Bebas'}
         </h1>
-        <p className="mt-1 text-body text-muted">
+        <p className="mt-2 text-body text-muted">
           {isReviewRole
             ? 'Ringkasan hasil percobaan praktikan pada modul M-4.'
             : 'Ikuti langkah-langkah pengukuran dan analisis gerak jatuh bebas.'}
@@ -43,13 +45,24 @@ export default function SimulatorPage() {
       {isReviewRole ? (
         <ReviewTable />
       ) : (
-        <div className="grid gap-4 lg:grid-cols-3">
-          <div className="lg:col-span-2">
-            <SimulatorCanvas />
-          </div>
-          <div className="space-y-4">
-            <StepPanel />
-            <MetricSummary />
+        <div className="flex flex-col lg:flex-row gap-4">
+          <ExperimentsPanel
+            experiments={EXPERIMENTS}
+            activeId="M-4"
+            onSelect={(id) => {
+              if (id !== 'M-4') {
+                alert(`Module ${id} akan tersedia di versi berikutnya.`)
+              }
+            }}
+          />
+          <div className="flex-1 grid gap-4 lg:grid-cols-3">
+            <div className="lg:col-span-2">
+              <SimulatorCanvas />
+            </div>
+            <div className="space-y-4">
+              <StepPanel />
+              <MetricSummary />
+            </div>
           </div>
         </div>
       )}
