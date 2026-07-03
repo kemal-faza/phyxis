@@ -21,10 +21,21 @@ export interface KpsPassport {
   skills: KpsSkill[]
 }
 
+export interface KpsModule {
+  id: string
+  name: string
+}
+
+export interface KpsModulePassport {
+  moduleId: string
+  moduleName: string
+  passport: KpsPassport
+}
+
 export interface PraktikanKpsProfile {
   nama: string
   nim: string
-  passport: KpsPassport
+  modules: KpsModulePassport[]
 }
 
 // Keep existing types for backward compatibility

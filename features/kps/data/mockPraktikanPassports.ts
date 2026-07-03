@@ -1,18 +1,29 @@
 import { PraktikanKpsProfile } from '@/features/kps/types'
-import { MOCK_PASSPORT } from './mockPassport'
+import { MOCK_MODULES, buildModulePassport } from './mockPassport'
+
+const OFFSETS: Record<string, number> = {
+  '230101001': 0,   // Budi = baseline
+  '230101002': 8,   // Ani = +8
+  '230101003': -12, // Citra = -12
+}
+
+function buildProfile(nama: string, nim: string): PraktikanKpsProfile {
+  const offset = OFFSETS[nim] ?? 0
+  return {
+    nama,
+    nim,
+    modules: MOCK_MODULES.map((mod) => ({
+      moduleId: mod.id,
+      moduleName: mod.name,
+      passport: buildModulePassport(mod.id, offset),
+    })),
+  }
+}
 
 export const MOCK_PRAKTIKAN_PROFILES: PraktikanKpsProfile[] = [
-  { nama: 'Budi Santoso', nim: '230101001', passport: MOCK_PASSPORT },
-  { nama: 'Ani Rahmawati', nim: '230101002', passport: {
-    ...MOCK_PASSPORT,
-    overallScore: 85,
-    skillsPassed: 7,
-    skills: MOCK_PASSPORT.skills.map(s => ({ ...s, score: Math.min(100, s.score + 8) })),
-  }},
-  { nama: 'Citra Dewi', nim: '230101003', passport: {
-    ...MOCK_PASSPORT,
-    overallScore: 62,
-    skillsPassed: 4,
-    skills: MOCK_PASSPORT.skills.map(s => ({ ...s, score: Math.max(0, s.score - 15) })),
-  }},
+  buildProfile('Budi Santoso', '230101001'),
+  buildProfile('Ani Rahmawati', '230101002'),
+  buildProfile('Citra Dewi', '230101003'),
+  buildProfile('Dedi Prasetyo', '230101004'),
+  buildProfile('Eka Putri', '230101005'),
 ]

@@ -1,7 +1,8 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { INDICATOR_DEFINITIONS } from '@/features/kps/data/mockKps'
-import { PraktikanKpsProfile } from '@/features/kps/types'
+import { PraktikanKpsProfile, KpsModule } from '@/features/kps/types'
+import { MOCK_MODULES } from '@/features/kps/data/mockPassport'
 import { MOCK_PRAKTIKAN_PROFILES } from '@/features/kps/data/mockPraktikanPassports'
 
 export interface IndicatorDef {
@@ -18,20 +19,25 @@ export interface PraktikanKpsData {
 interface KpsStoreState {
   indicatorDefs: IndicatorDef[]
   praktikanList: PraktikanKpsData[]
+  moduleDefs: KpsModule[]
   profiles: PraktikanKpsProfile[]
   addIndicator: (name: string) => void
   updateIndicator: (id: string, name: string) => void
   removeIndicator: (id: string) => void
   toggleStatus: (nim: string, indicatorId: string) => void
-  setScore: (nim: string, skillId: string, score: number) => void
-  setNote: (nim: string, skillId: string, note: string) => void
+  addModule: (name: string) => void
+  removeModule: (id: string) => void
+  setScore: (nim: string, moduleId: string, skillId: string, score: number) => void
+  setNote: (nim: string, moduleId: string, skillId: string, note: string) => void
 }
 
-function generateId(existing: IndicatorDef[]): string {
-  const max = existing.reduce((m, d) => {
-    const n = parseInt(d.id.replace('kps-', ''), 10)
-    return n > m ? n : m
-  }, 0)
+function generateId(existing: { id: string }[]): string {
+  let max = 0
+  for (const item of existing) {
+    const parts = item.id.split('-')
+    const num = parseInt(parts[parts.length - 1], 10)
+    if (!isNaN(num) && num > max) max = num
+  }
   return `kps-${max + 1}`
 }
 
@@ -56,7 +62,6 @@ function seedInitialStatuses(
   defs: IndicatorDef[],
   list: PraktikanKpsData[]
 ): PraktikanKpsData[] {
-  // Apply specific lulus/belum-lulus patterns from original mock data
   const patterns: Record<string, string[]> = {
     '230101001': ['kps-1', 'kps-2', 'kps-4'],
     '230101002': ['kps-1', 'kps-2', 'kps-3', 'kps-4', 'kps-5'],
@@ -82,6 +87,19 @@ export const useKpsStore = create<KpsStoreState>()(
         initialDefs,
         seedPraktikanList(initialDefs)
       ),
+
+      moduleDefs: MOCK_MODULES.map((m) => ({ ...m })),
+      profiles: MOCK_PRAKTIKAN_PROFILES.map((p) => ({
+        ...p,
+        modules: p.modules.map((m) => ({
+          ...m,
+          passport: {
+            ...m.passport,
+            skills: m.passport.skills.map((s) => ({ ...s })),
+            badges: m.passport.badges.map((b) => ({ ...b })),
+          },
+        })),
+      })),
 
       addIndicator: (name: string) => {
         const state = get()
@@ -133,39 +151,86 @@ export const useKpsStore = create<KpsStoreState>()(
         }))
       },
 
-      // New passport profile state
-      profiles: MOCK_PRAKTIKAN_PROFILES,
+      addModule: (name: string) => {
+        const state = get()
+        const id = `mod-${state.moduleDefs.length + 1}`
+        const newModule: KpsModule = { id, name }
+        set({
+          moduleDefs: [...state.moduleDefs, newModule],
+          profiles: state.profiles.map((p) => ({
+            ...p,
+            modules: [
+              ...p.modules,
+              {
+                moduleId: id,
+                moduleName: name,
+                passport: {
+                  overallScore: 0,
+                  skillsPassed: 0,
+                  totalSkills: 8,
+                  badges: [],
+                  skills: [],
+                },
+              },
+            ],
+          })),
+        })
+      },
 
-      setScore: (nim: string, skillId: string, score: number) => {
+      removeModule: (id: string) => {
+        set((state) => ({
+          moduleDefs: state.moduleDefs.filter((m) => m.id !== id),
+          profiles: state.profiles.map((p) => ({
+            ...p,
+            modules: p.modules.filter((m) => m.moduleId !== id),
+          })),
+        }))
+      },
+
+      setScore: (nim: string, moduleId: string, skillId: string, score: number) => {
         set((state) => ({
           profiles: state.profiles.map((p) =>
             p.nim === nim
               ? {
                   ...p,
-                  passport: {
-                    ...p.passport,
-                    skills: p.passport.skills.map((s) =>
-                      s.id === skillId ? { ...s, score } : s
-                    ),
-                  },
+                  modules: p.modules.map((mod) =>
+                    mod.moduleId === moduleId
+                      ? {
+                          ...mod,
+                          passport: {
+                            ...mod.passport,
+                            skills: mod.passport.skills.map((s) =>
+                              s.id === skillId ? { ...s, score } : s
+                            ),
+                          },
+                        }
+                      : mod
+                  ),
                 }
               : p
           ),
         }))
       },
 
-      setNote: (nim: string, skillId: string, note: string) => {
+      setNote: (nim: string, moduleId: string, skillId: string, note: string) => {
         set((state) => ({
           profiles: state.profiles.map((p) =>
             p.nim === nim
               ? {
                   ...p,
-                  passport: {
-                    ...p.passport,
-                    skills: p.passport.skills.map((s) =>
-                      s.id === skillId ? { ...s, note } : s
-                    ),
-                  },
+                  modules: p.modules.map((mod) =>
+                    mod.moduleId === moduleId
+                      ? {
+                          ...mod,
+                          passport: {
+                            ...mod.passport,
+                            skills: mod.passport.skills.map((s) =>
+                              s.id === skillId ? { ...s, note } : s
+                            ),
+                          },
+                        }
+                      : mod
+                  ),
                 }
               : p
           ),

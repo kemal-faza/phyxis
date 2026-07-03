@@ -14,32 +14,73 @@ interface KpsReviewTableProps {
 
 export function KpsReviewTable({ readOnly = false }: KpsReviewTableProps) {
   const profiles = useKpsStore((s) => s.profiles)
+  const moduleDefs = useKpsStore((s) => s.moduleDefs)
   const setScore = useKpsStore((s) => s.setScore)
   const setNote = useKpsStore((s) => s.setNote)
-  const [selected, setSelected] = useState<PraktikanKpsProfile | null>(null)
 
-  const handleSave = (updated: PraktikanKpsProfile) => {
-    updated.passport.skills.forEach((skill) => {
-      const original = selected?.passport.skills.find((s) => s.id === skill.id)
+  const [selectedModuleId, setSelectedModuleId] = useState(
+    moduleDefs.length > 0 ? moduleDefs[0].id : ''
+  )
+  const [selectedProfile, setSelectedProfile] = useState<PraktikanKpsProfile | null>(null)
+
+  // Compute stats for the selected module
+  const moduleProfiles = profiles.map((p) => {
+    const mod = p.modules.find((m) => m.moduleId === selectedModuleId)
+    return { profile: p, modulePassport: mod }
+  })
+
+  const totalPraktikan = moduleProfiles.length
+  const avgOverall = moduleProfiles.length > 0
+    ? Math.round(
+        moduleProfiles.reduce((sum, mp) => sum + (mp.modulePassport?.passport.overallScore ?? 0), 0) /
+          moduleProfiles.length
+      )
+    : 0
+  const allPassed = moduleProfiles.filter(
+    (mp) =>
+      mp.modulePassport &&
+      mp.modulePassport.passport.skillsPassed === mp.modulePassport.passport.totalSkills
+  ).length
+
+  const handleSave = (updated: PraktikanKpsProfile, moduleId: string) => {
+    const updatedModule = updated.modules.find((m) => m.moduleId === moduleId)
+    if (!updatedModule) return
+    updatedModule.passport.skills.forEach((skill) => {
+      const original = selectedProfile?.modules
+        .find((m) => m.moduleId === moduleId)
+        ?.passport.skills.find((s) => s.id === skill.id)
       if (original && original.score !== skill.score) {
-        setScore(updated.nim, skill.id, skill.score)
+        setScore(updated.nim, moduleId, skill.id, skill.score)
       }
       if (original && original.note !== skill.note) {
-        setNote(updated.nim, skill.id, skill.note)
+        setNote(updated.nim, moduleId, skill.id, skill.note)
       }
     })
   }
 
-  const avgOverall = Math.round(
-    profiles.reduce((sum, p) => sum + p.passport.overallScore, 0) / (profiles.length || 1)
-  )
-
   return (
     <div className="space-y-4">
+      {/* Module filter + stat summary */}
+      <Card className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div className="flex flex-col gap-2">
+          <label htmlFor="review-module-select" className="text-label-sm text-muted">PILIH MODUL</label>
+          <select
+            id="review-module-select"
+            value={selectedModuleId}
+            onChange={(e) => setSelectedModuleId(e.target.value)}
+            className="rounded-lg border border-border bg-card px-3 py-2 text-body md:w-72"
+          >
+            {moduleDefs.map((mod) => (
+              <option key={mod.id} value={mod.id}>{mod.name}</option>
+            ))}
+          </select>
+        </div>
+      </Card>
+
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         <Card className="space-y-1">
           <div className="text-label-md text-muted">TOTAL PRAKTIKAN</div>
-          <div className="text-headline-md font-bold">{profiles.length}</div>
+          <div className="text-headline-md font-bold">{totalPraktikan}</div>
         </Card>
         <Card className="space-y-1">
           <div className="text-label-md text-muted">RATA-RATA OVERALL</div>
@@ -47,12 +88,11 @@ export function KpsReviewTable({ readOnly = false }: KpsReviewTableProps) {
         </Card>
         <Card className="space-y-1">
           <div className="text-label-md text-muted">LULUS SEMUA SKILL</div>
-          <div className="text-headline-md font-bold">
-            {profiles.filter((p) => p.passport.skillsPassed === p.passport.totalSkills).length}
-          </div>
+          <div className="text-headline-md font-bold">{allPassed}</div>
         </Card>
       </div>
 
+      {/* Per-modul table */}
       <Card>
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
@@ -66,34 +106,39 @@ export function KpsReviewTable({ readOnly = false }: KpsReviewTableProps) {
               </tr>
             </thead>
             <tbody>
-              {profiles.map((p) => (
-                <tr key={p.nim} className="border-b border-border last:border-0">
-                  <td className="py-3 pr-4">{p.nama}</td>
-                  <td className="py-3 pr-4 text-muted">{p.nim}</td>
-                  <td className="py-3 pr-4 font-semibold">{p.passport.overallScore}%</td>
-                  <td className="py-3 pr-4">
-                    <Badge variant={p.passport.skillsPassed === p.passport.totalSkills ? 'success' : 'warning'}>
-                      {p.passport.skillsPassed}/{p.passport.totalSkills}
-                    </Badge>
-                  </td>
-                  <td className="py-3">
-                    <Button size="sm" variant="outline" onClick={() => setSelected(p)}>
-                      {readOnly ? 'Lihat' : 'Nilai'}
-                    </Button>
-                  </td>
-                </tr>
-              ))}
+              {moduleProfiles.map(({ profile: p, modulePassport }) => {
+                const passport = modulePassport?.passport
+                if (!passport) return null
+                return (
+                  <tr key={p.nim} className="border-b border-border last:border-0">
+                    <td className="py-3 pr-4">{p.nama}</td>
+                    <td className="py-3 pr-4 text-muted">{p.nim}</td>
+                    <td className="py-3 pr-4 font-semibold">{passport.overallScore}%</td>
+                    <td className="py-3 pr-4">
+                      <Badge variant={passport.skillsPassed === passport.totalSkills ? 'success' : 'warning'}>
+                        {passport.skillsPassed}/{passport.totalSkills}
+                      </Badge>
+                    </td>
+                    <td className="py-3">
+                      <Button size="sm" variant="outline" onClick={() => setSelectedProfile(p)}>
+                        {readOnly ? 'Lihat' : 'Nilai'}
+                      </Button>
+                    </td>
+                  </tr>
+                )
+              })}
             </tbody>
           </table>
         </div>
       </Card>
 
-      {selected && (
+      {selectedProfile && (
         <KpsAssessmentModal
-          profile={selected}
+          profile={selectedProfile}
+          moduleId={selectedModuleId}
           readOnly={readOnly}
           onSave={readOnly ? undefined : handleSave}
-          onClose={() => setSelected(null)}
+          onClose={() => setSelectedProfile(null)}
         />
       )}
     </div>

@@ -4,23 +4,26 @@ import { useState } from 'react'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import { ScoreProgress } from '@/components/ui/ScoreProgress'
-import { KpsSkill, PraktikanKpsProfile } from '@/features/kps/types'
+import { KpsSkill, PraktikanKpsProfile, KpsModulePassport } from '@/features/kps/types'
 import { calculateOverallScore } from '@/features/kps/lib/scoreColor'
 
 interface KpsAssessmentModalProps {
   profile: PraktikanKpsProfile
+  moduleId: string
   readOnly?: boolean
-  onSave?: (updated: PraktikanKpsProfile) => void
+  onSave?: (updated: PraktikanKpsProfile, moduleId: string) => void
   onClose: () => void
 }
 
 export function KpsAssessmentModal({
   profile,
+  moduleId,
   readOnly = false,
   onSave,
   onClose,
 }: KpsAssessmentModalProps) {
-  const [skills, setSkills] = useState<KpsSkill[]>(profile.passport.skills)
+  const currentModule = profile.modules.find((m) => m.moduleId === moduleId)
+  const [skills, setSkills] = useState<KpsSkill[]>(currentModule?.passport.skills ?? [])
 
   const updateSkill = (id: string, patch: Partial<KpsSkill>) => {
     setSkills((prev) => prev.map((s) => (s.id === id ? { ...s, ...patch } : s)))
@@ -28,12 +31,15 @@ export function KpsAssessmentModal({
 
   const overall = calculateOverallScore(skills)
   const passed = skills.filter((s) => s.score >= s.threshold).length
+  const moduleName = currentModule?.moduleName ?? moduleId
 
   const handleSave = () => {
-    onSave?.({
-      ...profile,
-      passport: { ...profile.passport, skills, overallScore: overall, skillsPassed: passed },
-    })
+    const updatedModules = profile.modules.map((m) =>
+      m.moduleId === moduleId
+        ? { ...m, passport: { ...m.passport, skills, overallScore: overall, skillsPassed: passed } }
+        : m
+    )
+    onSave?.({ ...profile, modules: updatedModules }, moduleId)
     onClose()
   }
 
@@ -43,11 +49,14 @@ export function KpsAssessmentModal({
         <div className="mb-4 flex items-center justify-between">
           <div>
             <h2 className="text-headline-sm">{readOnly ? 'Detail KPS' : 'Nilai KPS'}</h2>
-            <p className="text-body-sm text-muted">{profile.nama} &mdash; {profile.nim}</p>
+            <p className="text-body-sm text-muted">
+              {profile.nama} &mdash; {profile.nim}
+            </p>
+            <p className="text-body-sm text-muted">{moduleName}</p>
           </div>
           <div className="text-right">
             <div className="text-headline-md font-bold">{overall}%</div>
-            <div className="text-body-sm text-muted">{passed}/8 lulus</div>
+            <div className="text-body-sm text-muted">{passed}/{skills.length} lulus</div>
           </div>
         </div>
 
