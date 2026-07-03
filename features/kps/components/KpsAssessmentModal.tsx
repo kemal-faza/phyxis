@@ -1,0 +1,95 @@
+'use client'
+
+import { useState } from 'react'
+import { Card } from '@/components/ui/Card'
+import { Button } from '@/components/ui/Button'
+import { ScoreProgress } from '@/components/ui/ScoreProgress'
+import { KpsSkill, PraktikanKpsProfile } from '@/features/kps/types'
+import { calculateOverallScore } from '@/features/kps/lib/scoreColor'
+
+interface KpsAssessmentModalProps {
+  profile: PraktikanKpsProfile
+  readOnly?: boolean
+  onSave?: (updated: PraktikanKpsProfile) => void
+  onClose: () => void
+}
+
+export function KpsAssessmentModal({
+  profile,
+  readOnly = false,
+  onSave,
+  onClose,
+}: KpsAssessmentModalProps) {
+  const [skills, setSkills] = useState<KpsSkill[]>(profile.passport.skills)
+
+  const updateSkill = (id: string, patch: Partial<KpsSkill>) => {
+    setSkills((prev) => prev.map((s) => (s.id === id ? { ...s, ...patch } : s)))
+  }
+
+  const overall = calculateOverallScore(skills)
+  const passed = skills.filter((s) => s.score >= s.threshold).length
+
+  const handleSave = () => {
+    onSave?.({
+      ...profile,
+      passport: { ...profile.passport, skills, overallScore: overall, skillsPassed: passed },
+    })
+    onClose()
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+      <Card className="max-h-[90vh] w-full max-w-2xl overflow-y-auto p-6">
+        <div className="mb-4 flex items-center justify-between">
+          <div>
+            <h2 className="text-headline-sm">{readOnly ? 'Detail KPS' : 'Nilai KPS'}</h2>
+            <p className="text-body-sm text-muted">{profile.nama} &mdash; {profile.nim}</p>
+          </div>
+          <div className="text-right">
+            <div className="text-headline-md font-bold">{overall}%</div>
+            <div className="text-body-sm text-muted">{passed}/8 lulus</div>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          {skills.map((skill) => (
+            <div key={skill.id} className="space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="text-body font-medium">{skill.name}</span>
+                {readOnly ? (
+                  <span className="text-body-sm font-semibold">{skill.score}</span>
+                ) : (
+                  <input
+                    type="number"
+                    min={0}
+                    max={100}
+                    value={skill.score}
+                    onChange={(e) => updateSkill(skill.id, { score: Number(e.target.value) })}
+                    className="w-20 rounded border border-border bg-card px-2 py-1 text-right text-body"
+                    disabled={readOnly}
+                  />
+                )}
+              </div>
+              <ScoreProgress score={skill.score} label="" showScore={false} />
+              {readOnly ? (
+                <p className="text-body-sm text-muted">{skill.note}</p>
+              ) : (
+                <textarea
+                  value={skill.note}
+                  onChange={(e) => updateSkill(skill.id, { note: e.target.value })}
+                  placeholder="Catatan/alasan nilai..."
+                  className="min-h-[60px] w-full rounded border border-border bg-card p-2 text-body-sm"
+                />
+              )}
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-6 flex justify-end gap-2">
+          <Button variant="ghost" onClick={onClose}>Tutup</Button>
+          {!readOnly && <Button onClick={handleSave}>Simpan</Button>}
+        </div>
+      </Card>
+    </div>
+  )
+}

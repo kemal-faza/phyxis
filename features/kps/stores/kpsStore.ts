@@ -1,6 +1,8 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { INDICATOR_DEFINITIONS } from '@/features/kps/data/mockKps'
+import { PraktikanKpsProfile } from '@/features/kps/types'
+import { MOCK_PRAKTIKAN_PROFILES } from '@/features/kps/data/mockPraktikanPassports'
 
 export interface IndicatorDef {
   id: string
@@ -16,10 +18,13 @@ export interface PraktikanKpsData {
 interface KpsStoreState {
   indicatorDefs: IndicatorDef[]
   praktikanList: PraktikanKpsData[]
+  profiles: PraktikanKpsProfile[]
   addIndicator: (name: string) => void
   updateIndicator: (id: string, name: string) => void
   removeIndicator: (id: string) => void
   toggleStatus: (nim: string, indicatorId: string) => void
+  setScore: (nim: string, skillId: string, score: number) => void
+  setNote: (nim: string, skillId: string, note: string) => void
 }
 
 function generateId(existing: IndicatorDef[]): string {
@@ -121,6 +126,45 @@ export const useKpsStore = create<KpsStoreState>()(
                       p.indicatorStatuses[indicatorId] === 'lulus'
                         ? 'belum-lulus'
                         : 'lulus',
+                  },
+                }
+              : p
+          ),
+        }))
+      },
+
+      // New passport profile state
+      profiles: MOCK_PRAKTIKAN_PROFILES,
+
+      setScore: (nim: string, skillId: string, score: number) => {
+        set((state) => ({
+          profiles: state.profiles.map((p) =>
+            p.nim === nim
+              ? {
+                  ...p,
+                  passport: {
+                    ...p.passport,
+                    skills: p.passport.skills.map((s) =>
+                      s.id === skillId ? { ...s, score } : s
+                    ),
+                  },
+                }
+              : p
+          ),
+        }))
+      },
+
+      setNote: (nim: string, skillId: string, note: string) => {
+        set((state) => ({
+          profiles: state.profiles.map((p) =>
+            p.nim === nim
+              ? {
+                  ...p,
+                  passport: {
+                    ...p.passport,
+                    skills: p.passport.skills.map((s) =>
+                      s.id === skillId ? { ...s, note } : s
+                    ),
                   },
                 }
               : p
