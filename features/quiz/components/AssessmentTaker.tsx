@@ -21,7 +21,7 @@ export function AssessmentTaker({ questions, title }: AssessmentTakerProps) {
 
   return (
     <Card className="space-y-4">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <h2 className="text-headline-sm">{title}</h2>
         {submitted && <Badge variant="success">{title} sudah dikerjakan</Badge>}
       </div>
@@ -41,7 +41,7 @@ export function AssessmentTaker({ questions, title }: AssessmentTakerProps) {
         </div>
       ))}
 
-      {!submitted && <Button onClick={handleSubmit}>Kirim Jawaban</Button>}
+      {!submitted && <Button className="w-full sm:w-auto" onClick={handleSubmit}>Kirim Jawaban</Button>}
     </Card>
   )
 }
