@@ -9,7 +9,7 @@ interface AnalyticsDashboardProps {
 export function AnalyticsDashboard({ data }: AnalyticsDashboardProps) {
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
         <Card className="space-y-1">
           <div className="text-label-md text-muted">ENROLLED</div>
           <div className="text-headline-md font-bold">{data.enrolled}</div>
