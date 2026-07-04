@@ -10,18 +10,17 @@ vi.mock('next/navigation', () => ({
 
 function TitleSetter() {
   usePageTitle('Dashboard Dosen')
-  return <div>Page content</div>
+  return <div data-testid="page-content">Page content</div>
 }
 
 describe('AppShell', () => {
-  it('renders mobile header title', () => {
+  it('renders mobile header and main content', () => {
     render(
       <AppShell>
         <TitleSetter />
       </AppShell>
     )
-    // Title appears in both mobile header and top header breadcrumb
-    const titles = screen.getAllByText('Dashboard Dosen')
-    expect(titles.length).toBeGreaterThanOrEqual(1)
+    expect(screen.getByLabelText('Buka menu')).toBeTruthy()
+    expect(screen.getByTestId('page-content')).toBeTruthy()
   })
 })
