@@ -46,7 +46,7 @@ export function KpsAssessmentModal({
   return (
     <Dialog open onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto">
-        <div className="mb-4 flex items-center justify-between">
+        <div className="mb-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h2 className="text-headline-sm">{readOnly ? 'Detail KPS' : 'Nilai KPS'}</h2>
             <p className="text-body-sm text-muted">
@@ -94,7 +94,7 @@ export function KpsAssessmentModal({
           ))}
         </div>
 
-        <div className="mt-6 flex justify-end gap-2">
+        <div className="mt-6 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
           <Button variant="ghost" onClick={onClose}>Tutup</Button>
           {!readOnly && <Button onClick={handleSave}>Simpan</Button>}
         </div>
