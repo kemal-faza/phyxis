@@ -57,14 +57,10 @@ export default function SimulatorPage() {
             activeId={currentModuleId}
             onSelect={selectModule}
           />
-          <div className="flex-1 grid gap-4 lg:grid-cols-3">
-            <div className="lg:col-span-2">
-              <SimulatorCanvas />
-            </div>
-            <div className="space-y-4">
-              <StepPanel />
-              <MetricSummary />
-            </div>
+          <div className="flex-1 space-y-4">
+            <SimulatorCanvas />
+            <StepPanel />
+            <MetricSummary />
           </div>
         </div>
       )}

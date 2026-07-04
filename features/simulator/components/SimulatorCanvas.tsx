@@ -17,7 +17,7 @@ export function SimulatorCanvas() {
   }, [])
 
   return (
-    <Card className="relative flex h-72 sm:h-[400px] lg:h-[500px] items-center justify-center overflow-hidden bg-gradient-to-br from-surface to-card">
+    <Card className="relative flex h-64 sm:h-80 md:h-96 lg:h-[500px] items-center justify-center overflow-hidden bg-gradient-to-br from-surface to-card">
       {!webglSupported && (
         <div className="absolute inset-0 z-10 flex items-center justify-center bg-card/95 p-6 text-center">
           <div>
