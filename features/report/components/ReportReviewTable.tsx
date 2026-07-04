@@ -69,27 +69,33 @@ export function ReportReviewTable() {
         </Card>
       </div>
 
-      <Card className="flex flex-wrap items-center gap-3">
-        <Select value={selectedModul} onValueChange={setSelectedModul}>
-          <SelectTrigger className="w-full md:w-48">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            {MODULS.map((m) => (
-              <SelectItem key={m} value={m}>{m}</SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        <Select value={selectedStatus} onValueChange={setSelectedStatus}>
-          <SelectTrigger className="w-full md:w-44">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="semua">Semua status</SelectItem>
-            <SelectItem value="terkumpul">Terkumpul</SelectItem>
-            <SelectItem value="belum">Belum dikumpulkan</SelectItem>
-          </SelectContent>
-        </Select>
+      <Card className="flex flex-wrap items-end gap-3">
+        <div className="flex flex-col gap-1">
+          <label className="text-label-sm text-muted">MODUL</label>
+          <Select value={selectedModul} onValueChange={setSelectedModul}>
+            <SelectTrigger className="w-full md:w-48">
+              <SelectValue placeholder="Pilih modul..." />
+            </SelectTrigger>
+            <SelectContent>
+              {MODULS.map((m) => (
+                <SelectItem key={m} value={m}>{m}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+        <div className="flex flex-col gap-1">
+          <label className="text-label-sm text-muted">STATUS</label>
+          <Select value={selectedStatus} onValueChange={setSelectedStatus}>
+            <SelectTrigger className="w-full md:w-44">
+              <SelectValue placeholder="Pilih status..." />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="semua">Semua status</SelectItem>
+              <SelectItem value="terkumpul">Terkumpul</SelectItem>
+              <SelectItem value="belum">Belum dikumpulkan</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
       </Card>
 
       <div className="space-y-3 md:hidden">

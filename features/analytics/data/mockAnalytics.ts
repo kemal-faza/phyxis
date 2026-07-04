@@ -6,10 +6,9 @@ export const MOCK_ANALYTICS: CohortAnalytics = {
   weeklyGrowth: 4.6,
   avgHoursPerWeek: 4.2,
   conceptMastery: [
-    { topic: 'Kinematika', score: 88 },
-    { topic: 'Listrik', score: 84 },
+    { topic: 'Mekanika', score: 88 },
     { topic: 'Optika', score: 76 },
+    { topic: 'Listrik', score: 84 },
     { topic: 'Termodinamika', score: 71 },
-    { topic: 'Gelombang', score: 65 },
   ],
 }

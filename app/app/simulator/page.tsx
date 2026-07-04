@@ -51,14 +51,16 @@ export default function SimulatorPage() {
       {isReviewRole ? (
         <ReviewTable />
       ) : (
-        <div className="flex flex-col lg:flex-row gap-4">
+        <div className="flex flex-col gap-4 lg:flex-row">
           <ExperimentsPanel
             experiments={EXPERIMENTS}
             activeId={currentModuleId}
             onSelect={selectModule}
           />
-          <div className="flex-1 space-y-4">
+          <div className="flex-1">
             <SimulatorCanvas />
+          </div>
+          <div className="w-full space-y-4 lg:w-[300px] lg:shrink-0">
             <StepPanel />
             <MetricSummary />
           </div>

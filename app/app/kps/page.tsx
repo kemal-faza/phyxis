@@ -8,7 +8,7 @@ import { useKpsStore } from '@/features/kps/stores/kpsStore'
 import { KpsPassportView } from '@/features/kps/components/KpsPassportView'
 import { KpsReviewTable } from '@/features/kps/components/KpsReviewTable'
 
-const ALLOWED_ROLES: Array<string> = ['praktikan', 'asisten', 'dosen']
+const ALLOWED_ROLES: Array<string> = ['praktikan', 'asisten', 'dosen', 'admin']
 
 export default function KpsPage() {
   const role = useAuthStore((s) => s.role)

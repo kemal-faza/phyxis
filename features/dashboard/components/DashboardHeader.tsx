@@ -18,7 +18,7 @@ export function DashboardHeader() {
         <h1 className="page-title">{config.heading}</h1>
         <p className="mt-2 text-body text-muted">{config.description}</p>
       </div>
-      <div className="flex flex-col gap-2 md:flex-row shrink-0">
+          <div className="flex flex-col gap-2 md:flex-row lg:flex-col shrink-0">
         {config.ctas.map((cta, i) => (
           <Button key={i} variant={cta.variant} icon={cta.icon} iconPosition="left" href={cta.href}>
             {cta.label}

@@ -41,14 +41,16 @@ export function AssessmentWorkspace() {
       <div className="space-y-3 md:hidden">
         {submissions.map((s) => (
           <Card key={s.id} className="space-y-3">
-            <div className="flex items-center justify-between">
-              <span className="font-semibold">{s.studentName}</span>
-              <Badge variant={s.reviewed ? 'success' : 'warning'}>
-                {s.reviewed ? 'Reviewed' : 'Pending'}
-              </Badge>
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-3 flex-1 min-w-0">
+                <span className="font-semibold truncate">{s.studentName}</span>
+                <Badge variant={s.reviewed ? 'success' : 'warning'} className="shrink-0">
+                  {s.reviewed ? 'Reviewed' : 'Pending'}
+                </Badge>
+              </div>
+              <Button variant="outline" size="sm" onClick={() => setSelected(s)} className="shrink-0">Review</Button>
             </div>
             <div className="text-body-sm text-muted">{s.topic}</div>
-            <Button variant="outline" size="sm" onClick={() => setSelected(s)}>Review</Button>
           </Card>
         ))}
       </div>

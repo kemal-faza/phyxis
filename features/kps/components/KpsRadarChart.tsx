@@ -25,7 +25,7 @@ export function KpsRadarChart({ skills }: KpsRadarChartProps) {
     <div className="h-64 w-full md:h-80">
       <ResponsiveContainer width="100%" height="100%">
         <RadarChart cx="50%" cy="50%" outerRadius="70%" data={data}>
-          <PolarGrid stroke="#3264f2" strokeOpacity={0.25} />
+          <PolarGrid stroke="#6b7280" strokeOpacity={0.3} />
           <PolarAngleAxis dataKey="skill" tick={{ fill: 'var(--foreground)', fontSize: 12 }} />
           <PolarRadiusAxis angle={30} domain={[0, 100]} tick={false} axisLine={false} />
           <Radar
@@ -33,7 +33,7 @@ export function KpsRadarChart({ skills }: KpsRadarChartProps) {
             dataKey="score"
             stroke="var(--primary)"
             fill="var(--primary)"
-            fillOpacity={0.25}
+            fillOpacity={0.35}
           />
         </RadarChart>
       </ResponsiveContainer>
