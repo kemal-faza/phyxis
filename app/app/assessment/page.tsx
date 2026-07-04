@@ -39,12 +39,12 @@ export default function AssessmentPage() {
 
       {isPraktikan ? (
         <>
-          <div className="flex gap-2">
+          <div className="flex flex-col gap-2 sm:flex-row">
             {(['pre-test', 'post-test'] as const).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`rounded-lg px-4 py-2 text-body font-medium ${
+                className={`flex-1 rounded-lg px-4 py-2 text-body font-medium sm:flex-initial ${
                   activeTab === tab ? 'bg-primary text-primary-foreground' : 'bg-surface text-muted'
                 }`}
               >
