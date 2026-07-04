@@ -22,7 +22,7 @@ describe('createStorage', () => {
       throw new Error('quota exceeded')
     })
     const storage = createStorage('error', { default: true })
-    storage.save({ value: 1 })
+    storage.save({ default: false })
     expect(storage.load()).toEqual({ default: true })
   })
 })
