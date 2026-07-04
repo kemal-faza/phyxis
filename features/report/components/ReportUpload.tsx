@@ -35,7 +35,7 @@ export function ReportUpload() {
       {file && (
         <div className="space-y-2">
           <Progress value={progress} />
-          <Button onClick={handleUpload} disabled={progress > 0 && progress < 100}>
+          <Button onClick={handleUpload} disabled={progress > 0 && progress < 100} className="w-full md:w-auto">
             {submitted ? 'Terkirim' : 'Upload'}
           </Button>
         </div>
