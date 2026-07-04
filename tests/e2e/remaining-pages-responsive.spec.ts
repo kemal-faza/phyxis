@@ -29,3 +29,10 @@ test('simulator mobile renders stacked layout', async ({ page }) => {
   await expect(page.getByText('PILIH MODUL')).toBeVisible()
   await page.screenshot({ path: 'test-results/simulator-mobile.png', fullPage: true })
 })
+
+test('landing mobile renders hero and menu', async ({ page }) => {
+  await page.goto('/')
+  await page.setViewportSize({ width: 390, height: 844 })
+  await expect(page.getByText('Start Learning')).toBeVisible()
+  await page.screenshot({ path: 'test-results/landing-mobile.png', fullPage: true })
+})
