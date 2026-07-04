@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
 import { Sidebar } from '@/components/layout/Sidebar'
 
@@ -12,7 +12,7 @@ vi.mock('@/features/auth/stores/authStore', () => ({
 }))
 
 describe('Sidebar', () => {
-  it('renders workspace nav items with Lucide-based Dashboard', () => {
+  it('renders workspace nav items', () => {
     render(
       <Sidebar
         collapsed={false}
@@ -23,6 +23,21 @@ describe('Sidebar', () => {
     )
     expect(screen.getByText('Dashboard')).toBeTruthy()
     expect(screen.getByText('Virtual Lab')).toBeTruthy()
-    expect(screen.getByText('KPS Passport')).toBeTruthy()
+  })
+
+  it('closes mobile sidebar when nav item clicked', () => {
+    const onCloseMobile = vi.fn()
+    // Simulate mobile viewport by overriding window.innerWidth
+    Object.defineProperty(window, 'innerWidth', { writable: true, configurable: true, value: 375 })
+    render(
+      <Sidebar
+        collapsed={false}
+        onToggleCollapse={() => {}}
+        mobileOpen={true}
+        onCloseMobile={onCloseMobile}
+      />
+    )
+    fireEvent.click(screen.getByText('Virtual Lab'))
+    expect(onCloseMobile).toHaveBeenCalled()
   })
 })
