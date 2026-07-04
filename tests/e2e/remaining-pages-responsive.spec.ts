@@ -36,3 +36,13 @@ test('landing mobile renders hero and menu', async ({ page }) => {
   await expect(page.getByText('Start Learning')).toBeVisible()
   await page.screenshot({ path: 'test-results/landing-mobile.png', fullPage: true })
 })
+
+test('kps passport mobile renders stats and radar', async ({ page }) => {
+  await page.goto('/login')
+  await page.click('text=Praktikan')
+  await page.waitForURL('/app/dashboard')
+  await page.goto('/app/kps')
+  await page.setViewportSize({ width: 390, height: 844 })
+  await expect(page.getByText('OVERALL KPS')).toBeVisible()
+  await page.screenshot({ path: 'test-results/kps-mobile.png', fullPage: true })
+})
