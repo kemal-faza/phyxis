@@ -9,13 +9,13 @@ async function loginAsDosen(page: any) {
 test.describe('Dashboard responsive', () => {
   test.beforeEach(async ({ page }) => {
     await loginAsDosen(page)
-    await page.waitForSelector('text=Selamat datang, Dinda')
+    await page.waitForSelector('text=Dosen Pengampu')
   })
 
   test('mobile layout renders single column', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 })
     await expect(page.locator('[aria-label="Buka menu"]')).toBeVisible()
-    await expect(page.locator('text=Enter Virtual Lab').first()).toBeVisible()
+    await expect(page.locator('text=Total Praktikan').first()).toBeVisible()
     await expect(page.locator('text=Temperature')).toHaveCount(0)
     await page.screenshot({ path: 'test-results/dashboard-mobile.png', fullPage: true })
   })
@@ -23,7 +23,7 @@ test.describe('Dashboard responsive', () => {
   test('tablet layout renders two column stats', async ({ page }) => {
     await page.setViewportSize({ width: 820, height: 1180 })
     await expect(page.locator('[aria-label="Buka menu"]')).toBeVisible()
-    await expect(page.locator('text=Enter Virtual Lab').first()).toBeVisible()
+    await expect(page.locator('text=Total Praktikan').first()).toBeVisible()
     await page.screenshot({ path: 'test-results/dashboard-tablet.png', fullPage: true })
   })
 

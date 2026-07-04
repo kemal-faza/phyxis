@@ -24,23 +24,30 @@ export default function DashboardPage() {
 
   if (!role) return null
 
+  const isPraktikan = role === 'praktikan'
+  const showModules = isPraktikan || role === 'dosen'
+
   return (
     <div className="space-y-6">
       <DashboardHeader />
       <DashboardStatsGrid />
 
-      <div className="grid gap-4 lg:grid-cols-3">
-        <div className="lg:col-span-2">
-          <DashboardLiveExperiment />
-        </div>
+      <div className={`grid gap-4 ${isPraktikan ? 'lg:grid-cols-3' : 'lg:grid-cols-1'}`}>
+        {isPraktikan && (
+          <div className="lg:col-span-2">
+            <DashboardLiveExperiment />
+          </div>
+        )}
         <DashboardScheduleCard />
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-3">
+      <div className={`grid gap-4 ${showModules ? 'lg:grid-cols-3' : 'lg:grid-cols-1'}`}>
         <DashboardActivityCard />
-        <div className="lg:col-span-2">
-          <DashboardModulesProgress />
-        </div>
+        {showModules && (
+          <div className="lg:col-span-2">
+            <DashboardModulesProgress />
+          </div>
+        )}
       </div>
 
       <DashboardRoleRecap />

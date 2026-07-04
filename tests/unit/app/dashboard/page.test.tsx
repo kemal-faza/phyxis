@@ -14,20 +14,30 @@ vi.mock('@/features/auth/stores/authStore', () => ({
   useAuthStore: (selector: (s: { role: string }) => string) => selector({ role: 'dosen' }),
 }))
 
-describe('DashboardPage', () => {
-  it('renders all dashboard sections', () => {
+describe('DashboardPage (dosen)', () => {
+  it('renders dosen-specific sections', () => {
     render(<DashboardPage />)
-    expect(screen.getByText('Selamat datang, Dinda')).toBeTruthy()
-    expect(screen.getByText('Active Practicum')).toBeTruthy()
-    expect(screen.getByText('Live experiment')).toBeTruthy()
+    // Header: dosen specific
+    expect(screen.getByText('Dosen Pengampu · Semester 4')).toBeTruthy()
+    expect(screen.getByText('Lihat Modul')).toBeTruthy()
+    // Stats: dosen specific (may appear in stats grid + role recap)
+    expect(screen.getAllByText('Total Praktikan').length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText('Rata-rata Nilai').length).toBeGreaterThanOrEqual(1)
+    // Schedule: dosen specific
     expect(screen.getByText("Today's schedule")).toBeTruthy()
-    expect(screen.getByText('Recent activity')).toBeTruthy()
-    expect(screen.getAllByText('Modules in progress').length).toBeGreaterThanOrEqual(1)
+    // Activity: dosen specific
+    expect(screen.getByText('Nilai terkumpul')).toBeTruthy()
+    // Modules: dosen shows Class Progress
+    expect(screen.getByText('Class Progress')).toBeTruthy()
+    // Role recap: dosen shows Rekap Kelas
     expect(screen.getByText('Rekap Kelas')).toBeTruthy()
   })
 
-  it('does not render telemetry metrics', () => {
+  it('does not render praktikan-only sections', () => {
     render(<DashboardPage />)
+    // Live experiment is praktikan-only
+    expect(screen.queryByText('Live experiment')).toBeNull()
+    // Telemetry metrics should not appear
     expect(screen.queryByText('Temperature')).toBeNull()
   })
 })

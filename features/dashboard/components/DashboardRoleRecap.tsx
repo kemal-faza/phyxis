@@ -8,32 +8,27 @@ import {
   DOSEN_STATS,
   ASISTEN_STATS,
   ADMIN_STATS,
-  PRAKTIKAN_STATS,
   RECENT_MODULES,
   ASISTEN_QUEUE,
 } from '../data/mockData'
 
 export function DashboardRoleRecap() {
   const role = useAuthStore((s) => s.role)
-  if (!role) return null
+  if (!role || role === 'praktikan') return null
 
   const roleStats =
     role === 'dosen'
       ? DOSEN_STATS
       : role === 'asisten'
       ? ASISTEN_STATS
-      : role === 'admin'
-      ? ADMIN_STATS
-      : PRAKTIKAN_STATS
+      : ADMIN_STATS
 
   const heading =
     role === 'dosen'
       ? 'Rekap Kelas'
       : role === 'asisten'
       ? 'Antrian Review'
-      : role === 'admin'
-      ? 'Ringkasan Admin'
-      : 'Info Cepat'
+      : 'Ringkasan Admin'
 
   return (
     <div className="space-y-4">
@@ -62,7 +57,7 @@ export function DashboardRoleRecap() {
                   <div className="text-body font-semibold text-foreground">{mod.id} — {mod.name}</div>
                   <div className="text-body-sm text-muted">{mod.participants} praktikan</div>
                 </div>
-                <Badge variant={mod.status === 'Aktif' ? 'success' : 'neutral'}>{mod.status}</Badge>
+                <Badge variant={mod.status === 'Aktif' ? 'success' : 'neutral'} className="self-start">{mod.status}</Badge>
               </div>
             ))}
           </div>
@@ -79,7 +74,7 @@ export function DashboardRoleRecap() {
                 className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 rounded-xl border border-border bg-surface p-3"
               >
                 <span className="text-body text-foreground">{item.nama} — {item.modul}</span>
-                <Badge variant={item.status === 'Sudah dinilai' ? 'success' : 'warning'}>{item.status}</Badge>
+                <Badge variant={item.status === 'Sudah dinilai' ? 'success' : 'warning'} className="self-start">{item.status}</Badge>
               </div>
             ))}
           </div>

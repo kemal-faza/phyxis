@@ -19,7 +19,7 @@ export function DashboardLiveExperiment() {
             Pengamatan lintasan benda dengan sudut elevasi 45°.
           </p>
         </div>
-        <Badge variant="success">Ongoing</Badge>
+        <Badge variant="success" className="self-start">Ongoing</Badge>
       </div>
       <div>
         <div className="mb-1 flex justify-between text-body-sm text-muted">
