@@ -23,7 +23,7 @@ export function LandingFooter() {
 					&copy; {new Date().getFullYear()} PhyXis &middot; Physics
 					Experience &amp; Intelligent System
 				</p>
-				<div className="flex gap-6 text-body-sm text-muted">
+				<div className="flex flex-wrap justify-center gap-6 text-body-sm text-muted">
 					<Link
 						href="/login"
 						className="hover:text-foreground">

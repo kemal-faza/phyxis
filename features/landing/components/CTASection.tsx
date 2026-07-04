@@ -15,16 +15,16 @@ export function CTASection() {
 						physics modules and grade a live report with AI on your
 						first login.
 					</p>
-					<div className="mt-6 flex flex-wrap justify-center gap-3">
+					<div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
 						<Button
-							className="bg-white text-primary hover:bg-white/90"
+							className="w-full bg-white text-primary hover:bg-white/90 sm:w-auto"
 							icon={<ArrowRight size={16} />}
 							href="/login">
 							Enter workspace
 						</Button>
 						<Button
 							variant="outline"
-							className="border-white/30 bg-white/10 text-white hover:bg-white/20"
+							className="w-full border-white/30 bg-white/10 text-white hover:bg-white/20 sm:w-auto"
 							href="/login">
 							Sign in
 						</Button>
