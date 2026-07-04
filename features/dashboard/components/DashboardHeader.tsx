@@ -46,7 +46,7 @@ const HEADER_CONFIG: Record<string, {
   },
   asisten: {
     subtitle: 'Asisten Lab · Semester 4',
-    heading: 'Selamat datang, [Nama]',
+    heading: 'Selamat datang, Dinda',
     description: '12 laporan menunggu review. 3 sesi lab hari ini.',
     ctas: [
       { variant: 'outline', icon: <ClipboardCheck size={16} />, label: 'Buka Antrian Review' },
@@ -55,7 +55,7 @@ const HEADER_CONFIG: Record<string, {
   },
   dosen: {
     subtitle: 'Dosen Pengampu · Semester 4',
-    heading: 'Selamat datang, [Nama]',
+    heading: 'Selamat datang, Dinda',
     description: '124 praktikan aktif. 5 modul berjalan.',
     ctas: [
       { variant: 'outline', icon: <BookOpen size={16} />, label: 'Lihat Modul' },

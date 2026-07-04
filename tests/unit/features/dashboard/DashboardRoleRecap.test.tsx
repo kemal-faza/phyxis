@@ -7,9 +7,10 @@ vi.mock('@/features/auth/stores/authStore', () => ({
 }))
 
 describe('DashboardRoleRecap', () => {
-  it('renders role-specific heading and stats for dosen', () => {
+  it('renders rekap kelas with modul terbaru for dosen', () => {
     render(<DashboardRoleRecap />)
     expect(screen.getByText('Rekap Kelas')).toBeTruthy()
-    expect(screen.getByText('Total Praktikan')).toBeTruthy()
+    expect(screen.getByText('Modul Terbaru')).toBeTruthy()
+    expect(screen.getByText('M-4 — Gerak Jatuh Bebas')).toBeTruthy()
   })
 })
