@@ -99,8 +99,39 @@ export function KpsReviewTable({ readOnly = false }: KpsReviewTableProps) {
         </Card>
       </div>
 
-      {/* Per-modul table */}
-      <Card>
+      {/* Mobile card list */}
+      <div className="space-y-3 md:hidden">
+        {moduleProfiles.map(({ profile: p, modulePassport }) => {
+          const passport = modulePassport?.passport
+          if (!passport) return null
+          return (
+            <Card key={p.nim} className="space-y-3 p-4">
+              <div className="flex items-center justify-between gap-3">
+                <span className="text-body font-semibold text-foreground">{p.nama}</span>
+                <Badge variant={passport.skillsPassed === passport.totalSkills ? 'success' : 'warning'}>
+                  {passport.skillsPassed}/{passport.totalSkills}
+                </Badge>
+              </div>
+              <div className="grid grid-cols-2 gap-4 text-body-sm">
+                <div>
+                  <div className="text-label-sm text-muted">NIM</div>
+                  <div className="font-medium text-muted">{p.nim}</div>
+                </div>
+                <div>
+                  <div className="text-label-sm text-muted">OVERALL</div>
+                  <div className="font-medium">{passport.overallScore}%</div>
+                </div>
+              </div>
+              <Button variant="outline" size="sm" className="w-full" onClick={() => setSelectedProfile(p)}>
+                {readOnly ? 'Lihat' : 'Nilai'}
+              </Button>
+            </Card>
+          )
+        })}
+      </div>
+
+      {/* Desktop table */}
+      <Card className="hidden md:block">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead>
