@@ -1,10 +1,10 @@
 import { KpsModule, KpsPassport } from '@/features/kps/types'
 
 export const MOCK_MODULES: KpsModule[] = [
-  { id: 'mod-1', name: 'M-1 Pendahuluan' },
-  { id: 'mod-2', name: 'M-2 Kinematika' },
-  { id: 'mod-3', name: 'M-3 Dinamika' },
-  { id: 'mod-4', name: 'M-4 Gerak Jatuh Bebas' },
+  { id: 'mod-1', name: 'M-1 Pegas' },
+  { id: 'mod-2', name: 'M-2 Viskosimeter Stokes' },
+  { id: 'mod-3', name: 'M-4 Gerak Jatuh Bebas' },
+  { id: 'mod-4', name: 'M-5 Momen Kelembaman' },
 ]
 
 const SKILL_DEFS = [

@@ -36,19 +36,26 @@ const MOCK_REVIEW_ALL: Record<string, ReviewRow[]> = {
     { nama: 'Dedi Prasetyo', status: 'completed', errors: 0, avgTime: '5s' },
     { nama: 'Eka Putri', status: 'not-started', errors: 0, avgTime: '-' },
   ],
-  'M-3': [
-    { nama: 'Budi Santoso', status: 'completed', errors: 0, avgTime: '4s' },
-    { nama: 'Ani Rahmawati', status: 'completed', errors: 1, avgTime: '5s' },
-    { nama: 'Citra Dewi', status: 'in-progress', errors: 4, avgTime: '-' },
-    { nama: 'Dedi Prasetyo', status: 'completed', errors: 2, avgTime: '7s' },
-    { nama: 'Eka Putri', status: 'completed', errors: 0, avgTime: '3s' },
-  ],
   'M-4': [
     { nama: 'Budi Santoso', status: 'completed', errors: 3, avgTime: '12s' },
     { nama: 'Ani Rahmawati', status: 'completed', errors: 1, avgTime: '8s' },
     { nama: 'Citra Dewi', status: 'in-progress', errors: 5, avgTime: '-' },
     { nama: 'Dedi Prasetyo', status: 'not-started', errors: 0, avgTime: '-' },
     { nama: 'Eka Putri', status: 'completed', errors: 0, avgTime: '6s' },
+  ],
+  'M-5': [
+    { nama: 'Budi Santoso', status: 'completed', errors: 2, avgTime: '10s' },
+    { nama: 'Ani Rahmawati', status: 'completed', errors: 0, avgTime: '7s' },
+    { nama: 'Citra Dewi', status: 'completed', errors: 3, avgTime: '11s' },
+    { nama: 'Dedi Prasetyo', status: 'in-progress', errors: 1, avgTime: '-' },
+    { nama: 'Eka Putri', status: 'completed', errors: 1, avgTime: '9s' },
+  ],
+  'M-6': [
+    { nama: 'Budi Santoso', status: 'completed', errors: 4, avgTime: '15s' },
+    { nama: 'Ani Rahmawati', status: 'in-progress', errors: 2, avgTime: '-' },
+    { nama: 'Citra Dewi', status: 'completed', errors: 1, avgTime: '8s' },
+    { nama: 'Dedi Prasetyo', status: 'completed', errors: 3, avgTime: '12s' },
+    { nama: 'Eka Putri', status: 'completed', errors: 0, avgTime: '5s' },
   ],
 }
 

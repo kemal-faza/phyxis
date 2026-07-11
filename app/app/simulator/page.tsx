@@ -16,16 +16,19 @@ const ALLOWED_ROLES: Array<string> = ['praktikan', 'asisten', 'dosen']
 
 export default function SimulatorPage() {
   const role = useAuthStore((s) => s.role)
+  const isHydrated = useAuthStore((s) => s.isHydrated)
   const currentModuleId = useSimulatorStore((s) => s.currentModuleId)
   const selectModule = useSimulatorStore((s) => s.selectModule)
   const router = useRouter()
 
   useEffect(() => {
+    if (!isHydrated) return
     if (!role || !ALLOWED_ROLES.includes(role)) router.push('/login')
-  }, [role, router])
+  }, [role, router, isHydrated])
 
   usePageTitle('Virtual Lab')
 
+  if (!isHydrated) return null
   if (!role || !ALLOWED_ROLES.includes(role)) return null
 
   const isReviewRole = role === 'asisten' || role === 'dosen'

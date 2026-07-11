@@ -31,14 +31,14 @@ export const ADMIN_STATS_GRID = [
 // ── Schedule Data (for DashboardScheduleCard) ──
 
 export const PRAKTIKAN_SCHEDULE = [
-  { time: '08:00', title: 'Mekanika — Gerak Parabola', location: 'Lab Mekanika A-102', status: 'ongoing' as const },
+  { time: '08:00', title: 'Mekanika — Pesawat Atwood', location: 'Lab Mekanika A-102', status: 'ongoing' as const },
   { time: '10:00', title: 'Optika — Pembiasan Cahaya', location: 'Lab Optik B-204', status: 'upcoming' as const },
   { time: '13:00', title: 'Listrik — Hukum Ohm', location: 'Lab Listrik C-110', status: 'upcoming' as const },
   { time: '15:00', title: 'Termodinamika — Kalorimeter', location: 'Lab Termo D-208', status: 'upcoming' as const },
 ]
 
 export const DOSEN_SCHEDULE = [
-  { time: '08:00', title: 'Kuliah Mekanika — Gerak Parabola', location: 'Ruang 301', status: 'ongoing' as const },
+  { time: '08:00', title: 'Kuliah Mekanika — Pesawat Atwood', location: 'Ruang 301', status: 'ongoing' as const },
   { time: '10:00', title: 'Office Hours', location: 'Ruang Dosen Lt.2', status: 'upcoming' as const },
   { time: '13:00', title: 'Lab Visit — Optika B-204', location: 'Lab Optik', status: 'upcoming' as const },
   { time: '15:00', title: 'Rapat Jurusan', location: 'Ruang Sidang', status: 'upcoming' as const },
@@ -67,8 +67,8 @@ export const PRAKTIKAN_ACTIVITY = [
 
 export const DOSEN_ACTIVITY = [
   { id: 1, title: 'Nilai terkumpul', detail: 'M-4 — 98/124 praktikan sudah dinilai', time: '2h ago' },
-  { id: 2, title: 'Rubrik diperbarui', detail: 'M-5 Gerak Parabola — bobot asisten disesuaikan', time: '4h ago' },
-  { id: 3, title: 'Laporan perlu review', detail: 'M-3 — 12 laporan menunggu verifikasi', time: '6h ago' },
+  { id: 2, title: 'Rubrik diperbarui', detail: 'M-5 Momen Kelembaman — bobot asisten disesuaikan', time: '4h ago' },
+  { id: 3, title: 'Laporan perlu review', detail: 'M-6 — 8 laporan menunggu verifikasi', time: '6h ago' },
 ]
 
 export const ASISTEN_ACTIVITY = [
@@ -79,7 +79,7 @@ export const ASISTEN_ACTIVITY = [
 
 export const ADMIN_ACTIVITY = [
   { id: 1, title: 'User baru', detail: '3 praktikan terdaftar hari ini', time: '2h ago' },
-  { id: 2, title: 'Modul dipublikasikan', detail: 'M-5 Gerak Parabola — status: Draft', time: '4h ago' },
+  { id: 2, title: 'Modul dipublikasikan', detail: 'M-5 Momen Kelembaman — status: Draft', time: '4h ago' },
   { id: 3, title: 'Role diperbarui', detail: 'Role asisten — akses tambahan: edit nilai', time: '6h ago' },
 ]
 
@@ -87,14 +87,14 @@ export const ADMIN_ACTIVITY = [
 
 export const PRAKTIKAN_MODULES = [
   { id: 'M-4', name: 'Gerak Jatuh Bebas', progress: 76 },
-  { id: 'M-3', name: 'Hukum Newton', progress: 100 },
-  { id: 'M-5', name: 'Gerak Parabola', progress: 30 },
+  { id: 'M-2', name: 'Viskosimeter Stokes', progress: 100 },
+  { id: 'M-5', name: 'Momen Kelembaman', progress: 30 },
 ]
 
 export const DOSEN_MODULES = [
   { id: 'M-4', name: 'Gerak Jatuh Bebas', progress: 78 },
-  { id: 'M-3', name: 'Hukum Newton', progress: 92 },
-  { id: 'M-5', name: 'Gerak Parabola', progress: 34 },
+  { id: 'M-2', name: 'Viskosimeter Stokes', progress: 92 },
+  { id: 'M-5', name: 'Momen Kelembaman', progress: 34 },
 ]
 
 // ── DashboardRoleRecap Data ──
@@ -108,8 +108,10 @@ export const DOSEN_STATS = [
 
 export const RECENT_MODULES = [
   { id: 'M-4', name: 'Gerak Jatuh Bebas', status: 'Aktif' as const, participants: 124 },
-  { id: 'M-5', name: 'Gerak Parabola', status: 'Draft' as const, participants: 0 },
-  { id: 'M-6', name: 'Hukum Newton', status: 'Draft' as const, participants: 0 },
+  { id: 'M-1', name: 'Pegas', status: 'Selesai' as const, participants: 120 },
+  { id: 'M-2', name: 'Viskosimeter Stokes', status: 'Selesai' as const, participants: 118 },
+  { id: 'M-5', name: 'Momen Kelembaman', status: 'Selesai' as const, participants: 95 },
+  { id: 'M-6', name: 'Pesawat Atwood', status: 'Draft' as const, participants: 0 },
 ]
 
 export const ASISTEN_STATS = [

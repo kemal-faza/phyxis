@@ -8,7 +8,7 @@ vi.mock('@/features/kps/stores/kpsStore', () => ({
       profiles: [
         { nama: 'Budi', nim: '001', modules: [{ moduleId: 'M-1', moduleName: 'GP', passport: { overallScore: 80, skillsPassed: 7, totalSkills: 8, skills: [] } }] },
       ],
-      moduleDefs: [{ id: 'M-1', name: 'Gerak Parabola' }],
+      moduleDefs: [{ id: 'M-1', name: 'Pegas' }],
       setScore: () => {},
       setNote: () => {},
     }

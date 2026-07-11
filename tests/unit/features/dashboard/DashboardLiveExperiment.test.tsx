@@ -6,7 +6,7 @@ describe('DashboardLiveExperiment', () => {
   it('renders live experiment card and resume button', () => {
     render(<DashboardLiveExperiment />)
     expect(screen.getByText('Live experiment')).toBeTruthy()
-    expect(screen.getByText('Gerak Parabola — Sesi 03')).toBeTruthy()
+    expect(screen.getByText('Pesawat Atwood — Sesi 03')).toBeTruthy()
     expect(screen.getByText('Resume simulation')).toBeTruthy()
   })
 

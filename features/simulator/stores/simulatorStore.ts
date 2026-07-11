@@ -8,10 +8,11 @@ const initialProgress: ModuleProgress = {
   status: 'idle',
   metrics: {
     totalErrors: 0,
-    totalDecisionTimeMs: 0,
+    totalDecisionTimeS: 0,
     stepCount: 0,
     startedAt: null,
   },
+  hasStarted: false,
   hasCompleted: false,
   lastError: null,
 }
@@ -21,14 +22,16 @@ const initialState: SimulatorState = {
   modules: {
     'M-1': { ...initialProgress, metrics: { ...initialProgress.metrics } },
     'M-2': { ...initialProgress, metrics: { ...initialProgress.metrics } },
-    'M-3': { ...initialProgress, metrics: { ...initialProgress.metrics } },
     'M-4': { ...initialProgress, metrics: { ...initialProgress.metrics } },
+    'M-5': { ...initialProgress, metrics: { ...initialProgress.metrics } },
+    'M-6': { ...initialProgress, metrics: { ...initialProgress.metrics } },
   },
   isFirstAttempt: true,
 }
 
 interface SimulatorStoreFull extends SimulatorState {
   selectModule: (moduleId: string) => void
+  startModule: () => void
   submitAnswer: (optionIndex: number) => void
   completeAnimation: () => void
   restart: () => void
@@ -57,6 +60,26 @@ export const useSimulatorStore = create<SimulatorStoreFull>()(
         }
       },
 
+      startModule: () => {
+        const state = get()
+        const modId = state.currentModuleId
+        if (!modId) {
+          console.warn('startModule: no currentModuleId')
+          return
+        }
+        if (state.modules[modId].hasStarted) return // already started
+        set((s) => ({
+          modules: {
+            ...s.modules,
+            [modId]: {
+              ...s.modules[modId],
+              hasStarted: true,
+              metrics: { ...s.modules[modId].metrics, startedAt: Date.now() },
+            },
+          },
+        }))
+      },
+
       submitAnswer: (optionIndex: number) => {
         const state = get()
         const modId = state.currentModuleId
@@ -67,25 +90,50 @@ export const useSimulatorStore = create<SimulatorStoreFull>()(
         const step = steps[progress.currentStepIndex]
         if (!step || progress.status === 'playing' || progress.status === 'completed') return
 
-        if (!progress.metrics.startedAt) {
-          set((s) => ({
-            modules: {
-              ...s.modules,
-              [modId]: {
-                ...progress,
-                metrics: { ...progress.metrics, startedAt: Date.now() },
-              },
-            },
-          }))
-        }
+        const now = Date.now()
+        const elapsed = progress.metrics.startedAt
+          ? Math.round((now - progress.metrics.startedAt) / 1000)
+          : 0
 
         if (optionIndex === step.correctOptionIndex) {
-          set((s) => ({
-            modules: {
-              ...s.modules,
-              [modId]: { ...s.modules[modId], status: 'playing', lastError: null },
-            },
-          }))
+          const nextIndex = progress.currentStepIndex + 1
+          if (nextIndex >= steps.length) {
+            set((s) => ({
+              modules: {
+                ...s.modules,
+                [modId]: {
+                  ...s.modules[modId],
+                  status: 'completed',
+                  hasCompleted: true,
+                  lastError: null,
+                  metrics: {
+                    ...s.modules[modId].metrics,
+                    stepCount: s.modules[modId].metrics.stepCount + 1,
+                    totalDecisionTimeS: s.modules[modId].metrics.totalDecisionTimeS + elapsed,
+                    startedAt: now,
+                  },
+                },
+              },
+            }))
+          } else {
+            set((s) => ({
+              modules: {
+                ...s.modules,
+                [modId]: {
+                  ...s.modules[modId],
+                  status: 'idle',
+                  currentStepIndex: nextIndex,
+                  lastError: null,
+                  metrics: {
+                    ...s.modules[modId].metrics,
+                    stepCount: s.modules[modId].metrics.stepCount + 1,
+                    totalDecisionTimeS: s.modules[modId].metrics.totalDecisionTimeS + elapsed,
+                    startedAt: now,
+                  },
+                },
+              },
+            }))
+          }
         } else {
           set((s) => ({
             modules: {
@@ -95,6 +143,8 @@ export const useSimulatorStore = create<SimulatorStoreFull>()(
                 metrics: {
                   ...s.modules[modId].metrics,
                   totalErrors: s.modules[modId].metrics.totalErrors + 1,
+                  totalDecisionTimeS: s.modules[modId].metrics.totalDecisionTimeS + elapsed,
+                  startedAt: now,
                 },
                 lastError: step.explanation,
               },

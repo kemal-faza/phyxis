@@ -6,10 +6,9 @@ export interface ExperimentItem {
 }
 
 export const EXPERIMENTS: ExperimentItem[] = [
-  { id: 'M-1', name: 'Pengukuran', subtitle: 'Measurement & Uncertainty', status: 'completed' },
-  { id: 'M-2', name: 'Vektor', subtitle: 'Vector Analysis', status: 'completed' },
-  { id: 'M-3', name: 'Gerak Lurus', subtitle: 'Linear Motion', status: 'completed' },
+  { id: 'M-1', name: 'Pegas', subtitle: 'Konstanta Pegas (Hooke\'s Law)', status: 'completed' },
+  { id: 'M-2', name: 'Viskosimeter Stokes', subtitle: 'Koefisien Kekentalan Zat Cair', status: 'completed' },
   { id: 'M-4', name: 'Gerak Jatuh Bebas', subtitle: 'Free Fall Motion', status: 'active' },
-  { id: 'M-5', name: 'Gerak Parabola', subtitle: 'Projectile Motion', status: 'locked' },
-  { id: 'M-6', name: 'Hukum Newton', subtitle: "Newton's Laws of Motion", status: 'locked' },
+  { id: 'M-5', name: 'Momen Kelembaman', subtitle: 'Momen Inersia Benda', status: 'completed' },
+  { id: 'M-6', name: 'Pesawat Atwood', subtitle: 'GLB & GLBB', status: 'completed' },
 ]

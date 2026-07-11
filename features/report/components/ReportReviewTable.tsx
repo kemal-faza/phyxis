@@ -12,29 +12,34 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
-const MODULS = ['M-1', 'M-2', 'M-3', 'M-4']
+const MODULS = ['M-1', 'M-2', 'M-4', 'M-5', 'M-6']
 
 const MOCK_REVIEW = [
   { nama: 'Budi Santoso',  nim: '230101001', modul: 'M-1', submitted: true,  tanggal: '15 Jun 2026' },
   { nama: 'Budi Santoso',  nim: '230101001', modul: 'M-2', submitted: true,  tanggal: '22 Jun 2026' },
-  { nama: 'Budi Santoso',  nim: '230101001', modul: 'M-3', submitted: false, tanggal: '-' },
   { nama: 'Budi Santoso',  nim: '230101001', modul: 'M-4', submitted: true,  tanggal: '30 Jun 2026' },
+  { nama: 'Budi Santoso',  nim: '230101001', modul: 'M-5', submitted: true,  tanggal: '05 Jul 2026' },
+  { nama: 'Budi Santoso',  nim: '230101001', modul: 'M-6', submitted: false, tanggal: '-' },
   { nama: 'Ani Rahmawati', nim: '230101002', modul: 'M-1', submitted: true,  tanggal: '14 Jun 2026' },
   { nama: 'Ani Rahmawati', nim: '230101002', modul: 'M-2', submitted: false, tanggal: '-' },
-  { nama: 'Ani Rahmawati', nim: '230101002', modul: 'M-3', submitted: true,  tanggal: '25 Jun 2026' },
   { nama: 'Ani Rahmawati', nim: '230101002', modul: 'M-4', submitted: true,  tanggal: '28 Jun 2026' },
+  { nama: 'Ani Rahmawati', nim: '230101002', modul: 'M-5', submitted: false, tanggal: '-' },
+  { nama: 'Ani Rahmawati', nim: '230101002', modul: 'M-6', submitted: false, tanggal: '-' },
   { nama: 'Citra Dewi',   nim: '230101003', modul: 'M-1', submitted: false, tanggal: '-' },
   { nama: 'Citra Dewi',   nim: '230101003', modul: 'M-2', submitted: true,  tanggal: '20 Jun 2026' },
-  { nama: 'Citra Dewi',   nim: '230101003', modul: 'M-3', submitted: false, tanggal: '-' },
   { nama: 'Citra Dewi',   nim: '230101003', modul: 'M-4', submitted: false, tanggal: '-' },
+  { nama: 'Citra Dewi',   nim: '230101003', modul: 'M-5', submitted: true,  tanggal: '08 Jul 2026' },
+  { nama: 'Citra Dewi',   nim: '230101003', modul: 'M-6', submitted: false, tanggal: '-' },
   { nama: 'Dedi Prasetyo', nim: '230101004', modul: 'M-1', submitted: true,  tanggal: '13 Jun 2026' },
   { nama: 'Dedi Prasetyo', nim: '230101004', modul: 'M-2', submitted: true,  tanggal: '21 Jun 2026' },
-  { nama: 'Dedi Prasetyo', nim: '230101004', modul: 'M-3', submitted: true,  tanggal: '26 Jun 2026' },
   { nama: 'Dedi Prasetyo', nim: '230101004', modul: 'M-4', submitted: false, tanggal: '-' },
+  { nama: 'Dedi Prasetyo', nim: '230101004', modul: 'M-5', submitted: true,  tanggal: '06 Jul 2026' },
+  { nama: 'Dedi Prasetyo', nim: '230101004', modul: 'M-6', submitted: true,  tanggal: '12 Jul 2026' },
   { nama: 'Eka Putri',    nim: '230101005', modul: 'M-1', submitted: true,  tanggal: '16 Jun 2026' },
   { nama: 'Eka Putri',    nim: '230101005', modul: 'M-2', submitted: false, tanggal: '-' },
-  { nama: 'Eka Putri',    nim: '230101005', modul: 'M-3', submitted: true,  tanggal: '27 Jun 2026' },
   { nama: 'Eka Putri',    nim: '230101005', modul: 'M-4', submitted: true,  tanggal: '01 Jul 2026' },
+  { nama: 'Eka Putri',    nim: '230101005', modul: 'M-5', submitted: true,  tanggal: '09 Jul 2026' },
+  { nama: 'Eka Putri',    nim: '230101005', modul: 'M-6', submitted: false, tanggal: '-' },
 ]
 
 export function ReportReviewTable() {

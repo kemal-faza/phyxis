@@ -4,7 +4,7 @@ import { KpsPassportView } from '@/features/kps/components/KpsPassportView'
 
 const MODULES = [{
   moduleId: 'M-1',
-  moduleName: 'Gerak Parabola',
+  moduleName: 'Pegas',
   passport: {
     overallScore: 77,
     skillsPassed: 6,
@@ -14,7 +14,7 @@ const MODULES = [{
   },
 }]
 
-const MODULE_DEFS = [{ id: 'M-1', name: 'Gerak Parabola' }]
+const MODULE_DEFS = [{ id: 'M-1', name: 'Pegas' }]
 
 describe('KpsPassportView', () => {
   it('renders passport stats and radar', () => {

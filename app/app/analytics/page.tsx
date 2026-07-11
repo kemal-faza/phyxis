@@ -11,14 +11,17 @@ const ALLOWED_ROLES: Array<string> = ['asisten', 'dosen']
 
 export default function AnalyticsPage() {
   const role = useAuthStore((s) => s.role)
+  const isHydrated = useAuthStore((s) => s.isHydrated)
   const router = useRouter()
 
   usePageTitle('Analytics')
 
   useEffect(() => {
+    if (!isHydrated) return
     if (!role || !ALLOWED_ROLES.includes(role)) router.push('/app/dashboard')
-  }, [role, router])
+  }, [role, router, isHydrated])
 
+  if (!isHydrated) return null
   if (!role || !ALLOWED_ROLES.includes(role)) return null
 
   return (

@@ -12,15 +12,18 @@ const ALLOWED_ROLES: Array<string> = ['praktikan', 'asisten', 'dosen']
 
 export default function AssessmentPage() {
   const role = useAuthStore((s) => s.role)
+  const isHydrated = useAuthStore((s) => s.isHydrated)
   const router = useRouter()
   const [activeTab, setActiveTab] = useState<'pre-test' | 'post-test'>('pre-test')
 
   usePageTitle('AI Assessment')
 
   useEffect(() => {
+    if (!isHydrated) return
     if (!role || !ALLOWED_ROLES.includes(role)) router.push('/login')
-  }, [role, router])
+  }, [role, router, isHydrated])
 
+  if (!isHydrated) return null
   if (!role || !ALLOWED_ROLES.includes(role)) return null
 
   const isPraktikan = role === 'praktikan'

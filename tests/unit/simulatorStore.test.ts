@@ -13,12 +13,11 @@ describe('simulatorStore', () => {
     expect(state.modules['M-4'].currentStepIndex).toBe(0)
   })
 
-  it('should advance on correct answer', () => {
+  it('should advance on correct answer (auto-advance)', () => {
     const m4 = MODULE_STEPS['M-4']
     useSimulatorStore.getState().submitAnswer(m4[0].correctOptionIndex)
-    expect(useSimulatorStore.getState().modules['M-4'].currentStepIndex).toBe(0) // still on same step until animation completes
-    useSimulatorStore.getState().completeAnimation()
-    expect(useSimulatorStore.getState().modules['M-4'].currentStepIndex).toBe(1)
+    expect(useSimulatorStore.getState().modules['M-4'].currentStepIndex).toBe(1) // auto-advance
+    expect(useSimulatorStore.getState().modules['M-4'].status).toBe('idle')
   })
 
   it('should increment error on wrong answer', () => {
@@ -31,9 +30,11 @@ describe('simulatorStore', () => {
     const m4 = MODULE_STEPS['M-4']
     m4.forEach((step) => {
       useSimulatorStore.getState().submitAnswer(step.correctOptionIndex)
-      useSimulatorStore.getState().completeAnimation()
+      // auto-advance: no need to call completeAnimation
     })
     expect(useSimulatorStore.getState().modules['M-4'].status).toBe('completed')
+    expect(useSimulatorStore.getState().modules['M-4'].hasCompleted).toBe(true)
+    expect(useSimulatorStore.getState().modules['M-4'].metrics.stepCount).toBe(7)
   })
 
   it('should switch modules independently', () => {
@@ -45,8 +46,20 @@ describe('simulatorStore', () => {
     expect(useSimulatorStore.getState().modules['M-4'].currentStepIndex).toBe(0)
   })
 
-  it('should not switch to module without steps', () => {
+  it('should switch to M-5 (now has steps)', () => {
     useSimulatorStore.getState().selectModule('M-5')
+    expect(useSimulatorStore.getState().currentModuleId).toBe('M-5')
+    expect(useSimulatorStore.getState().modules['M-5'].currentStepIndex).toBe(0)
+  })
+
+  it('should switch to M-6 (now has steps)', () => {
+    useSimulatorStore.getState().selectModule('M-6')
+    expect(useSimulatorStore.getState().currentModuleId).toBe('M-6')
+    expect(useSimulatorStore.getState().modules['M-6'].currentStepIndex).toBe(0)
+  })
+
+  it('should not switch to module without steps (M-3)', () => {
+    useSimulatorStore.getState().selectModule('M-3')
     expect(useSimulatorStore.getState().currentModuleId).toBe('M-4') // remains on M-4
   })
 })

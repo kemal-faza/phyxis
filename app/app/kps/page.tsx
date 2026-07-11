@@ -12,6 +12,7 @@ const ALLOWED_ROLES: Array<string> = ['praktikan', 'asisten', 'dosen', 'admin']
 
 export default function KpsPage() {
   const role = useAuthStore((s) => s.role)
+  const isHydrated = useAuthStore((s) => s.isHydrated)
   const router = useRouter()
   const profiles = useKpsStore((s) => s.profiles)
   const moduleDefs = useKpsStore((s) => s.moduleDefs)
@@ -20,9 +21,11 @@ export default function KpsPage() {
   usePageTitle(title)
 
   useEffect(() => {
+    if (!isHydrated) return
     if (!role || !ALLOWED_ROLES.includes(role)) router.push('/login')
-  }, [role, router])
+  }, [role, router, isHydrated])
 
+  if (!isHydrated) return null
   if (!role || !ALLOWED_ROLES.includes(role)) return null
 
   // Mock: praktikan melihat data Budi Santoso (profile pertama)

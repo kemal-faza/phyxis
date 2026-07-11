@@ -12,7 +12,7 @@ const mockModuleProgress = {
   status: 'idle' as const,
   metrics: {
     totalErrors: 0,
-    totalDecisionTimeMs: 0,
+    totalDecisionTimeS: 0,
     stepCount: 0,
     startedAt: null,
   },
@@ -21,7 +21,8 @@ const mockModuleProgress = {
 }
 
 vi.mock('@/features/auth/stores/authStore', () => ({
-  useAuthStore: (selector: (s: { role: string }) => string) => selector({ role: 'praktikan' }),
+  useAuthStore: (selector: (s: { role: string; isHydrated: boolean }) => string) =>
+    selector({ role: 'praktikan', isHydrated: true }),
 }))
 
 vi.mock('@/features/simulator/stores/simulatorStore', () => ({

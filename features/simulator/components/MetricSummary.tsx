@@ -12,9 +12,11 @@ export function MetricSummary() {
 
   if (!progress) return null
 
-  const avgTime = progress.metrics.stepCount > 0
-    ? progress.metrics.totalDecisionTimeMs / progress.metrics.stepCount
+  const totalAttempts = progress.metrics.stepCount + progress.metrics.totalErrors
+  const avgTimeS = totalAttempts > 0
+    ? progress.metrics.totalDecisionTimeS / totalAttempts
     : 0
+  const avgTimeDisplay = totalAttempts > 0 && progress.metrics.startedAt ? `${avgTimeS.toFixed(1)}s` : '-'
 
   return (
     <Card className="space-y-4">
@@ -26,9 +28,7 @@ export function MetricSummary() {
         </div>
         <div>
           <div className="text-label text-muted uppercase tracking-wide">RATA-RATA WAKTU</div>
-          <div className="mt-1 font-heading text-headline-md text-foreground">
-            {progress.metrics.startedAt ? `${Math.round(avgTime / 1000)}s` : '-'}
-          </div>
+          <div className="mt-1 font-heading text-headline-md text-foreground">{avgTimeDisplay}</div>
         </div>
       </div>
       {!isFirstAttempt && (

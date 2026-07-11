@@ -13,10 +13,10 @@ export function DashboardLiveExperiment() {
             Live experiment
           </div>
           <h2 className="mt-1 font-heading text-headline-sm text-foreground">
-            Gerak Parabola — Sesi 03
+            Pesawat Atwood — Sesi 03
           </h2>
           <p className="mt-1 text-body text-muted">
-            Pengamatan lintasan benda dengan sudut elevasi 45°.
+            Pengukuran GLB & GLBB dengan pesawat Atwood.
           </p>
         </div>
         <Badge variant="success" className="self-start">Ongoing</Badge>

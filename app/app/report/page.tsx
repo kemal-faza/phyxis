@@ -11,14 +11,17 @@ const ALLOWED_ROLES: Array<string> = ['praktikan', 'asisten', 'dosen']
 
 export default function ReportPage() {
   const role = useAuthStore((s) => s.role)
+  const isHydrated = useAuthStore((s) => s.isHydrated)
   const router = useRouter()
 
   usePageTitle('Laporan Akhir')
 
   useEffect(() => {
+    if (!isHydrated) return
     if (!role || !ALLOWED_ROLES.includes(role)) router.push('/login')
-  }, [role, router])
+  }, [role, router, isHydrated])
 
+  if (!isHydrated) return null
   if (!role || !ALLOWED_ROLES.includes(role)) return null
 
   return (

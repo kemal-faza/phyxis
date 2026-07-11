@@ -3,8 +3,8 @@ import { describe, it, expect, vi } from 'vitest'
 import { ExperimentsPanel } from '@/features/simulator/components/ExperimentsPanel'
 
 const EXPERIMENTS = [
-  { id: 'M-1', name: 'Gerak Parabola', subtitle: 'Projectile Motion', status: 'active' as const },
-  { id: 'M-2', name: 'Hukum Newton', subtitle: "Newton's Laws", status: 'active' as const },
+  { id: 'M-1', name: 'Pegas', subtitle: 'Spring', status: 'active' as const },
+  { id: 'M-2', name: 'Viskosimeter Stokes', subtitle: "Stokes' Viscometer", status: 'active' as const },
 ]
 
 describe('ExperimentsPanel', () => {

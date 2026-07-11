@@ -10,6 +10,6 @@ describe('DashboardScheduleCard', () => {
   it('renders praktikan schedule with sessions', () => {
     render(<DashboardScheduleCard />)
     expect(screen.getByText("Today's schedule")).toBeTruthy()
-    expect(screen.getByText('Mekanika — Gerak Parabola')).toBeTruthy()
+    expect(screen.getByText('Mekanika — Pesawat Atwood')).toBeTruthy()
   })
 })
