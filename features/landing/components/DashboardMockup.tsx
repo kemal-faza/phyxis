@@ -60,7 +60,7 @@ export function DashboardMockup() {
 								Student console
 							</p>
 							<h3 className="font-heading text-xl font-bold text-foreground">
-								Welcome back, Dinda 👋
+								Welcome back, Belinda 👋
 							</h3>
 						</div>
 

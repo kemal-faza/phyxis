@@ -37,7 +37,7 @@ const HEADER_CONFIG: Record<string, {
 }> = {
   praktikan: {
     subtitle: 'Student console · Semester 4',
-    heading: 'Selamat datang, Dinda',
+    heading: 'Selamat datang, Belinda',
     description: 'You have 2 experiments and 1 report due today. Lab A-102 is live and ready.',
     ctas: [
       { variant: 'outline', icon: <Calendar size={16} />, label: 'Full schedule' },
@@ -46,7 +46,7 @@ const HEADER_CONFIG: Record<string, {
   },
   asisten: {
     subtitle: 'Asisten Lab · Semester 4',
-    heading: 'Selamat datang, Dinda',
+    heading: 'Selamat datang, Belinda',
     description: '12 laporan menunggu review. 3 sesi lab hari ini.',
     ctas: [
       { variant: 'outline', icon: <ClipboardCheck size={16} />, label: 'Buka Antrian Review' },
@@ -55,7 +55,7 @@ const HEADER_CONFIG: Record<string, {
   },
   dosen: {
     subtitle: 'Dosen Pengampu · Semester 4',
-    heading: 'Selamat datang, Dinda',
+    heading: 'Selamat datang, Belinda',
     description: '124 praktikan aktif. 5 modul berjalan.',
     ctas: [
       { variant: 'outline', icon: <BookOpen size={16} />, label: 'Lihat Modul' },
